@@ -7,8 +7,8 @@
           <div class="regionContainer" v-for="(region, index) in activeArcaneRiverRegions" :key="index">
             <div></div>
             {{ region.RegionName }}: 
-            <input type="checkbox" v-model="region.RegionDailyCompletion" disabled /> / 
-            <input type="checkbox" v-model="region.RegionWeeklyCompletion" disabled />
+            <input type="checkbox" v-model="region.RegionDailyCompletion" @change="saveProgression" /> / 
+            <input type="checkbox" v-model="region.RegionWeeklyCompletion" @change="saveProgression" />
           </div>
         </div>
       </div>
@@ -17,7 +17,7 @@
         <ul>
           <li v-for="(region, index) in activeGrandisRegions" :key="index">
             {{ region.RegionName }}: 
-            <input type="checkbox" v-model="region.RegionDailyCompletion" disabled />
+            <input type="checkbox" v-model="region.RegionDailyCompletion" @change="saveProgression" disabled />
           </li>
         </ul>
       </div>
@@ -25,7 +25,7 @@
         <h3>Dailies</h3>
         <ul>
           <li v-for="(daily, index) in activeDailies" :key="index">
-            {{ daily.Name }}: <input type="checkbox" v-model="daily.CompletionStatus" disabled />
+            {{ daily.Name }}: <input type="checkbox" v-model="daily.CompletionStatus" @change="saveProgression" disabled />
           </li>
         </ul>
       </div>
@@ -33,7 +33,7 @@
         <h3>Weeklies</h3>
         <ul>
           <li v-for="(weekly, index) in activeWeeklies" :key="index">
-            {{ weekly.Name }}: <input type="checkbox" v-model="weekly.CompletionStatus" disabled />
+            {{ weekly.Name }}: <input type="checkbox" v-model="weekly.CompletionStatus" @change="saveProgression" disabled />
           </li>
         </ul>
       </div>
@@ -42,6 +42,7 @@
   
   <script setup>
   import { computed } from 'vue'
+  import { saveData } from '../../localStorageService'
   
   const props = defineProps({
     character: {
@@ -65,6 +66,15 @@
   const activeWeeklies = computed(() => {
     return props.character.Progression.Weeklies.WeeklyActivity.filter(weekly => weekly.isActive)
   })
+  
+  function saveProgression() {
+    const characters = JSON.parse(localStorage.getItem('mapleStoryData')).Legion.Characters
+    const characterIndex = characters.findIndex(c => c.Name === props.character.Name)
+    if (characterIndex !== -1) {
+      characters[characterIndex] = props.character
+      saveData({ Legion: { Characters: characters } })
+    }
+  }
   </script>
   
   <style scoped>
