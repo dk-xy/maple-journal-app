@@ -11,6 +11,38 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+
+  
+/* LOCAL VARIABLES */
+
+--elev-0: #FFECD9;
+--elev-1: #F5D9BE;
+--elev-2: #E9C7AE;
+
+--dark-brown: #6E4732;
+--dark-text: #2D2D2D;
+
+--blue-accent: #33AABB;
+--green-accent: #9AC83A;
+--red-accent: #E85365;
+
+--oblivion-grad:linear-gradient(289deg, rgba(152, 224, 255, 0.60) 11.04%, rgba(152, 224, 255, 0.60) 11.05%, rgba(185, 234, 255, 0.50) 88.12%);
+--chuchu-grad: linear-gradient(300deg, rgba(244, 216, 244, 0.56) 8.79%, rgba(255, 204, 255, 0.74) 86%);
+--lachelein-grad: linear-gradient(298deg, rgba(255, 123, 67, 0.27) 8.78%, rgba(255, 204, 255, 0.55) 100%);
+--arcana-grad:  linear-gradient(289deg, rgba(87, 164, 189, 0.60) 11.04%, rgba(158, 150, 255, 0.60) 88.12%);
+--morass-grad:linear-gradient(289deg, rgba(152, 224, 255, 0.60) 11.05%, rgba(243, 188, 170, 0.60) 88.12%);
+--esfera-grad:linear-gradient(289deg, rgba(34, 68, 153, 0.60) 11.05%, rgba(153, 119, 255, 0.60) 88.12%);
+
+--cernium-grad:linear-gradient(289deg, rgba(152, 224, 255, 0.70) 11.04%, rgba(225, 185, 255, 0.58) 88.12%);
+--arcus-grad: linear-gradient(289deg, rgba(252, 181, 115, 0.70) 11.04%, rgba(187, 221, 255, 0.35) 88.12%);
+--odium-grad: linear-gradient(289deg, rgba(107, 201, 201, 0.70) 11.04%, rgba(255, 237, 184, 0.70) 88.12%);
+--shangrila-grad: linear-gradient(288deg, rgba(255, 187, 204, 0.70) -2.3%, rgba(255, 200, 145, 0.70) 104.09%);
+--arteria-grad: linear-gradient(288deg, rgba(187, 119, 255, 0.70) -6.29%, rgba(51, 85, 136, 0.70) 114.06%);
+--carcion-grad: linear-gradient(288deg, rgba(119, 136, 238, 0.70) 37.26%, rgba(102, 187, 102, 0.70) 104.84%);
+
+ 
+
 }
 
 a {
@@ -77,3 +109,6 @@ button:focus-visible {
     background-color: #f9f9f9;
   }
 }
+
+
+
