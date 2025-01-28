@@ -17,7 +17,7 @@
         <ul>
           <li v-for="(region, index) in activeGrandisRegions" :key="index">
             {{ region.RegionName }}: 
-            <input type="checkbox" v-model="region.RegionDailyCompletion" @change="saveProgression" disabled />
+            <input type="checkbox" v-model="region.RegionDailyCompletion" @change="saveProgression" />
           </li>
         </ul>
       </div>
@@ -25,7 +25,7 @@
         <h3>Dailies</h3>
         <ul>
           <li v-for="(daily, index) in activeDailies" :key="index">
-            {{ daily.Name }}: <input type="checkbox" v-model="daily.CompletionStatus" @change="saveProgression" disabled />
+            {{ daily.Name }}: <input type="checkbox" v-model="daily.CompletionStatus" @change="saveProgression"  />
           </li>
         </ul>
       </div>
@@ -33,7 +33,7 @@
         <h3>Weeklies</h3>
         <ul>
           <li v-for="(weekly, index) in activeWeeklies" :key="index">
-            {{ weekly.Name }}: <input type="checkbox" v-model="weekly.CompletionStatus" @change="saveProgression" disabled />
+            {{ weekly.Name }}: <input type="checkbox" v-model="weekly.CompletionStatus" @change="saveProgression"  />
           </li>
         </ul>
       </div>
