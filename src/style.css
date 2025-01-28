@@ -16,17 +16,35 @@
   
 /* LOCAL VARIABLES */
 
+/* !!ELEVATIONS */
 --elev-0: #FFECD9;
 --elev-1: #F5D9BE;
 --elev-2: #E9C7AE;
+--elev--1: # C99D7D;
 
+/* !!TEXTS */
 --dark-brown: #6E4732;
 --dark-text: #2D2D2D;
 
+/* !!ACCENTS */
 --blue-accent: #33AABB;
 --green-accent: #9AC83A;
 --red-accent: #E85365;
 
+/* BOSS DIFFICULTIES */
+--easy-diff: #999999;
+--normal-diff: #33AABB;
+--hard-diff: #E85365;
+--chaos-diff: #282828;
+--chaos-diff-accent: linear-gradient(180deg, #DB8 0%, #FDB 48.44%, #CA8 100%);
+--extreme-diff: #282828;
+--extreme-diff-accent: linear-gradient(180deg, #BA4A4A 0%, #D6281C 46.5%, #BA4A4A 100%);
+
+
+
+
+
+/* SYMBOL GRADIENTS */
 --oblivion-grad:linear-gradient(289deg, rgba(152, 224, 255, 0.60) 11.04%, rgba(152, 224, 255, 0.60) 11.05%, rgba(185, 234, 255, 0.50) 88.12%);
 --chuchu-grad: linear-gradient(300deg, rgba(244, 216, 244, 0.56) 8.79%, rgba(255, 204, 255, 0.74) 86%);
 --lachelein-grad: linear-gradient(298deg, rgba(255, 123, 67, 0.27) 8.78%, rgba(255, 204, 255, 0.55) 100%);
@@ -95,6 +113,11 @@ button:focus-visible {
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
+  width: 100%;
+  height: auto;
+  min-height: 100vh;
+
+  background-color: var(--elev-0);
 }
 
 @media (prefers-color-scheme: light) {
