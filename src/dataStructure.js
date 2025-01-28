@@ -47,6 +47,26 @@ export const initialData = {
       }
     },
     Bosses: {
-      Boss: []
+      BossList: [
+        {
+          Name: 'Boss 1',
+          Difficulty: [
+            { DifficultyName: 'Normal', DifficultyReset: 'Daily', CompletionStatus: false, CompletionDate: '', isActive: false },
+            { DifficultyName: 'Hard', DifficultyReset: 'Weekly', CompletionStatus: false, CompletionDate: '', isActive: false }
+          ],
+          CompletionStatus: false,
+          CompletionDate: ''
+        },
+        {
+          Name: 'Boss 2',
+          Difficulty: [
+            { DifficultyName: 'Normal', DifficultyReset: 'Daily', CompletionStatus: false, CompletionDate: '', isActive: false },
+            { DifficultyName: 'Hard', DifficultyReset: 'Weekly', CompletionStatus: false, CompletionDate: '', isActive: false  },
+            { DifficultyName: 'Chaos', DifficultyReset: 'Weekly', CompletionStatus: false, CompletionDate: '', isActive: false }
+          ],
+          
+          
+        }
+      ]
     }
   }
