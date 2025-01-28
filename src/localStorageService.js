@@ -1,4 +1,4 @@
-import { initialData, emptyCharacter } from './dataStructure'
+import { initialData } from './dataStructure'
 
 const LOCAL_STORAGE_KEY = 'mapleStoryData'
 
@@ -11,8 +11,19 @@ export function saveData(data) {
   localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(data))
 }
 
-export function addCharacter() {
+export function addCharacter(character) {
   const data = getData()
-  data.Legion.Characters.push({ ...emptyCharacter })
+  data.Legion.Characters.push(character)
+  saveData(data)
+}
+
+export function getCharacters() {
+  const data = getData()
+  return data.Legion.Characters
+}
+
+export function deleteCharacter(index) {
+  const data = getData()
+  data.Legion.Characters.splice(index, 1)
   saveData(data)
 }

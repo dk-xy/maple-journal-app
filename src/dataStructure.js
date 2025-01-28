@@ -10,16 +10,40 @@ export const initialData = {
     Level: "Level",
     Progression: {
       ArcaneRiver: {
-        Region: []
+        isActive: false,
+        Region: [
+          { RegionName: 'Vanishing Journey', RegionDailyCompletion: false, RegionWeeklyCompletion: false, isActive: false },
+          { RegionName: 'Chu Chu Island', RegionDailyCompletion: false, RegionWeeklyCompletion: false, isActive: false },
+          { RegionName: 'Lachelein', RegionDailyCompletion: false, RegionWeeklyCompletion: false, isActive: false },
+          { RegionName: 'Arcana', RegionDailyCompletion: false, RegionWeeklyCompletion: false, isActive: false },
+          { RegionName: 'Morass', RegionDailyCompletion: false, RegionWeeklyCompletion: false, isActive: false },
+          { RegionName: 'Esfera', RegionDailyCompletion: false, RegionWeeklyCompletion: false, isActive: false }
+        ]
       },
       Grandis: {
-        Region: []
+        isActive: false,
+        Region: [
+          { RegionName: 'Cernium', RegionDailyCompletion: false, isActive: false },
+          { RegionName: 'Burning Cernium', RegionDailyCompletion: false, isActive: false },
+          { RegionName: 'Hotel Arcs', RegionDailyCompletion: false, isActive: false },
+          { RegionName: 'Odium', RegionDailyCompletion: false, isActive: false },
+          { RegionName: 'Shangri-La', RegionDailyCompletion: false, isActive: false },
+          { RegionName: 'Arteria', RegionDailyCompletion: false, isActive: false }
+        ]
       },
       Dailies: {
-        DailyActivity: []
+        isActive: false,
+        DailyActivity: [
+          { Name: 'Daily Quest 1', CompletionStatus: false, isActive: false },
+          { Name: 'Daily Quest 2', CompletionStatus: false, isActive: false }
+        ]
       },
       Weeklies: {
-        WeeklyActivity: []
+        isActive: false,
+        WeeklyActivity: [
+          { Name: 'Weekly Quest 1', CompletionStatus: false, isActive: false },
+          { Name: 'Weekly Quest 2', CompletionStatus: false, isActive: false }
+        ]
       }
     },
     Bosses: {

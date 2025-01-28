@@ -1,8 +1,7 @@
 <template>
-    <div class="modal-overlay" @click.self="close">
+    <div v-if="show" class="modal-overlay" @click.self="close">
       <div class="modal">
         <h2>Add Character</h2>
-        WESH
         <form @submit.prevent="handleAddCharacter">
           <div>
             <label for="name">Name:</label>
@@ -28,6 +27,7 @@
   <script setup>
   import { ref } from 'vue'
   import { addCharacter } from '../../localStorageService'
+  import { emptyCharacter } from '../../dataStructure'
   
   const props = defineProps({
     show: Boolean
@@ -44,20 +44,26 @@
   ]
   
   function handleAddCharacter() {
-    addCharacter({
-      Name: characterName.value,
-      Class: characterClass.value,
-      Level: characterLevel.value,
-      Progression: {
-        ArcaneRiver: { Region: [] },
-        Grandis: { Region: [] },
-        Dailies: { DailyActivity: [] },
-        Weeklies: { WeeklyActivity: [] }
-      },
-      Bosses: { Boss: [] }
-    })
+    const newCharacter = { ...emptyCharacter }
+    newCharacter.Name = characterName.value
+    newCharacter.Class = characterClass.value
+    newCharacter.Level = characterLevel.value
+  
+    addCharacter(newCharacter)
+    resetForm()
     emit('close')
     alert('Character added!')
+  }
+  
+  function resetForm() {
+    characterName.value = ''
+    characterClass.value = ''
+    characterLevel.value = 1
+  }
+  
+  function close() {
+    resetForm()
+    emit('close')
   }
   </script>
   
@@ -72,13 +78,6 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    visibility: hidden;
-    opacity: 0;
-    transition: visibility 0s, opacity 0.3s;
-  }
-  .modal-overlay[show] {
-    visibility: visible;
-    opacity: 1;
   }
   .modal {
     background: white;

@@ -4,7 +4,7 @@
   font-weight: 400;
 
   color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
+
   background-color: #242424;
 
   font-synthesis: none;
@@ -60,7 +60,7 @@
 --carcion-grad: linear-gradient(288deg, rgba(119, 136, 238, 0.70) 37.26%, rgba(102, 187, 102, 0.70) 104.84%);
 
  
-
+color: var(--dark-text);
 }
 
 a {
