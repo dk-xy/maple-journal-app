@@ -18,26 +18,25 @@
 
     </div>
     <h3>Activities</h3>
-    <div class="activity-container">
-
-    </div>
-
-    <div class="activity-block" v-if="character.Progression.Dailies.isActive">
-      
+    <div class="activities-container">
+      <div class="activity-block" v-if="character.Progression.Dailies.isActive">
       <div class="activity-category-container">
         <h4>Dailies</h4>
         <ProgressionItem v-for="(daily, index) in activeDailies" :key="index" :item="daily" type="daily" code="daily"
           :saveProgression="saveProgression" />
         </div>
     </div>
-    <div class="activity-block" v-if="character.Progression.Weeklies.isActive">
-      
+    
+    <div class="activity-block" v-if="character.Progression.Weeklies.isActive"> 
       <div class="activity-category-container">
         <h4>Weeklies</h4>
         <ProgressionItem v-for="(weekly, index) in activeWeeklies" :key="index" :item="weekly" type="weekly"
           code="weekly" :saveProgression="saveProgression" />
       </div>
     </div>
+    </div>
+
+
   </div>
 </template>
 
@@ -139,8 +138,6 @@ h3 {
 
 
 
-
-
 .symbol-progression_container h3 {
   grid-column-start: span 3;
 }
@@ -157,6 +154,17 @@ h3 {
   .symbol-progression_container {
     grid-template-columns: repeat(2, auto);
   }
+}
+
+@media (min-width: 868px) {
+.activities-container {
+  display: grid;
+  grid-template-columns: repeat(2, auto);
+  gap: 20px;
+}
+
+
+  
 }
 
 @media (max-width: 768px) {
