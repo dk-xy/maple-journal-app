@@ -120,6 +120,20 @@ watch(
   gap: 16px;
 }
 
+/* max width 1000px */
+@media (max-width: 968px) {
+  .symbol-container {
+    grid-template-columns: repeat(2, auto);
+  }
+}
+
+@media (min-width: 968px) {
+  .activities-container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+}
 
 @media (max-width: 768px) {
   .allSymbols-container {
