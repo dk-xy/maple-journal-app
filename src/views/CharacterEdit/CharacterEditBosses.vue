@@ -2,17 +2,14 @@
   <div>
     <h2>Edit Bosses</h2>
     <div v-for="(boss, index) in character.Bosses.BossList" :key="index">
-      <h3>{{ boss.Name }}</h3>
-      <div v-for="(difficulty, diffIndex) in boss.Difficulty" :key="diffIndex">
-        <label :for="'boss-' + index + '-difficulty-' + diffIndex">{{ difficulty.DifficultyName }}</label>
-        <input :id="'boss-' + index + '-difficulty-' + diffIndex" v-model="difficulty.isActive" type="checkbox" @change="handleDifficultyChange(boss, difficulty)" />
-      </div>
+      <EditBossBlock :boss="boss" :saveBosses="saveBosses" />
     </div>
   </div>
 </template>
 
 <script setup>
 import { saveData } from '../../localStorageService'
+import EditBossBlock from '../../components/CharacterEdit/Bosses/EditBossBlock.vue'
 
 const props = defineProps({
   character: {
@@ -21,17 +18,6 @@ const props = defineProps({
   }
 })
 
-function handleDifficultyChange(boss, changedDifficulty) {
-  // Ensure only one difficulty is active for each DifficultyReset type
-  if (changedDifficulty.isActive) {
-    boss.Difficulty.forEach(difficulty => {
-      if (difficulty !== changedDifficulty && difficulty.DifficultyReset === changedDifficulty.DifficultyReset) {
-        difficulty.isActive = false
-      }
-    })
-  }
-  saveBosses()
-}
 
 function saveBosses() {
   const characters = JSON.parse(localStorage.getItem('mapleStoryData')).Legion.Characters

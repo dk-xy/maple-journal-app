@@ -23,15 +23,17 @@
     </div>
 
     <div class="activity-block" v-if="character.Progression.Dailies.isActive">
-      <h4>Dailies</h4>
+      
       <div class="activity-category-container">
+        <h4>Dailies</h4>
         <ProgressionItem v-for="(daily, index) in activeDailies" :key="index" :item="daily" type="daily" code="daily"
           :saveProgression="saveProgression" />
         </div>
     </div>
     <div class="activity-block" v-if="character.Progression.Weeklies.isActive">
-      <h4>Weeklies</h4>
+      
       <div class="activity-category-container">
+        <h4>Weeklies</h4>
         <ProgressionItem v-for="(weekly, index) in activeWeeklies" :key="index" :item="weekly" type="weekly"
           code="weekly" :saveProgression="saveProgression" />
       </div>
@@ -106,7 +108,7 @@ function saveProgression() {
   min-height: 100px;
 }
 
-/* SYMBOLS!!COLORS!!*/
+/* SYMBOLS!!COLORS!!
 
 .progression-item__symbols.Vanishing.Journey{
   background: var(--oblivion-grad);
@@ -155,9 +157,20 @@ function saveProgression() {
 .progression-item__symbols.Carcion{
   background: var(--carcion-grad);
 }
+ */
 
 
 
+/* DAILIES */
+.activity-category-container{
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+
+.activity-category-container h4{
+  grid-column-start: span 3;
+}
 
 
 h3 {

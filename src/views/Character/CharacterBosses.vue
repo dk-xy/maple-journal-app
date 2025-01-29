@@ -1,19 +1,15 @@
 <template>
-  <div>
+  <div class="character-bosses">
     <h2>Bosses</h2>
     <div v-for="(boss, index) in character.Bosses.BossList" :key="index">
-      <h3>{{ boss.Name }}</h3>
-      <div v-for="(difficulty, diffIndex) in activeDifficulties(boss)" :key="diffIndex">
-        <p>{{ difficulty.DifficultyName }}: {{ difficulty.DifficultyReset }}</p>
-        <p>Completion Status: <input type="checkbox" v-model="difficulty.CompletionStatus" @change="handleCompletionChange(difficulty)" /></p>
-      </div>
+      <BossBlock :boss="boss" :saveBosses="saveBosses" />
     </div>
   </div>
 </template>
 
 <script setup>
-import { computed } from 'vue'
 import { saveData } from '../../localStorageService'
+import BossBlock from '../../components/Character/Bosses/BossBlock.vue'
 
 const props = defineProps({
   character: {
@@ -21,19 +17,6 @@ const props = defineProps({
     required: true
   }
 })
-
-function activeDifficulties(boss) {
-  return boss.Difficulty.filter(difficulty => difficulty.isActive)
-}
-
-function handleCompletionChange(difficulty) {
-  if (difficulty.CompletionStatus) {
-    difficulty.CompletionDate = new Date().toISOString().split('T')[0] // Set to current date in YYYY-MM-DD format
-  } else {
-    difficulty.CompletionDate = ''
-  }
-  saveBosses()
-}
 
 function saveBosses() {
   const characters = JSON.parse(localStorage.getItem('mapleStoryData')).Legion.Characters
@@ -47,4 +30,16 @@ function saveBosses() {
 
 <style scoped>
 /* Add any custom styles here */
+
+.character-bosses{
+  display: grid;
+  grid-template-columns: repeat(2, auto);
+  gap: 1rem;
+}
+
+.character-bosses h2{
+  grid-column: 1 / -1;
+  text-align: center;
+  margin-bottom: 1rem;
+}
 </style>

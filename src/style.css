@@ -63,6 +63,61 @@
 color: var(--dark-text);
 }
 
+
+/* MASTER BACKGROUND FOR SYMBOLS!!!!! */
+
+/* SYMBOLS!!COLORS!!*/
+
+.Vanishing.Journey{
+  background: var(--oblivion-grad);
+}
+
+.Chu.Chu{
+  background: var(--chuchu-grad);
+}
+
+.Lachelein{
+  background: var(--lachelein-grad);
+}
+
+.Arcana{
+  background: var(--arcana-grad);
+}
+
+.Morass{
+  background: var(--morass-grad);
+}
+
+.Esfera{
+  background: var(--esfera-grad);
+}
+
+.Cernium{
+  background: var(--cernium-grad);
+}
+
+.Hotel.Arcs{
+  background: var(--arcus-grad);
+}
+
+.Odium{
+  background: var(--odium-grad);
+}
+
+.Shangri-La{
+  background: var(--shangrila-grad);
+}
+
+.Arteria{
+  background: var(--arteria-grad);
+}
+
+.Carcion{
+  background: var(--carcion-grad);
+}
+
+
+
 @font-face {
   font-family: 'Open Sans';
   font-style: normal;
