@@ -1,18 +1,14 @@
 <template>
     <div class="boss-block">
-        <h3>{{ boss.Name }}</h3>
-        <div class="difficulties-container">
-            <div class="difficulty-container" v-for="(difficulty, diffIndex) in activeDifficulties" :key="diffIndex">
-                <div>{{ difficulty.DifficultyReset }}</div>
-                <div>{{ difficulty.DifficultyName }} <input type="checkbox" v-model="difficulty.CompletionStatus"
-                        @change="handleCompletionChange(difficulty)" /></div>
-            </div>
-        </div>
+      <h3>{{ boss.Name }}</h3>
+      <DifficultySelector :difficulties="boss.Difficulty" :handleChange="handleCompletionChange" />
     </div>
-</template>
+  </template>
 
 <script setup>
 import { computed } from 'vue'
+
+import DifficultySelector from '../../DifficultySelector.vue'
 
 const props = defineProps({
     boss: {

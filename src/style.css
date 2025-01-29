@@ -64,6 +64,49 @@ color: var(--dark-text);
 }
 
 
+/* MASTER BACKGROUND FOR BOSS DIFFICULTIES */
+/* EASY */
+.Easy{
+  background: var(--easy-diff);
+}
+
+/* NORMAL */
+.Normal{
+  background: var(--normal-diff);
+  border: solid 2px #fff;
+  color: #fff;
+}
+
+/* HARD */
+.Hard{
+  background: var(--hard-diff);
+  border: solid 2px #fff;
+  color: #fff;
+}
+.Chaos {
+  background-color: var(--chaos-diff); /* Black background */
+  color: transparent; /* Make text transparent to show gradient */
+  background: var(--chaos-diff-accent); /* Apply gradient */
+  -webkit-background-clip: text; /* Clip background to text */
+  background-clip: text; /* Clip background to text */
+  -webkit-text-fill-color: transparent; /* Make text transparent to show gradient */
+  text-fill-color: transparent; /* Make text transparent to show gradient */
+  border: 2px solid #debc89; /* Set border color */
+  border-radius: 16px; /* Add border radius */
+}
+
+.Extreme {
+  background-color: var(--extreme-diff); /* Black background */
+  color: transparent; /* Make text transparent to show gradient */
+  background: var(--extreme-diff-accent); /* Apply gradient */
+  -webkit-background-clip: text; /* Clip background to text */
+  background-clip: text; /* Clip background to text */
+  -webkit-text-fill-color: transparent; /* Make text transparent to show gradient */
+  text-fill-color: transparent; /* Make text transparent to show gradient */
+  border: 2px solid #debc89; /* Set border color */
+  border-radius: 16px; /* Add border radius */
+}
+
 /* MASTER BACKGROUND FOR SYMBOLS!!!!! */
 
 /* SYMBOLS!!COLORS!!*/
@@ -196,6 +239,5 @@ button:focus-visible {
     background-color: #f9f9f9;
   }
 }
-
 
 
