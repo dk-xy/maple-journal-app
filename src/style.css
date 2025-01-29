@@ -103,7 +103,7 @@ color: var(--dark-text);
   background-clip: text; /* Clip background to text */
   -webkit-text-fill-color: transparent; /* Make text transparent to show gradient */
   text-fill-color: transparent; /* Make text transparent to show gradient */
-  border: 2px solid #debc89; /* Set border color */
+  border: 2px solid #cf3027; /* Set border color */
   border-radius: 16px; /* Add border radius */
 }
 

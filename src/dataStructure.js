@@ -62,7 +62,8 @@ export const initialData = {
           Difficulty: [
             { DifficultyName: 'Normal', DifficultyReset: 'Daily', CompletionStatus: false, CompletionDate: '', isActive: false },
             { DifficultyName: 'Hard', DifficultyReset: 'Weekly', CompletionStatus: false, CompletionDate: '', isActive: false  },
-            { DifficultyName: 'Chaos', DifficultyReset: 'Weekly', CompletionStatus: false, CompletionDate: '', isActive: false }
+            { DifficultyName: 'Chaos', DifficultyReset: 'Weekly', CompletionStatus: false, CompletionDate: '', isActive: false },
+            { DifficultyName: 'Extreme', DifficultyReset: 'Weekly', CompletionStatus: false, CompletionDate: '', isActive: false }
           ],
           
           
