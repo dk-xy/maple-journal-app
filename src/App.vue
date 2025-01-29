@@ -31,7 +31,7 @@ nav {
   top: 0;
   left: 50%;
   transform: translateX(-50%);
-  width: 80%;
+  width: 50%;
   max-width: 1280px;
   z-index: 1000;
   margin-top: 12px;
