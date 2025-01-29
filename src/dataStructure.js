@@ -24,11 +24,11 @@ export const initialData = {
         isActive: false,
         Region: [
           { RegionName: 'Cernium', RegionDailyCompletion: false, isActive: false },
-          { RegionName: 'Burning Cernium', RegionDailyCompletion: false, isActive: false },
           { RegionName: 'Hotel Arcs', RegionDailyCompletion: false, isActive: false },
           { RegionName: 'Odium', RegionDailyCompletion: false, isActive: false },
           { RegionName: 'Shangri-La', RegionDailyCompletion: false, isActive: false },
-          { RegionName: 'Arteria', RegionDailyCompletion: false, isActive: false }
+          { RegionName: 'Arteria', RegionDailyCompletion: false, isActive: false },
+          { RegionName: 'Carcion', RegionDailyCompletion: false, isActive: false }
         ]
       },
       Dailies: {

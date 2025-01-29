@@ -3,26 +3,13 @@
     <h3>{{ character.Name }}</h3>
     <p>Class: {{ character.Class }}</p>
     <p>Level: {{ character.Level }}</p>
-    <LegionProgressionBlock
-      title="Symbols"
-      :completed="completedSymbols"
-      :total="totalSymbols"
-    />
-    <LegionProgressionBlock
-      title="Dailies"
-      :completed="completedDailies"
-      :total="totalDailies"
-    />
-    <LegionProgressionBlock
-      title="Weeklies"
-      :completed="completedWeeklies"
-      :total="totalWeeklies"
-    />
-    <LegionProgressionBlock
-      title="Bosses"
-      :completed="completedBosses"
-      :total="totalBosses"
-    />
+    <div class="progression-block__Container">
+      <LegionProgressionBlock title="Symbols" :completed="completedSymbols" :total="totalSymbols" />
+      <LegionProgressionBlock title="Dailies" :completed="completedDailies" :total="totalDailies" />
+      <LegionProgressionBlock title="Weeklies" :completed="completedWeeklies" :total="totalWeeklies" />
+      <LegionProgressionBlock title="Bosses" :completed="completedBosses" :total="totalBosses" />
+    </div>
+
   </div>
 </template>
 
@@ -81,17 +68,43 @@ const totalBosses = computed(() => {
 </script>
 
 <style scoped>
+.character a {
+  color: var(--dark-text) !important;
+}
+
+.character{
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+  justify-content: center;
+}
+
 .card {
-  background-color: #ffeccd;
+  background-color: var(--elev-1);
   border: 1px solid #ddd;
   border-radius: 8px;
   padding: 1em;
   margin: 1em 0;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  background: var(--elev-1);
+  box-shadow: 0px 2px 8px 1px rgba(0, 0, 0, 0.05);
+  color: var(--dark-text) !important;
 }
+
+.progression-block__Container {
+
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(2, auto);
+  gap: 4px 8px;
+  flex-wrap: wrap;
+}
+
 h3 {
   margin: 0 0 0.5em 0;
 }
+
 p {
   margin: 0.5em 0;
 }

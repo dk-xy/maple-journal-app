@@ -1,40 +1,48 @@
 <template>
     <div class="progression-block">
-      <h4>{{ title }}</h4>
-      <p>{{ completed }} / {{ total }} completed</p>
+        <div class="progression-block__title">
+            {{ title }}
+        </div>
+        <div class="progression-block__status">
+            {{ completed }} / {{ total }}
+        </div>
     </div>
-  </template>
-  
-  <script setup>
-  const props = defineProps({
+</template>
+
+<script setup>
+const props = defineProps({
     title: {
-      type: String,
-      required: true
+        type: String,
+        required: true
     },
     completed: {
-      type: Number,
-      required: true
+        type: Number,
+        required: true
     },
     total: {
-      type: Number,
-      required: true
+        type: Number,
+        required: true
     }
-  })
-  </script>
-  
-  <style scoped>
-  .progression-block {
-    background-color: #ffeccd;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    padding: 1em;
-    margin: 1em 0;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  }
-  h4 {
+})
+</script>
+
+<style scoped>
+.progression-block {
+    display: flex;
+    padding: 2px 8px;
+    align-items: center;
+    gap: 4px;
+
+    border-radius: 32px;
+    border: 0.5px solid #FFF;
+    background: #E9C7AE;
+}
+
+h4 {
     margin: 0 0 0.5em 0;
-  }
-  p {
+}
+
+p {
     margin: 0.5em 0;
-  }
-  </style>
+}
+</style>

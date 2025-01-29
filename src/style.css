@@ -55,13 +55,22 @@
 --cernium-grad:linear-gradient(289deg, rgba(152, 224, 255, 0.70) 11.04%, rgba(225, 185, 255, 0.58) 88.12%);
 --arcus-grad: linear-gradient(289deg, rgba(252, 181, 115, 0.70) 11.04%, rgba(187, 221, 255, 0.35) 88.12%);
 --odium-grad: linear-gradient(289deg, rgba(107, 201, 201, 0.70) 11.04%, rgba(255, 237, 184, 0.70) 88.12%);
---shangrila-grad: linear-gradient(288deg, rgba(255, 187, 204, 0.70) -2.3%, rgba(255, 200, 145, 0.70) 104.09%);
---arteria-grad: linear-gradient(288deg, rgba(187, 119, 255, 0.70) -6.29%, rgba(51, 85, 136, 0.70) 114.06%);
---carcion-grad: linear-gradient(288deg, rgba(119, 136, 238, 0.70) 37.26%, rgba(102, 187, 102, 0.70) 104.84%);
+--shangrila-grad: linear-gradient(288deg, rgba(255, 187, 204, 0.589) -2.3%, rgba(255, 200, 145, 0.596) 104.09%);
+--arteria-grad: linear-gradient(288deg, rgba(187, 119, 255, 0.568) -6.29%, rgba(51, 85, 136, 0.473) 114.06%);
+--carcion-grad: linear-gradient(288deg, rgba(119, 137, 238, 0.521) 37.26%, rgba(102, 187, 102, 0.514) 104.84%);
 
  
 color: var(--dark-text);
 }
+
+@font-face {
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: local('OpenSans'), url(assets/fonts/OpenSans-VariableFont_wdth,wght.ttf) format('ttf');
+}
+
 
 a {
   font-weight: 500;

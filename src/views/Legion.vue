@@ -25,8 +25,8 @@ function handleCharacterAdded() {
     <CharacterAddModal :show="showModal" @close="handleCharacterAdded" />
     <div v-if="characters.length">
       <h2>Characters</h2>
-      <div>
-        <div v-for="(character, index) in characters" :key="index">
+      <div class="character-container">
+        <div class="character" v-for="(character, index) in characters" :key="index">
           <RouterLink :to="`/legion/${index + 1}`">
             <LegionBlock :character="character" />
           </RouterLink>
@@ -49,5 +49,12 @@ button {
 }
 button:hover {
   background-color: #ffd7a8;
+}
+
+.character-container {
+/* grid */
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 2fr));
+  gap: 1em;
 }
 </style>

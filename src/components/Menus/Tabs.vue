@@ -50,15 +50,17 @@ function selectTab(tab) {
     color: #6E4732 !important;
 
     /* H4 */
-    font-family: "Open Sans";
+
     font-size: 23.04px;
     font-style: normal;
     font-weight: 700;
     line-height: normal;
+
+    border-radius: 0%;
 }
 
 .tabs button.active {
-    border-bottom: 2px solid #000;
+    border-bottom: 2px solid #6E4732;
 
 }
 
