@@ -85,13 +85,13 @@ function saveProgression() {
 /* SYMBOLS!! */
 
 /* Add any custom styles here */
-.symbols-Container {
+/* .symbols-Container {
   display: grid;
 
   grid-template-columns: repeat(3, auto);
   gap: 10px;
   align-content: start;
-}
+} */
 
 .symbol-progression_container {
   display: grid;
@@ -110,54 +110,6 @@ function saveProgression() {
 
 /* SYMBOLS!!COLORS!!
 
-.progression-item__symbols.Vanishing.Journey{
-  background: var(--oblivion-grad);
-}
-
-.progression-item__symbols.Chu.Chu{
-  background: var(--chuchu-grad);
-}
-
-.progression-item__symbols.Lachelein{
-  background: var(--lachelein-grad);
-}
-
-.progression-item__symbols.Arcana{
-  background: var(--arcana-grad);
-}
-
-.progression-item__symbols.Morass{
-  background: var(--morass-grad);
-}
-
-.progression-item__symbols.Esfera{
-  background: var(--esfera-grad);
-}
-
-.progression-item__symbols.Cernium{
-  background: var(--cernium-grad);
-}
-
-.progression-item__symbols.Hotel.Arcs{
-  background: var(--arcus-grad);
-}
-
-.progression-item__symbols.Odium{
-  background: var(--odium-grad);
-}
-
-.progression-item__symbols.Shangri-La{
-  background: var(--shangrila-grad);
-}
-
-.progression-item__symbols.Arteria{
-  background: var(--arteria-grad);
-}
-
-.progression-item__symbols.Carcion{
-  background: var(--carcion-grad);
-}
- */
 
 
 
@@ -194,5 +146,33 @@ h3 {
 }
 
 
+
+/* RESPONSIVENES!! */
+
+@media (min-width:768px) and (max-width: 1024px) {
+  .symbol-progression_container h3 {
+  grid-column-start: span 2 ;
+}
+
+  .symbol-progression_container {
+    grid-template-columns: repeat(2, auto);
+  }
+}
+
+@media (max-width: 768px) {
+  .all-symbols {
+    grid-template-columns: 1fr;
+  }
+
+  .symbol-progression_container {
+    grid-template-columns: repeat(2, auto);
+  }
+}
+
+@media (max-width: 480px) {
+  .symbol-progression_container {
+    grid-template-columns: 1fr;
+  }
+}
 
 </style>
