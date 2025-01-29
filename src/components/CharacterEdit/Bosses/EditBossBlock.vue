@@ -9,7 +9,7 @@
 <script setup>
 import { computed } from 'vue'
 
-import DifficultySelector from '../../DifficultySelector.vue'
+import DifficultySelector from './DifficultySelector.vue'
 
 const props = defineProps({
     boss: {
