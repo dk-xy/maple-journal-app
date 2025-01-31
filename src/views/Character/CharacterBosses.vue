@@ -1,27 +1,34 @@
 <template>
   <div class="character-bosses-container">
-    <h2>Bosses</h2>
+    <div class="page-title">
+      <h2>Bosses</h2>
+      <div class="complete-all-container">
+        <button class="complete-all-button" @click="toggleDropdown">Complete All</button>
+        <div v-if="dropdownVisible" class="dropdown-menu">
+          <button @click="completeAll('Daily')">Daily</button>
+          <button @click="completeAll('Weekly')">Weekly</button>
+        </div>
+      </div>
+    </div>
 
-<div class="complete-all-container">
-  <button @click="toggleDropdown">Complete All</button>
-  <div v-if="dropdownVisible" class="dropdown-menu">
-    <button @click="completeAll('Daily')">Daily</button>
-    <button @click="completeAll('Weekly')">Weekly</button>
+
+
+    <div class="character-bosses">
+      <div v-for="(boss, index) in bossesWithActiveDifficulties" :key="index">
+        <BossBlock :boss="boss" :saveBosses="saveBosses" />
+      </div>
+    </div>
   </div>
-</div>
-<div class="character-bosses">
-<div v-for="(boss, index) in bossesWithActiveDifficulties" :key="index">
-  <BossBlock :boss="boss" :saveBosses="saveBosses" />
-</div>
-</div>
-  </div>
-    
+
 </template>
 
 <script setup>
 import { ref, computed } from 'vue'
 import { saveData } from '../../localStorageService'
 import BossBlock from '../../components/Character/Bosses/BossBlock.vue'
+
+
+const bossDropdownVisible = ref(false)
 
 const props = defineProps({
   character: {
@@ -37,13 +44,13 @@ function toggleDropdown() {
 }
 
 const bossesWithActiveDifficulties = computed(() => {
-  return props.character.Bosses.BossList.filter(boss => 
+  return props.character.Bosses.BossList.filter(boss =>
     boss.Difficulty.some(difficulty => difficulty.isActive)
   )
 })
 function completeAll(type) {
-  const allCompleted = props.character.Bosses.BossList.every(boss => 
-    boss.Difficulty.every(difficulty => 
+  const allCompleted = props.character.Bosses.BossList.every(boss =>
+    boss.Difficulty.every(difficulty =>
       difficulty.DifficultyReset !== type || !difficulty.isActive || difficulty.CompletionStatus
     )
   )
@@ -82,5 +89,10 @@ function saveBosses() {
   grid-column: 1 / -1;
   text-align: center;
   margin-bottom: 1rem;
+}
+
+.complete-all-container {
+  position: relative;
+  display: inline-block;
 }
 </style>

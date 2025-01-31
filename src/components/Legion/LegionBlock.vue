@@ -1,8 +1,17 @@
 <template>
   <div class="card">
-    <h3>{{ character.Name }}</h3>
-    <p>Class: {{ character.Class }}</p>
-    <p>Level: {{ character.Level }}</p>
+    <div class="card-character-info">
+      <div class="character-properties">
+        <h3>{{ character.Name }}</h3>
+        <p> {{ character.Class }}</p>
+      </div>
+      <div class="character-level">
+        <p>Lv. {{ character.Level }}</p>
+      </div>
+
+   
+    </div>
+
     <div class="progression-block__Container">
       <LegionProgressionBlock title="Symbols" :completed="completedSymbols" :total="totalSymbols" />
       <LegionProgressionBlock title="Dailies" :completed="completedDailies" :total="totalDailies" />
@@ -72,7 +81,7 @@ const totalBosses = computed(() => {
   color: var(--dark-text) !important;
 }
 
-.character{
+.character {
   display: flex;
   flex-direction: column;
   gap: 1em;
@@ -81,7 +90,7 @@ const totalBosses = computed(() => {
 
 .card {
   background-color: var(--elev-1);
-  border: 1px solid #ddd;
+  /* border: 1px solid #ddd; */
   border-radius: 8px;
   padding: 1em;
   margin: 1em 0;
@@ -90,6 +99,21 @@ const totalBosses = computed(() => {
   background: var(--elev-1);
   box-shadow: 0px 2px 8px 1px rgba(0, 0, 0, 0.05);
   color: var(--dark-text) !important;
+  display: grid;
+  grid-template-rows: repeat(auto, 1fr);
+  gap: 0.4em;
+}
+
+.card-character-info {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+
+  text-align: left;
+  width: 100%;
+  margin: auto;
+  margin-bottom: 8px;
+  /* padding: 4px 16px; */
 }
 
 .progression-block__Container {
@@ -97,15 +121,25 @@ const totalBosses = computed(() => {
   width: 100%;
   display: grid;
   grid-template-columns: repeat(2, auto);
-  gap: 4px 8px;
+  gap: 8px 8px;
   flex-wrap: wrap;
 }
 
+.character-level{
+  background-color: var(--elev-2);
+  height: fit-content;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 0.8rem;
+}
+
 h3 {
-  margin: 0 0 0.5em 0;
+  margin: 0;
+  /* margin: 0 0 0.5em 0; */
 }
 
 p {
-  margin: 0.5em 0;
+  /* margin: 0.5em 0; */
+  margin: 0;
 }
 </style>
