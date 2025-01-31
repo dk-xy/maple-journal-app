@@ -24,25 +24,34 @@ function handleDelete() {
 </script>
 
 <template>
-  <div v-if="character">
-    <h1>{{ character.Name }}</h1>
-    <p>Class: {{ character.Class }}</p>
-    <p>Level: {{ character.Level }}</p>
 
-    <RouterLink :to="`/legion/${route.params.id}/edit`">
-      <button>Edit Character</button>
-    </RouterLink>
-    <button @click="handleDelete">Delete Character</button>
+  <div class="character-header" v-if="character">
+    <div class="character-sheet">
+      <h1>{{ character.Name }}</h1>
+      <p>Class: {{ character.Class }}</p>
+      <p>Level: {{ character.Level }}</p>
+    </div>
+    <div class="character-informations">
+      <div class="character-buttons">
+        <RouterLink :to="`/legion/${route.params.id}/edit`">
+          <button>Edit Character</button>
+        </RouterLink>
+        <button @click="handleDelete">Delete Character</button>
+      </div>
+    </div>
 
-    <Tabs :tabs="['Progression', 'Bosses']">
-      <template #Progression>
-        <CharacterProgression :character="character" />
-      </template>
-      <template #Bosses>
-        <CharacterBosses :character="character" />
-      </template>
-    </Tabs>
+    <div class="tab-container">
+      <Tabs :tabs="['Progression', 'Bosses']">
+        <template #Progression>
+          <CharacterProgression :character="character" />
+        </template>
+        <template #Bosses>
+          <CharacterBosses :character="character" />
+        </template>
+      </Tabs>
+    </div>
   </div>
+
   <div v-else>
     <p>Character not found.</p>
   </div>
