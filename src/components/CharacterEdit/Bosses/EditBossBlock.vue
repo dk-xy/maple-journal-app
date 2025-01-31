@@ -5,37 +5,23 @@
     </div>
   </template>
   
-
-<script setup>
-import { computed } from 'vue'
-
-import DifficultySelector from './DifficultySelector.vue'
-
-const props = defineProps({
+  <script setup>
+  import DifficultySelector from './DifficultySelector.vue'
+  
+  const props = defineProps({
     boss: {
-        type: Object,
-        required: true
+      type: Object,
+      required: true
     },
     saveBosses: {
-        type: Function,
-        required: true
+      type: Function,
+      required: true
     }
-})
-// const dailyDifficulties = computed(() => {
-//     return props.boss.Difficulty.filter(difficulty => difficulty.DifficultyReset === 'Daily')
-// })
-
-// const weeklyDifficulties = computed(() => {
-//     return props.boss.Difficulty.filter(difficulty => difficulty.DifficultyReset === 'Weekly')
-// })
-
-function handleDifficultyChange(difficulty) {
+  })
+  
+  function handleDifficultyChange(difficulty) {
     props.saveBosses()
-}
-
-// function handleDifficultyChange(difficulty) {
-//     props.saveBosses()
-// }
+  }
 
 
 </script>

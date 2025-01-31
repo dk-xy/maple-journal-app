@@ -3,24 +3,18 @@
     <div class="edit-difficulty" v-if="dailyDifficulties.length">
       <div class="difficulty-frequency-label">Daily</div>
       <div class="all-difficulties-container">
-        <div class="boss-difficulty-selector" v-for="(difficulty, diffIndex) in dailyDifficulties"
-          :key="'daily-' + diffIndex">
-          <label :class="'difficulty-capsule ' + difficulty.DifficultyName" :for="'daily-difficulty-' + diffIndex">{{
-            difficulty.DifficultyName }}</label>
-          <input :id="'daily-difficulty-' + diffIndex" type="checkbox" :checked="difficulty.isActive"
-            @change="handleDailyChange(difficulty)" />
+        <div class="boss-difficulty-selector" v-for="(difficulty, diffIndex) in dailyDifficulties" :key="'daily-' + diffIndex">
+          <label :class="'difficulty-capsule ' + difficulty.DifficultyName" :for="'daily-difficulty-' + diffIndex">{{ difficulty.DifficultyName }}</label>
+          <input :id="'daily-difficulty-' + diffIndex" type="checkbox" v-model="difficulty.isActive" @change="handleChange(difficulty)" />
         </div>
       </div>
     </div>
     <div class="edit-difficulty" v-if="weeklyDifficulties.length">
       <div class="difficulty-frequency-label">Weekly</div>
       <div class="all-difficulties-container">
-        <div class="boss-difficulty-selector" v-for="(difficulty, diffIndex) in weeklyDifficulties"
-          :key="'weekly-' + diffIndex">
-          <label :class="'difficulty-capsule ' + difficulty.DifficultyName" :for="'weekly-difficulty-' + diffIndex">{{
-            difficulty.DifficultyName }}</label>
-          <input :id="'weekly-difficulty-' + diffIndex" type="checkbox" :checked="difficulty.isActive"
-            @change="handleWeeklyChange(difficulty)" />
+        <div class="boss-difficulty-selector" v-for="(difficulty, diffIndex) in weeklyDifficulties" :key="'weekly-' + diffIndex">
+          <label :class="'difficulty-capsule ' + difficulty.DifficultyName" :for="'weekly-difficulty-' + diffIndex">{{ difficulty.DifficultyName }}</label>
+          <input :id="'weekly-difficulty-' + diffIndex" type="checkbox" v-model="difficulty.isActive" @change="handleChange(difficulty)" />
         </div>
       </div>
     </div>
@@ -49,23 +43,10 @@ const weeklyDifficulties = computed(() => {
   return props.difficulties.filter(difficulty => difficulty.DifficultyReset === 'Weekly')
 })
 
-function handleDailyChange(selectedDifficulty) {
-  props.difficulties.forEach(difficulty => {
-    if (difficulty.DifficultyReset === 'Daily') {
-      difficulty.isActive = (difficulty === selectedDifficulty)
-    }
-  })
-  props.handleChange(selectedDifficulty)
-}
 
-function handleWeeklyChange(selectedDifficulty) {
-  props.difficulties.forEach(difficulty => {
-    if (difficulty.DifficultyReset === 'Weekly') {
-      difficulty.isActive = (difficulty === selectedDifficulty)
-    }
-  })
-  props.handleChange(selectedDifficulty)
-}
+
+
+
 </script>
 
 
