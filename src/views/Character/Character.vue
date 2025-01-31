@@ -27,17 +27,23 @@ function handleDelete() {
 
   <div class="character-header" v-if="character">
     <div class="character-sheet">
-      <h1>{{ character.Name }}</h1>
-      <p>Class: {{ character.Class }}</p>
-      <p>Level: {{ character.Level }}</p>
-    </div>
-    <div class="character-informations">
+      <div class="character-sheet-info">
+        <h1>{{ character.Name }}</h1>
+        <div class="sub-name">
+          <div class="character-sheet-class"> {{ character.Class }}</div>
+          <div class="character-sheet-class">Lvl. {{ character.Level }}</div>
+        </div>
+      </div>
       <div class="character-buttons">
         <RouterLink :to="`/legion/${route.params.id}/edit`">
-          <button>Edit Character</button>
+          <button class="edit-character character-button">Edit</button>
         </RouterLink>
-        <button @click="handleDelete">Delete Character</button>
+        <button class="delete-character character-button" @click="handleDelete">Delete</button>
       </div>
+
+    </div>
+    <div class="character-informations">
+     
     </div>
 
     <div class="tab-container">
@@ -59,4 +65,70 @@ function handleDelete() {
 
 <style scoped>
 /* Add any custom styles here */
+
+.character-sheet {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  width: 35%;
+  margin: auto;
+
+  margin-bottom: 1em;
+  margin-top: 1em;
+  background-color: var(--elev-1);
+
+  border-radius: 8px;
+
+  padding: 8px 16px;
+}
+
+.character-sheet-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: left;  
+  gap: 0.5em;
+}
+
+.sub-name {
+  display: flex;
+  flex-direction: column;
+  justify-content: left;
+  gap: 0.5em;
+  text-align: left;
+}
+
+.character-sheet-info h1{
+  font-size: 2.441rem;
+  margin: 0;
+}
+
+.character-buttons {
+  display: flex;
+  gap: 0.2em;
+  flex-direction: column;
+}
+
+
+.character-button{
+  width: 64px;
+  height: 32px;
+  font-size: 0.62rem;
+  font-weight: 800;
+  text-align: center;
+}
+
+.edit-character{
+  background-color: var(--blue-accent);
+  color: white;
+  border: none;
+  border-radius: 8px;
+}
+
+.delete-character{
+  background-color: var(--red-accent);
+  color: white;
+  border: none;
+  border-radius: 8px;
+}
 </style>

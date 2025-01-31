@@ -31,11 +31,13 @@ const props = defineProps({
     display: flex;
     padding: 2px 8px;
     align-items: center;
+    justify-content: center;
     gap: 4px;
-
+    font-size: 0.8em;
     border-radius: 32px;
     border: 0.5px solid #FFF;
     background: #E9C7AE;
+    text-align: center;
 }
 
 h4 {

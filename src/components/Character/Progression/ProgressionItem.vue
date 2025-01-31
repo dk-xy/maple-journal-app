@@ -1,7 +1,7 @@
 <template>
     <!-- ARCANE RIVER -->
     <div :class="'progression-item__symbols ' + item.RegionName" v-if="type === 'region' && code === 'arcaneRiver'">
-        {{ item.RegionName }}:
+        {{ item.RegionName }}
         <div class="completion_container">
             <div class="progression-item__symbols__completion">
                 <div>Daily</div>
@@ -32,13 +32,13 @@
 
     <!-- DAILIES -->
     <div class="progression-item__activity" v-else-if="type === 'daily'">
-        {{ item.Name }}:
+        {{ item.Name }}
         <input type="checkbox" v-model="item.CompletionStatus" @change="saveProgression" />
     </div>
 
     <!-- WEEKLIES -->
     <div class="progression-item__activity" v-else-if="type === 'weekly'">
-        {{ item.Name }}:
+        {{ item.Name }}
         <input type="checkbox" v-model="item.CompletionStatus" @change="saveProgression" />
     </div>
 

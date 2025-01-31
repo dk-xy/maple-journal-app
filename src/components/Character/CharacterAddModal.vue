@@ -8,11 +8,83 @@
             <input id="name" v-model="characterName" required />
           </div>
           <div>
-            <label for="class">Class:</label>
-            <select id="class" v-model="characterClass" required>
-              <option v-for="cls in classes" :key="cls" :value="cls">{{ cls }}</option>
-            </select>
-          </div>
+          <label for="class">Class:</label>
+          <select id="class" v-model="characterClass" required>
+            <optgroup label="Explorer">
+              <option>Dark Knight</option>
+              <option>Hero</option>
+              <option>Paladin</option>
+
+              <option>Fire/Poison Mage</option>
+              <option>Ice/Lightning Mage</option>
+              <option>Bishop</option>
+
+              <option>Bowmaster</option>
+              <option>Marksman</option>
+
+              <option>Shadower</option>
+              <option>Night Lord</option>
+              <option>Dual Blade</option>
+
+              <option>Buccaneer</option>
+              <option>Pirate</option>
+            </optgroup>
+
+            <optgroup label="Cygnus Knights">
+              <option>Dawn Warrior</option>
+              <option>Blaze Wizard</option>
+              <option>Wind Archer</option>
+              <option>Night Walker</option>
+              <option>Thunder Breaker</option>
+            </optgroup>
+
+
+            <optgroup label="Resistance">
+              <option>Battle Mage</option>
+              <option>Wild Hunter</option>
+              <option>Mechanic</option>
+              <option>Demon Slayer</option>
+              <option>Demon Avenger</option>
+              <option>Xenon</option>
+            </optgroup>
+
+            <optgroup label="Heroes">
+              <option>Aran</option>
+              <option>Evan</option>
+              <option>Mercedes</option>
+              <option>Phantom</option>
+              <option>Luminous</option>
+              <option>Shade</option>
+            </optgroup>
+
+
+
+            <optgroup label="Nova">
+              <option>Angelic Buster</option>
+              <option>Kaiser</option>
+              <option>Cadena</option>
+              <option>Kain</option>
+            </optgroup>
+
+            <optgroup label="Sengoku">
+              <option>Kanna</option>
+              <option>Hayato</option>
+            </optgroup>
+
+            <optgroup label="Flora">
+              <option>Adele</option>
+              <option>Ark</option>
+              <option>Illium</option>
+              <option>Khali</option>
+            </optgroup>
+            
+            <optgroup label="Anima">
+              <option>Lara</option>
+              <option>Hoyoung</option>
+            </optgroup>
+            <!-- Add more families and classes as needed -->
+          </select>
+        </div>
           <div>
             <label for="level">Level:</label>
             <input id="level" type="number" v-model="characterLevel" min="1" max="300" required />
