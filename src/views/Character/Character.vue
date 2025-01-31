@@ -31,7 +31,7 @@ function handleDelete() {
         <h1>{{ character.Name }}</h1>
         <div class="sub-name">
           <div class="character-sheet-class"> {{ character.Class }}</div>
-          <div class="character-sheet-class">Lvl. {{ character.Level }}</div>
+          <div class="character-sheet-level">Lvl. {{ character.Level }}</div>
         </div>
       </div>
       <div class="character-buttons">
@@ -70,8 +70,8 @@ function handleDelete() {
   display: flex;
   justify-content: space-between;
   align-items: center;
-
-  width: 35%;
+  min-width: 33%;
+  max-width: 48%;
   margin: auto;
 
   margin-bottom: 1em;
@@ -80,21 +80,29 @@ function handleDelete() {
 
   border-radius: 8px;
 
-  padding: 8px 16px;
+  padding: 16px 32px;
+}
+
+.character-sheet-class {
+  font-size: 1rem;
+}
+
+.character-sheet-level {
+  font-size: 0.8rem;
 }
 
 .character-sheet-info {
   display: flex;
   flex-direction: column;
   justify-content: left;  
-  gap: 0.5em;
+  gap: 0.8em;
 }
 
 .sub-name {
   display: flex;
   flex-direction: column;
   justify-content: left;
-  gap: 0.5em;
+  gap: 0.1em;
   text-align: left;
 }
 
