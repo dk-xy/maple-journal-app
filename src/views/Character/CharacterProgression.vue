@@ -4,7 +4,7 @@
     <div class="page-title">
       <h2>Progression</h2>
       <div class="complete-all-container">
-      <button class="complete-all-button" @click="completeAll('all')">Complete All</button>
+      <button class="complete-all-button" @click="completeAll('all')"> <Icon iconName="task_alt" /> <div>Complete All</div></button>
     </div>
     </div>
 
@@ -70,6 +70,8 @@
 import { ref, computed } from 'vue'
 import ProgressionItem from '../../components/Character/Progression/ProgressionItem.vue'
 import { saveData } from '../../localStorageService'
+import Icon from '../../components/Icon.vue'
+
 
 const props = defineProps({
   character: {
@@ -171,27 +173,19 @@ function completeActivities(type) {
 </script>
 <style scoped>
 
-.page-title{
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: row;
-  height: 100%;
-  gap: 32px;
-}
 
 .page-title h2{
   margin: 0;
 }
 
 
-.section-title {
+/* .section-title {
   display: flex;
   justify-content: left;
   align-items: center;
   margin-bottom: 1em;
   gap: 16px;
-}
+} */
 
 .section-title h3 {
   margin: 0;
@@ -223,7 +217,6 @@ function completeActivities(type) {
   min-height: 100px;
 }
 
-/* SYMBOLS!!COLORS!!
 
 
 
@@ -267,59 +260,6 @@ h3 {
 
 
 
-/* COMPLETE ALL CSS !!! */
-.complete-all-button {
-  background: var(--elev-1);
-  border: none;
-  padding: 0.5em 1em;
-  cursor: pointer;
-  color: var(--dark-brown);
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  /* border: solid 1px var(--elev-2); */
-  font-size: 0.8rem;
-  font-weight: 600;
-}
-
-
-.complete-all-container {
-  /* margin-bottom: 1em; */
-}
-
-.complete-symbols-container,
-.complete-activities-container {
-  position: relative;
-  display: inline-block;
-  /* margin-bottom: 1em; */
-}
-
-.dropdown-menu {
-  position: absolute;
-  top: 100%;
-  left: 0;
-  background: var(--elev-1);
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  z-index: 1000;
-  width: 100%;
-  margin-top: 4px;
-
-}
-
-.dropdown-menu button {
-  display: block;
-  width: 100%;
-  padding: 0.5em 1em;
-  background: none;
-  border: none;
-  text-align: left;
-  cursor: pointer;
-  color: var(--dark-text);
-}
-
-.dropdown-menu button:hover {
-  background: var(--elev-2);
-}
 
 
 

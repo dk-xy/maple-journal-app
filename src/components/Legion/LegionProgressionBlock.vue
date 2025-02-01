@@ -38,6 +38,7 @@ const props = defineProps({
     border: 0.5px solid #FFF;
     background: #E9C7AE;
     text-align: center;
+    min-width: 84px;
 }
 
 h4 {

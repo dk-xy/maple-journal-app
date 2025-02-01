@@ -102,6 +102,7 @@ const totalBosses = computed(() => {
   display: grid;
   grid-template-rows: repeat(auto, 1fr);
   gap: 0.4em;
+  min-width: 340px;
 }
 
 .card-character-info {

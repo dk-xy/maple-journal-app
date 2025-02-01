@@ -20,7 +20,7 @@
 --elev-0: #FFECD9;
 --elev-1: #F5D9BE;
 --elev-2: #E9C7AE;
---elev--1: # C99D7D;
+--elev--1: #C99D7D;
 
 /* !!TEXTS */
 --dark-brown: #6E4732;
@@ -28,6 +28,7 @@
 
 /* !!ACCENTS */
 --blue-accent: #33AABB;
+--blue-accent-deep: hsl(188, 40%, 30%);
 --green-accent: #9AC83A;
 --red-accent: #E85365;
 
@@ -163,6 +164,14 @@ color: var(--dark-text);
 /* PAGES LAYOUT !!! */
 
 
+
+.section-title {
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  margin-bottom: 1em;
+  gap: 16px;
+}
 .page-title{
   display: flex;
   justify-content: center;
@@ -185,6 +194,10 @@ color: var(--dark-text);
   /* border: solid 1px var(--elev-2); */
   font-size: 0.8rem;
   font-weight: 600;
+
+  display: flex;
+  align-items: center;
+  gap: 0.6em;
 }
 
 

@@ -4,6 +4,7 @@ import CharacterAddModal from '../components/Character/CharacterAddModal.vue'
 import LegionBlock from '../components/Legion/LegionBlock.vue'
 import { getCharacters } from '../localStorageService'
 import { RouterLink } from 'vue-router'
+import Icon from '../components/Icon.vue'
 
 const showModal = ref(false)
 const characters = ref([])
@@ -21,10 +22,14 @@ function handleCharacterAdded() {
 <template>
   <div>
     <h1>Legion</h1>
-    <button class="addChar" @click="showModal = true">Add Character</button>
+    <div class="section-title">
+      <h2>Characters</h2>
+      <button class="addChar" @click="showModal = true"> <Icon iconName="add_box" /> Add </button>
+    </div>
+    
     <CharacterAddModal :show="showModal" @close="handleCharacterAdded" />
     <div v-if="characters.length">
-      <h2>Characters</h2>
+     
       <div class="character-container">
         <div class="character" v-for="(character, index) in characters" :key="index">
           <RouterLink :to="`/legion/${index + 1}`">
@@ -41,14 +46,20 @@ function handleCharacterAdded() {
 
 <style scoped>
 button {
-  padding: 0.5em 1em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  padding: 0.2em 0.8em;
+  gap: 8px;
   background-color: var(--blue-accent);
   border: none;
   cursor: pointer;
   font-weight: bold;
 }
 button:hover {
-  background-color: #ffd7a8;
+  background-color: var(--blue-accent-deep);
+  
 }
 
 .character-container {
