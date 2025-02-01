@@ -29,9 +29,9 @@ const props = defineProps({
 <style scoped>
 .progression-block {
     display: flex;
-    padding: 2px 8px;
+    padding: 2px 32px;
     align-items: center;
-    justify-content: center;
+    justify-content: space-between;
     gap: 4px;
     font-size: 0.8em;
     border-radius: 32px;

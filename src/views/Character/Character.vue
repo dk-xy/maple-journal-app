@@ -21,6 +21,24 @@ function handleDelete() {
   deleteCharacter(characterId)
   router.push('/legion')
 }
+
+async function getPlayerData() {
+  const url = "https://www.nexon.com/maplestory/rankings/europe/overall/weekly?world_type=both&search_type=character-name&search=Artificiel";
+  try {
+    const response = await fetch(url);
+    if (!response.ok) {
+      throw new Error(`Response status: ${response.status}`);
+    }
+
+    const json = await response.json();
+    console.log(json);
+  } catch (error) {
+    console.error(error.message);
+  }
+}
+
+
+
 </script>
 
 <template>
