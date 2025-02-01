@@ -1,18 +1,25 @@
 <template>
   <div>
-    
+
     <div class="page-title">
       <h2>Progression</h2>
       <div class="complete-all-container">
-      <button class="complete-all-button" @click="completeAll('all')"> <Icon iconName="task_alt" /> <div>Complete All</div></button>
-    </div>
+        <button class="complete-all-button" @click="completeAll('all')">
+          <Icon iconName="task_alt" />
+          <div>Complete All</div>
+        </button>
+      </div>
     </div>
 
 
     <div class="symbol-title section-title">
       <h3>Symbols</h3>
       <div class="complete-symbols-container">
-        <button class="complete-all-button" @click="toggleSymbolsDropdown"> <Icon iconName="beenhere" /> Complete Symbols</button>
+        <button class="complete-all-button toggle-complete" @click="toggleSymbolsDropdown">
+          <div>Complete</div>
+          <Icon :iconName="symbolsDropdownVisible ? 'arrow_drop_up' : 'arrow_drop_down'" />
+        </button>
+        <!-- <button class="complete-all-button" @click="toggleSymbolsDropdown"> Complete Symbols</button> -->
         <div v-if="symbolsDropdownVisible" class="dropdown-menu">
           <button @click="completeSymbols('Daily')">Daily</button>
           <button @click="completeSymbols('Weekly')">Weekly</button>
@@ -36,14 +43,18 @@
 
     <div class="activities-title section-title">
       <h3>Activities</h3>
-    <div class="complete-activities-container">
-      <button class="complete-all-button" @click="toggleActivitiesDropdown">Complete Activities</button>
-      <div v-if="activitiesDropdownVisible" class="dropdown-menu">
-        <button @click="completeActivities('Daily')">Daily</button>
-        <button @click="completeActivities('Weekly')">Weekly</button>
-        <button @click="completeActivities('all')">All</button>
+      <div class="complete-activities-container">
+        <button class="complete-all-button toggle-complete" @click="toggleActivitiesDropdown">
+          Complete
+          <Icon :iconName="activitiesDropdownVisible ? 'arrow_drop_up' : 'arrow_drop_down'" />
+        </button>
+        <!-- <button class="complete-all-button" @click="toggleActivitiesDropdown">Complete Activities</button> -->
+        <div v-if="activitiesDropdownVisible" class="dropdown-menu">
+          <button @click="completeActivities('Daily')">Daily</button>
+          <button @click="completeActivities('Weekly')">Weekly</button>
+          <button @click="completeActivities('all')">All</button>
+        </div>
       </div>
-    </div>
     </div>
 
     <div class="activities-container">
@@ -122,10 +133,10 @@ function completeAll(type) {
 }
 
 function completeSymbols(type) {
-  const allCompleted = activeArcaneRiverRegions.value.every(region => 
-    (type === 'all' || type === 'Daily') && region.RegionDailyCompletion || 
+  const allCompleted = activeArcaneRiverRegions.value.every(region =>
+    (type === 'all' || type === 'Daily') && region.RegionDailyCompletion ||
     (type === 'all' || type === 'Weekly') && region.RegionWeeklyCompletion
-  ) && activeGrandisRegions.value.every(region => 
+  ) && activeGrandisRegions.value.every(region =>
     (type === 'all' || type === 'Daily') && region.RegionDailyCompletion
   )
 
@@ -149,9 +160,9 @@ function completeSymbols(type) {
 }
 
 function completeActivities(type) {
-  const allCompleted = activeDailies.value.every(daily => 
+  const allCompleted = activeDailies.value.every(daily =>
     (type === 'all' || type === 'Daily') && daily.CompletionStatus
-  ) && activeWeeklies.value.every(weekly => 
+  ) && activeWeeklies.value.every(weekly =>
     (type === 'all' || type === 'Weekly') && weekly.CompletionStatus
   )
 
@@ -172,9 +183,7 @@ function completeActivities(type) {
 }
 </script>
 <style scoped>
-
-
-.page-title h2{
+.page-title h2 {
   margin: 0;
 }
 
@@ -222,7 +231,7 @@ function completeActivities(type) {
 
 
 /* DAILIES */
-.activity-category-container{
+.activity-category-container {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 16px;
@@ -230,7 +239,7 @@ function completeActivities(type) {
   padding: 32px 16px;
 }
 
-.activity-category-container h4{
+.activity-category-container h4 {
   grid-column-start: span 3;
   margin: 0;
   text-align: left;
@@ -239,7 +248,8 @@ function completeActivities(type) {
 
 h3 {
   margin: 0.5em 0;
-  line-height: 1.2; /* Ensure consistent line height */
+  line-height: 1.2;
+  /* Ensure consistent line height */
 }
 
 .all-symbols {
@@ -267,8 +277,8 @@ h3 {
 
 @media (min-width:768px) and (max-width: 1024px) {
   .symbol-progression_container h3 {
-  grid-column-start: span 2 ;
-}
+    grid-column-start: span 2;
+  }
 
   .symbol-progression_container {
     grid-template-columns: repeat(2, auto);
@@ -276,14 +286,14 @@ h3 {
 }
 
 @media (min-width: 868px) {
-.activities-container {
-  display: grid;
-  grid-template-columns: repeat(2, auto);
-  gap: 20px;
-}
+  .activities-container {
+    display: grid;
+    grid-template-columns: repeat(2, auto);
+    gap: 20px;
+  }
 
 
-  
+
 }
 
 @media (max-width: 768px) {
@@ -301,5 +311,4 @@ h3 {
     grid-template-columns: 1fr;
   }
 }
-
 </style>
