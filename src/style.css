@@ -174,11 +174,12 @@ color: var(--dark-text);
 }
 .page-title{
   display: flex;
-  justify-content: center;
+  justify-content: left;
   align-items: center;
   flex-direction: row;
   height: 100%;
   gap: 32px;
+  margin-bottom: 32px;
 }
 
 

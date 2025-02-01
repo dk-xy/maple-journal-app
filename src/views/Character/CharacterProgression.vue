@@ -12,7 +12,7 @@
     <div class="symbol-title section-title">
       <h3>Symbols</h3>
       <div class="complete-symbols-container">
-        <button class="complete-all-button" @click="toggleSymbolsDropdown">Complete Symbols</button>
+        <button class="complete-all-button" @click="toggleSymbolsDropdown"> <Icon iconName="beenhere" /> Complete Symbols</button>
         <div v-if="symbolsDropdownVisible" class="dropdown-menu">
           <button @click="completeSymbols('Daily')">Daily</button>
           <button @click="completeSymbols('Weekly')">Weekly</button>

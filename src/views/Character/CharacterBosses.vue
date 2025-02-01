@@ -3,7 +3,7 @@
     <div class="page-title">
       <h2>Bosses</h2>
       <div class="complete-all-container">
-        <button class="complete-all-button" @click="toggleDropdown">Complete All</button>
+        <button class="complete-all-button" @click="toggleDropdown"><Icon iconName="task_alt" /> <div>Complete All</div></button>
         <div v-if="dropdownVisible" class="dropdown-menu">
           <button @click="completeAll('Daily')">Daily</button>
           <button @click="completeAll('Weekly')">Weekly</button>
@@ -26,6 +26,7 @@
 import { ref, computed } from 'vue'
 import { saveData } from '../../localStorageService'
 import BossBlock from '../../components/Character/Bosses/BossBlock.vue'
+import Icon from '../../components/Icon.vue'
 
 
 const bossDropdownVisible = ref(false)
