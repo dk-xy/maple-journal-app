@@ -1,8 +1,8 @@
 <template>
-  <div>
+  <div class="boss-edit-page">
     <h2>Edit Bosses</h2>
-    <div v-for="(boss, index) in character.Bosses.BossList" :key="index">
-      <EditBossBlock :boss="boss" :saveBosses="saveBosses" />
+    <div class="boss-edit-container">
+      <EditBossBlock v-for="(boss, index) in character.Bosses.BossList" :key="index" :boss="boss" :saveBosses="saveBosses" />
     </div>
   </div>
 </template>
@@ -18,7 +18,6 @@ const props = defineProps({
   }
 })
 
-
 function saveBosses() {
   const characters = JSON.parse(localStorage.getItem('mapleStoryData')).Legion.Characters
   const characterIndex = characters.findIndex(c => c.Name === props.character.Name)
@@ -30,5 +29,31 @@ function saveBosses() {
 </script>
 
 <style scoped>
-/* Add any custom styles here */
+.boss-edit-page {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+}
+
+.boss-edit-page h2 {
+  text-align: center;
+}
+
+.boss-edit-container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1em;
+}
+
+.boss-edit-block {
+  border-radius: 8px;
+  background: var(--elev-1, #F5D9BE);
+  padding: 1em;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  justify-content: left;
+}
+
+
 </style>

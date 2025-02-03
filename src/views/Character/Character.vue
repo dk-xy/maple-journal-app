@@ -22,27 +22,23 @@ function handleDelete() {
   router.push('/legion')
 }
 
-async function getPlayerData() {
-  const url = "https://www.nexon.com/maplestory/rankings/europe/overall/weekly?world_type=both&search_type=character-name&search=Artificiel";
-  try {
-    const response = await fetch(url);
-    if (!response.ok) {
-      throw new Error(`Response status: ${response.status}`);
-    }
-
-    const json = await response.json();
-    console.log(json);
-  } catch (error) {
-    console.error(error.message);
-  }
+function goToEdit() {
+  router.push(`/legion/${route.params.id}/edit`)
 }
 
+function hasActiveProgression(character) {
+  return character.Progression.ArcaneRiver.Region.some(region => region.isActive) ||
+         character.Progression.Grandis.Region.some(region => region.isActive) ||
+         character.Progression.Dailies.DailyActivity.some(activity => activity.isActive) ||
+         character.Progression.Weeklies.WeeklyActivity.some(activity => activity.isActive)
+}
 
-
+function hasActiveBosses(character) {
+  return character.Bosses.BossList.some(boss => boss.Difficulty.some(difficulty => difficulty.isActive))
+}
 </script>
 
 <template>
-
   <div class="character-page" v-if="character">
     <div class="character-sheet">
       <div class="character-sheet-info">
@@ -60,19 +56,33 @@ async function getPlayerData() {
       </div>
     </div>
 
-
     <div class="tab-container">
       <Tabs :tabs="['Progression', 'Bosses']">
         <template #Progression>
-          <CharacterProgression :character="character" />
+          <div v-if="hasActiveProgression(character)">
+            <CharacterProgression :character="character" />
+          </div>
+          <div v-else>
+            <div class="message-container">
+              <p>No progression registered.</p>
+              <p>Please edit your character to track it's progression.</p>
+            </div>
+           
+            <button class="edit-cta-button" @click="goToEdit">Edit Character</button>
+          </div>
         </template>
         <template #Bosses>
-          <CharacterBosses :character="character" />
+          <div v-if="hasActiveBosses(character)">
+            <CharacterBosses :character="character" />
+          </div>
+          <div v-else>
+            <p>No bosses found.</p>
+            <button @click="goToEdit">Edit Character</button>
+          </div>
         </template>
       </Tabs>
     </div>
   </div>
-
   <div v-else>
     <p>Character not found.</p>
   </div>
@@ -85,19 +95,13 @@ async function getPlayerData() {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  /* min-width: 33%;
-  max-width: 48%; */
-  /* width: 100%; */
   min-width: 100px;
   max-width: 728px;
   margin: auto;
-
   margin-bottom: 1em;
   margin-top: 1em;
   background-color: var(--elev-1);
-
   border-radius: 8px;
-
   padding: 16px 16px;
 }
 
@@ -112,7 +116,7 @@ async function getPlayerData() {
 .character-sheet-info {
   display: flex;
   flex-direction: column;
-  justify-content: left;  
+  justify-content: left;
   gap: 0.8em;
 }
 
@@ -124,7 +128,7 @@ async function getPlayerData() {
   text-align: left;
 }
 
-.character-sheet-info h1{
+.character-sheet-info h1 {
   font-size: 2.441rem;
   margin: 0;
 }
@@ -135,8 +139,7 @@ async function getPlayerData() {
   flex-direction: column;
 }
 
-
-.character-button{
+.character-button {
   width: 64px;
   height: 32px;
   font-size: 0.62rem;
@@ -144,17 +147,30 @@ async function getPlayerData() {
   text-align: center;
 }
 
-.edit-character{
+.edit-character {
   background-color: var(--blue-accent);
   color: white;
   border: none;
   border-radius: 8px;
 }
 
-.delete-character{
+.delete-character {
   background-color: var(--red-accent);
   color: white;
   border: none;
   border-radius: 8px;
+}
+
+.edit-cta-button {
+  background-color: var(--blue-accent);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 8px 16px;
+  margin-top: 1em;
+}
+
+.edit-cta-button:hover {
+  background-color: var(--blue-accent-deep);
 }
 </style>

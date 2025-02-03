@@ -38,7 +38,9 @@
     margin: 1em 0;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
+    justify-content: left;
+    /* justify-content: space-between; */
 
 }
 
@@ -46,6 +48,12 @@
     display: grid;
     grid-template-columns: repeat(2, auto);
     gap: 16px;
+}
+
+.boss-edit-block h3 {
+ text-align: left;
+ width: 100%;
+ margin-top: 0px;
 }
 
 </style>

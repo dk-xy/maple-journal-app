@@ -20,6 +20,7 @@
     </div>
   </div>
 </template>
+
 <script setup>
 import { computed } from 'vue'
 
@@ -41,6 +42,7 @@ const dailyDifficulties = computed(() => {
 const weeklyDifficulties = computed(() => {
   return props.difficulties.filter(difficulty => difficulty.DifficultyReset === 'Weekly')
 })
+
 function handleDailyChange(selectedDifficulty) {
   props.difficulties.forEach(difficulty => {
     if (difficulty.DifficultyReset === 'Daily') {
@@ -58,27 +60,21 @@ function handleWeeklyChange(selectedDifficulty) {
   })
   props.handleChange(selectedDifficulty)
 }
-
-
-
-
 </script>
-
 
 <style scoped>
 .difficulty-selector {
   display: flex;
   flex-direction: row;
   gap: 1rem;
+  width: 100%;
 }
 
 .edit-difficulty {
   display: flex;
   flex-direction: column;
-  /* left alignment */
   align-items: flex-start;
   gap: 1rem;
-
   padding: 8px 16px;
   background-color: var(--elev-2);
 }
