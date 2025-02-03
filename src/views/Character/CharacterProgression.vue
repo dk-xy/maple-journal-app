@@ -1,6 +1,5 @@
 <template>
   <div>
-
     <div class="page-title">
       <h2>Progression</h2>
       <div class="complete-all-container">
@@ -214,7 +213,7 @@ function completeActivities(type) {
 .symbol-progression_container {
   display: grid;
   grid-template-rows: repeat(3, auto);
-  background-color: var(--elev-1);
+  background-color: var(--elev-1-a);
   gap: 16px;
   padding: 16px 16px;
 }
@@ -235,7 +234,7 @@ function completeActivities(type) {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 16px;
-  background-color: var(--elev-1);
+  background-color: var(--elev-1-a);
   padding: 16px 16px;
 }
 

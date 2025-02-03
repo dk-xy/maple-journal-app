@@ -20,7 +20,7 @@ function handleCharacterAdded() {
 </script>
 
 <template>
-  <div>
+  <div class="legion-container">
     <h1>Legion</h1>
     <div class="section-title">
       <h2>Characters</h2>
@@ -45,6 +45,14 @@ function handleCharacterAdded() {
 </template>
 
 <style scoped>
+
+.legion-container {
+  /* display: flex;
+  flex-direction: column; */
+  gap: 1em;
+  width: 100%;
+}
+
 button {
   display: flex;
   justify-content: center;
@@ -71,7 +79,8 @@ button:hover {
 .character-container {
 /* grid */
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 2fr));
+  grid-template-columns: repeat(auto-fill, minmax(372px, 2fr));
   gap: 1em;
+  width: 100%;
 }
 </style>

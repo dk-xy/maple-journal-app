@@ -43,7 +43,7 @@ async function getPlayerData() {
 
 <template>
 
-  <div class="character-header" v-if="character">
+  <div class="character-page" v-if="character">
     <div class="character-sheet">
       <div class="character-sheet-info">
         <h1>{{ character.Name }}</h1>
@@ -58,11 +58,8 @@ async function getPlayerData() {
         </RouterLink>
         <button class="delete-character character-button" @click="handleDelete">Delete</button>
       </div>
+    </div>
 
-    </div>
-    <div class="character-informations">
-     
-    </div>
 
     <div class="tab-container">
       <Tabs :tabs="['Progression', 'Bosses']">
@@ -88,8 +85,11 @@ async function getPlayerData() {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  min-width: 33%;
-  max-width: 48%;
+  /* min-width: 33%;
+  max-width: 48%; */
+  /* width: 100%; */
+  min-width: 100px;
+  max-width: 728px;
   margin: auto;
 
   margin-bottom: 1em;
@@ -98,7 +98,7 @@ async function getPlayerData() {
 
   border-radius: 8px;
 
-  padding: 16px 32px;
+  padding: 16px 16px;
 }
 
 .character-sheet-class {
