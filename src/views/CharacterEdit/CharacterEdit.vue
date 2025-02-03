@@ -1,14 +1,16 @@
 <script setup>
 import { ref, onMounted } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
-import { getCharacters, saveData } from '../../localStorageService'
+import { getCharacters } from '../../localStorageService'
 import Tabs from '../../components/Menus/Tabs.vue'
 import CharacterEditProgression from './CharacterEditProgression.vue'
 import CharacterEditBosses from './CharacterEditBosses.vue'
+import EditCharacterInfo from './CharacterEditInfo.vue'
 
 const route = useRoute()
 const router = useRouter()
 const character = ref(null)
+const showEditModal = ref(false)
 
 onMounted(() => {
   const characters = getCharacters()
@@ -28,21 +30,8 @@ function handleSave() {
 <template>
   <div v-if="character">
     <h1>Edit Character</h1>
-    <form @submit.prevent="handleSave">
-      <div>
-        <label for="name">Name:</label>
-        <input id="name" v-model="character.Name" required />
-      </div>
-      <div>
-        <label for="class">Class:</label>
-        <input id="class" v-model="character.Class" required />
-      </div>
-      <div>
-        <label for="level">Level:</label>
-        <input id="level" type="number" v-model="character.Level" min="1" max="300" required />
-      </div>
-      <button type="submit">Save</button>
-    </form>
+    <button @click="showEditModal = true">Edit Character Info</button>
+    <EditCharacterInfo :show="showEditModal" :character="character" @close="showEditModal = false" />
 
     <Tabs :tabs="['Progression', 'Bosses']">
       <template #Progression>

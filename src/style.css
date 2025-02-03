@@ -71,6 +71,7 @@ color: var(--dark-text);
 /* EASY */
 .Easy{
   background: var(--easy-diff);
+  border: solid 2px #fff;
 }
 
 /* NORMAL */
@@ -250,6 +251,87 @@ color: var(--dark-text);
 }
 
 
+
+
+/* FORM CSS !! */
+.form-fields{
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+}
+
+.form-field {
+  display: flex;
+  flex-direction: column;
+  justify-content: left;
+
+}
+
+.form-field label {
+  text-align: left;
+  font-size: 0.8em;
+  color: var(--dark-text);
+}
+
+.form-field input,
+.form-field select {
+  padding: 0.5em;
+  margin-top: 0.5em;
+  border-radius: 4px;
+  border: solid 1px transparent;
+  background-color: var(--elev-2);
+  color: var(--dark-text);
+}
+
+
+.form-button-container {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+}
+
+.form-button-close {
+  background-color: transparent;
+  color: var(--dark-text);
+  border: 0px;
+  /* border-bottom: solid 1px var(--dark-brown); */
+  padding: 0.5em 1em;
+  border-radius: 0px;
+}
+
+.form-button-add {
+  background-color: var(--blue-accent);
+  color: #fff;
+  border: 0px;
+  padding: 0.5em 1em;
+  border-radius: 4px;
+}
+
+.form-button-add:hover {
+  background-color: var(--blue-accent-deep);
+}
+
+/* input focus */
+input:focus,
+select:focus {
+  outline: none;
+  border: 1px solid var(--dark-brown);
+  border-style: inset;
+
+}
+
+/* NUMBER INPUT */
+
+input[type=number] { 
+    -moz-appearance: textfield;
+    appearance: textfield;
+    background-color: var(--elev-2);
+    color: var(--dark-text);
+}
+
+input[type=number]::-webkit-inner-spin-button {
+  background-color: var(--dark-text);
+}
 
 
 @font-face {
