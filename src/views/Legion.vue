@@ -24,7 +24,7 @@ function handleCharacterAdded() {
     <h1>Legion</h1>
     <div class="section-title">
       <h2>Characters</h2>
-      <button class="addChar" @click="showModal = true"> <Icon iconName="add_box" />  </button>
+      <button class="addChar" @click="showModal = true"><Icon iconName="add_box" /></button>
     </div>
     
     <CharacterAddModal :show="showModal" @close="handleCharacterAdded" />

@@ -1,7 +1,7 @@
 <script setup>
 import { ref, onMounted } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
-import { getCharacters } from '../../localStorageService'
+import { getCharacters, saveData } from '../../localStorageService'
 import Tabs from '../../components/Menus/Tabs.vue'
 import CharacterEditProgression from './CharacterEditProgression.vue'
 import CharacterEditBosses from './CharacterEditBosses.vue'
@@ -30,9 +30,17 @@ function handleSave() {
 <template>
   <div v-if="character">
     <h1>Edit Character</h1>
-    <button @click="showEditModal = true">Edit Character Info</button>
-    <EditCharacterInfo :show="showEditModal" :character="character" @close="showEditModal = false" />
+    <div class="character-edit-info">
+      <div class="character-edit-details">
+        <div> {{ character.Name }}</div>
+        <div>{{ character.Class }}</div>
+        <div>{{ character.Level }}</div>
+      </div>
+      <button @click="showEditModal = true">Edit Character Info</button>
+    </div>
 
+    <button @click="handleSave">Save</button>
+    <EditCharacterInfo :show="showEditModal" :character="character" @close="showEditModal = false" />
     <Tabs :tabs="['Progression', 'Bosses']">
       <template #Progression>
         <CharacterEditProgression :character="character" />
@@ -41,6 +49,7 @@ function handleSave() {
         <CharacterEditBosses :character="character" />
       </template>
     </Tabs>
+
   </div>
   <div v-else>
     <p>Character not found.</p>
@@ -48,5 +57,34 @@ function handleSave() {
 </template>
 
 <style scoped>
-/* Add any custom styles here */
+.character-edit-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: var(--elev-1);
+  padding: 1em;
+  border-radius: 8px;
+  margin-bottom: 1em;
+}
+
+.character-edit-details {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1em;
+  justify-content: left;
+  text-align: left;
+}
+
+button {
+  background-color: var(--blue-accent);
+  color: white;
+  border: none;
+  padding: 0.5em 1em;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: var(--blue-accent-deep);
+}
 </style>
