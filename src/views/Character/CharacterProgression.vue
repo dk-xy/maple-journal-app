@@ -45,7 +45,7 @@
       <h3>Activities</h3>
       <div class="complete-activities-container">
         <button class="complete-all-button toggle-complete" @click="toggleActivitiesDropdown">
-          Complete
+          <div>Complete</div> 
           <Icon :iconName="activitiesDropdownVisible ? 'arrow_drop_up' : 'arrow_drop_down'" />
         </button>
         <!-- <button class="complete-all-button" @click="toggleActivitiesDropdown">Complete Activities</button> -->
@@ -236,7 +236,7 @@ function completeActivities(type) {
   grid-template-columns: repeat(2, 1fr);
   gap: 16px;
   background-color: var(--elev-1);
-  padding: 32px 16px;
+  padding: 16px 16px;
 }
 
 .activity-category-container h4 {

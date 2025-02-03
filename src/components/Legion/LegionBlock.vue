@@ -103,6 +103,12 @@ const totalBosses = computed(() => {
   grid-template-rows: repeat(auto, 1fr);
   gap: 0.4em;
   min-width: 340px;
+
+}
+
+.card:hover{  
+  background-color: var(--elev-a);
+  transition: background-color 0.3s;
 }
 
 .card-character-info {

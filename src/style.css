@@ -19,8 +19,9 @@
 /* !!ELEVATIONS */
 --elev-0: #FFECD9;
 --elev-1: #F5D9BE;
+--elev-a: hsl(29, 70%, 84%);
 --elev-2: #E9C7AE;
---elev--1: #C99D7D;
+/* --elev--1: #C99D7D; */
 
 /* !!TEXTS */
 --dark-brown: #6E4732;

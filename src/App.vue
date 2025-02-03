@@ -57,7 +57,7 @@ nav {
   transform: translateX(-50%);
   width: 50%;
   max-width: 1280px;
-  z-index: 1000;
+  z-index: 100;
   margin-top: 12px;
 
 }
