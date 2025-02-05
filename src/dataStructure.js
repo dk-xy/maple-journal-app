@@ -150,7 +150,7 @@ export const emptyCharacter = {
         Name: 'Pierre',
         key: 'pierre',
         Difficulty: [
-          { DifficultyName: 'Normal', DifficultyReset: 'Weekly', CompletionStatus: false, CompletionDate: '', isActive: false },
+          { DifficultyName: 'Normal', DifficultyReset: 'Daily', CompletionStatus: false, CompletionDate: '', isActive: false },
           { DifficultyName: 'Chaos', DifficultyReset: 'Weekly', CompletionStatus: false, CompletionDate: '', isActive: false }
         ]
       },
@@ -158,7 +158,7 @@ export const emptyCharacter = {
         Name: 'Queen',
         key: 'queen',
         Difficulty: [
-          { DifficultyName: 'Normal', DifficultyReset: 'Weekly', CompletionStatus: false, CompletionDate: '', isActive: false },
+          { DifficultyName: 'Normal', DifficultyReset: 'Daily', CompletionStatus: false, CompletionDate: '', isActive: false },
           { DifficultyName: 'Chaos', DifficultyReset: 'Weekly', CompletionStatus: false, CompletionDate: '', isActive: false }
         ]
       },
@@ -166,7 +166,7 @@ export const emptyCharacter = {
         Name: 'Von Bon',
         key: 'vonBon',
         Difficulty: [
-          { DifficultyName: 'Normal', DifficultyReset: 'Weekly', CompletionStatus: false, CompletionDate: '', isActive: false },
+          { DifficultyName: 'Normal', DifficultyReset: 'Daily', CompletionStatus: false, CompletionDate: '', isActive: false },
           { DifficultyName: 'Chaos', DifficultyReset: 'Weekly', CompletionStatus: false, CompletionDate: '', isActive: false }
         ]
       },
@@ -174,7 +174,7 @@ export const emptyCharacter = {
         Name: 'Vellum',
         key: 'vellum',
         Difficulty: [
-          { DifficultyName: 'Normal', DifficultyReset: 'Weekly', CompletionStatus: false, CompletionDate: '', isActive: false },
+          { DifficultyName: 'Normal', DifficultyReset: 'Daily', CompletionStatus: false, CompletionDate: '', isActive: false },
           { DifficultyName: 'Chaos', DifficultyReset: 'Weekly', CompletionStatus: false, CompletionDate: '', isActive: false }
         ]
       },

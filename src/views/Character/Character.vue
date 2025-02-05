@@ -91,6 +91,10 @@ function hasActiveBosses(character) {
 <style scoped>
 /* Add any custom styles here */
 
+.character-page{
+  width: 100%;
+}
+
 .character-sheet {
   display: flex;
   justify-content: space-between;
