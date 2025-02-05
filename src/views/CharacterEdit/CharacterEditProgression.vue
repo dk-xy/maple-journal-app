@@ -1,22 +1,38 @@
 <template>
-  <div>
+  <div class="character-edit-progression">
     <h2>Edit Progression</h2>
 
     <div class="allSymbols-container">
       <div class="region-container">
-        <h3>Arcane River</h3>
+        <div class="section-header">
+          <h3>Arcane River</h3>
+          <button class="select-all-button" @click="toggleAllArcaneRiver">
+            {{ allArcaneRiverSelected ? 'Deselect All' : 'Select All' }}
+          </button>
+        </div>
         <div class="symbol-container">
           <EditActivities v-for="(region, index) in character.Progression.ArcaneRiver.Region" :key="index"
-            :id="'arcane-active-' + index" :label="region.RegionName" :class="'Symbol ArcaneRiver ' + region.RegionName"
+            :id="'arcane-active-' + index" 
+            :label="region.RegionName" 
+            :class="'Symbol ArcaneRiver ' + region.RegionName"
+            :image="`/src/assets/images/symbols/${region.key}.webp`"
             v-model="region.isActive" />
         </div>
       </div>
 
       <div class="region-container">
-        <h3>Grandis</h3>
+        <div class="section-header">
+          <h3>Grandis</h3>
+          <button class="select-all-button" @click="toggleAllGrandis">
+            {{ allGrandisSelected ? 'Deselect All' : 'Select All' }}
+          </button>
+        </div>
         <div class="symbol-container">
           <EditActivities v-for="(region, index) in character.Progression.Grandis.Region" :key="index"
-            :id="'grandis-active-' + index" :label="region.RegionName" :class="'Symbol Grandis ' + region.RegionName"
+            :id="'grandis-active-' + index" 
+            :label="region.RegionName" 
+            :class="'Symbol Grandis ' + region.RegionName"
+            :image="`/src/assets/images/symbols/${region.key}.webp`"
             v-model="region.isActive" />
         </div>
       </div>
@@ -24,30 +40,43 @@
 
     <div class="activities-container">
       <div class="activity-block">
-        <h3>Dailies</h3>
+        <div class="section-header">
+          <h3>Dailies</h3>
+          <button class="select-all-button" @click="toggleAllDailies">
+            {{ allDailiesSelected ? 'Deselect All' : 'Select All' }}
+          </button>
+        </div>
         <div class="activity-container">
           <EditActivities v-for="(daily, index) in character.Progression.Dailies.DailyActivity" :key="index"
-            :id="'daily-active-' + index" :class="'Activity ' + daily.Name" :label="daily.Name"
+            :id="'daily-active-' + index" 
+            :class="'Activity ' + daily.Name" 
+            :label="daily.Name"
+            :image="`/src/assets/images/quests/${daily.key}.webp`"
             v-model="daily.isActive" />
         </div>
       </div>
 
       <div class="activity-block">
-        <h3>Weeklies</h3>
+        <div class="section-header">
+          <h3>Weeklies</h3>
+          <button class="select-all-button" @click="toggleAllWeeklies">
+            {{ allWeekliesSelected ? 'Deselect All' : 'Select All' }}
+          </button>
+        </div>
         <div class="activity-container">
           <EditActivities v-for="(weekly, index) in character.Progression.Weeklies.WeeklyActivity" :key="index"
-            :id="'weekly-active-' + index" :label="weekly.Name" :class="'Activity ' + weekly.Name"
+            :id="'weekly-active-' + index" 
+            :class="'Activity ' + weekly.Name" 
+            :label="weekly.Name"
+            :image="`/src/assets/images/quests/${weekly.key}.webp`"
             v-model="weekly.isActive" />
         </div>
       </div>
     </div>
-
-
   </div>
 </template>
-
 <script setup>
-import { watch } from 'vue'
+import { ref, watch, computed } from 'vue'
 import EditActivities from '../../components/CharacterEdit/Progression/EditActivities.vue'
 const props = defineProps({
   character: {
@@ -55,6 +84,51 @@ const props = defineProps({
     required: true
   }
 })
+
+const allArcaneRiverSelected = computed(() => {
+  return props.character.Progression.ArcaneRiver.Region.every(region => region.isActive)
+})
+
+const allGrandisSelected = computed(() => {
+  return props.character.Progression.Grandis.Region.every(region => region.isActive)
+})
+
+const allDailiesSelected = computed(() => {
+  return props.character.Progression.Dailies.DailyActivity.every(daily => daily.isActive)
+})
+
+const allWeekliesSelected = computed(() => {
+  return props.character.Progression.Weeklies.WeeklyActivity.every(weekly => weekly.isActive)
+})
+
+function toggleAllArcaneRiver() {
+  const newValue = !allArcaneRiverSelected.value
+  props.character.Progression.ArcaneRiver.Region.forEach(region => {
+    region.isActive = newValue
+  })
+}
+
+function toggleAllGrandis() {
+  const newValue = !allGrandisSelected.value
+  props.character.Progression.Grandis.Region.forEach(region => {
+    region.isActive = newValue
+  })
+}
+
+function toggleAllDailies() {
+  const newValue = !allDailiesSelected.value
+  props.character.Progression.Dailies.DailyActivity.forEach(daily => {
+    daily.isActive = newValue
+  })
+}
+
+function toggleAllWeeklies() {
+  const newValue = !allWeekliesSelected.value
+  props.character.Progression.Weeklies.WeeklyActivity.forEach(weekly => {
+    weekly.isActive = newValue
+  })
+}
+
 
 // Watchers for Arcane River
 watch(
@@ -94,6 +168,23 @@ watch(
 </script>
 
 <style scoped>
+
+.character-edit-progression {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+
+.section-header{
+  display: flex;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.section-header h3{
+  margin:0
+}
 .allSymbols-container {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
