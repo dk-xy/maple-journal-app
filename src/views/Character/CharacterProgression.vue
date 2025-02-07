@@ -239,7 +239,7 @@ function completeActivities(type) {
 }
 
 .activity-category-container h4 {
-  grid-column-start: span 3;
+  grid-column-start: span 2;
   margin: 0;
   text-align: left;
 }
