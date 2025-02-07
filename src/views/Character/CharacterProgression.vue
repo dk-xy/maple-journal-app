@@ -291,6 +291,7 @@ h3 {
     display: grid;
     grid-template-columns: repeat(2, auto);
     gap: 20px;
+    row-gap: 20px;
   }
 
 
@@ -298,6 +299,12 @@ h3 {
 }
 
 @media (max-width: 768px) {
+
+  .activities-container{
+    display: grid;
+    grid-template-rows: repeat(2, auto);
+    row-gap: 20px;
+  }
   .all-symbols {
     grid-template-columns: 1fr;
   }
