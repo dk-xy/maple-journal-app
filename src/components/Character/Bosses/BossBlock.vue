@@ -1,14 +1,16 @@
 <template>
   <div class="boss-block">
-    <div class="boss-info">
-      <h3>{{ boss.Name }}</h3>
-      <DifficultyCompletion :difficulties="boss.Difficulty" :handleChange="handleCompletionChange" />
-    </div>
     <div class="boss-image-container">
       <img :src="`/src/assets/images/resizedBosses/${boss.key}.webp`" :alt="boss.Name" class="boss-image" />
     </div>
+    <div class="boss-info">
+      <h3 class="boss-name">{{ boss.Name }}</h3>
+      <DifficultyCompletion :difficulties="boss.Difficulty" :handleChange="handleCompletionChange" />
+    </div>
+
   </div>
 </template>
+
 <script setup>
 import DifficultyCompletion from './DifficultyCompletion.vue'
 import { saveData } from '../../../localStorageService'
@@ -44,7 +46,6 @@ function updateLocalStorage() {
 }
 </script>
 
-
 <style scoped>
 .boss-block {
   position: relative;
@@ -63,29 +64,30 @@ function updateLocalStorage() {
   position: relative;
   z-index: 2;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: space-between;
   gap: 0.5em;
-  padding: 0.5em 0.5em;
-  margin-right: 130px; /* Space for the fixed image */
+  padding: 0.5em 1em;
+  width: calc(100% - 150px); /* Adjust width to account for image */
 }
 
 .boss-image-container {
-  position: absolute;
-  top: 0;
-  right: 0;
+  position: relative;
   width: 150px;
   height: 100%;
-  border-radius: 8px 0 0 8px;
+  border-radius: 0 8px 8px 0;
   overflow: hidden;
   z-index: 1;
 }
 
 .boss-image {
   width: 100%;
-  height: 100%;
+  height: 80px;
   object-fit: cover;
   object-position: left center;
   display: block;
+  transform: scaleX(-1); /* Mirror the image */
 }
 
 /* Gradient overlay on the image */
@@ -96,13 +98,8 @@ function updateLocalStorage() {
   right: 0;
   bottom: 0;
   left: 0;
-  background: linear-gradient(145deg, #f5d9be 23.61%, rgba(197, 160, 125, 0) 98%);
+  background: linear-gradient(225deg, #f5d9be 23.61%, rgba(197, 160, 125, 0) 98%); /* Mirror the gradient */
   z-index: 2;
   pointer-events: none;
-}
-
-h3 {
-  margin: 0.2em;
-  text-align: left;
 }
 </style>

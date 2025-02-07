@@ -27,7 +27,6 @@ const props = defineProps({
 })
 
 function handleDifficultyChange(difficulty) {
-  // This ensures the isActive property is being toggled
   difficulty.isActive = !difficulty.isActive
   props.saveBosses()
 }

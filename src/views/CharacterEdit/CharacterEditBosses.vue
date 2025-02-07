@@ -40,7 +40,6 @@ import EditBossBlock from '../../components/CharacterEdit/Bosses/EditBossBlock.v
 import PresetButton from '../../components/CharacterEdit/Bosses/PresetButton.vue'
 import { presetConfigs } from '../../components/CharacterEdit/Bosses/presetConfigs'
 
-
 const props = defineProps({
   character: {
     type: Object,
@@ -56,51 +55,6 @@ const bossGroups = {
   grandis: ['kalos', 'kaling', 'seren']
 }
 
-
-// const presets = {
-//   threeDoors: {
-//     pierre: ['Chaos'],
-//     queen: ['Chaos'],
-//     vonBon: ['Chaos'],
-//     magnus: ['Hard'],
-//     cygnus: ['Normal']
-//   },
-//   fourDoors: {
-//     pierre: ['Chaos'],
-//     queen: ['Chaos'],
-//     vonBon: ['Chaos'],
-//     vellum: ['Chaos'],
-//     vonLeon: ['Hard'],
-//     magnus: ['Hard'],
-//     cygnus: ['Normal']
-//   }
-// }
-// export const presetConfigs = {
-//   threeDoors: {
-//     name: '3 Doors+',
-//     tooltip: 'CRA (except Vel.), Hard Magnus, Normal Cygnus',
-//     bosses: {
-//       pierre: ['Chaos'],
-//       queen: ['Chaos'],
-//       vonBon: ['Chaos'],
-//       magnus: ['Hard'],
-//       cygnus: ['Normal']
-//     }
-//   },
-//   fourDoors: {
-//     name: '4 Doors+',
-//     tooltip: 'Full CRA, Hard Magnus, Hard Von Leon, Normal Cygnus',
-//     bosses: {
-//       pierre: ['Chaos'],
-//       queen: ['Chaos'],
-//       vonBon: ['Chaos'],
-//       vellum: ['Chaos'],
-//       vonLeon: ['Hard'],
-//       magnus: ['Hard'],
-//       cygnus: ['Normal']
-//     }
-//   }
-// }
 function applyPreset(presetName) {
   const preset = presetConfigs[presetName]
   if (!preset) return
@@ -186,13 +140,12 @@ function saveBosses() {
   flex-direction: row;
   justify-content: flex-start;
   gap: 8px;
-
 }
 
 .preset-button{
   display: flex;
   flex-direction: column;
-  justify-content: flex-start ;
+  justify-content: flex-start;
   background-color: var(--elev-1);
   color: var(--dark-text);
   text-align: left;

@@ -90,10 +90,10 @@
     flex-direction: column;
     /* left alignment */
     align-items: flex-start;
-    gap: 1rem;
+    gap: 0.1rem;
 
     padding: 8px 16px;
-    background-color: var(--elev-2);
+    /* background-color: var(--elev-2); */
 }
 
 .all-difficulties-container {
@@ -120,6 +120,10 @@
     font-size: 1rem;
     font-weight: 500;
     text-transform: capitalize;
+}
+
+.difficulty-frequency-label{
+  font-size: 0.8em;
 }
   
   </style>
