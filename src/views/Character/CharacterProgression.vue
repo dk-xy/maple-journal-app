@@ -233,7 +233,9 @@ function completeActivities(type) {
 .activity-category-container {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 16px;
+  grid-row-gap: 8px;
+  grid-column-gap: 16px;
+
   background-color: var(--elev-1-a);
   padding: 16px 16px;
 }

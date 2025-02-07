@@ -91,6 +91,13 @@ function saveBosses() {
   gap: 1rem;
 }
 
+/* responsiveness */
+@media (max-width: 868px) {
+  .character-bosses {
+    grid-template-columns: 1fr;
+  }
+}
+
 .character-bosses h2 {
   grid-column: 1 / -1;
   text-align: center;
@@ -101,4 +108,6 @@ function saveBosses() {
   position: relative;
   display: inline-block;
 }
+
+
 </style>
