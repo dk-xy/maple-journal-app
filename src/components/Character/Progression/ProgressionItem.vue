@@ -1,6 +1,7 @@
 <template>
     <!-- ARCANE RIVER -->
     <div :class="'progression-item__symbols ' + item.RegionName" v-if="type === 'region' && code === 'arcaneRiver'">
+        <img :src="getSymbolImageSrc(item.key)" :alt="item.RegionName" class="progression-item__background-image" />
         {{ item.RegionName }}
         <div class="completion_container">
             <div class="progression-item__symbols__completion">
@@ -8,40 +9,41 @@
                 <input type="checkbox" v-model="item.RegionDailyCompletion" @change="saveProgression" />
             </div>
             <div class="progression-item__symbols__completion">
-                <div>
-                    Weekly
-                </div>
+                <div>Weekly</div>
                 <input type="checkbox" v-model="item.RegionWeeklyCompletion" @change="saveProgression" />
-
             </div>
         </div>
     </div>
 
     <!-- GRANDIS -->
     <div :class="'progression-item__symbols ' + item.RegionName" v-else-if="type === 'region' && code === 'grandis'">
-        {{ item.RegionName }}:
+        <img :src="getSymbolImageSrc(item.key)" :alt="item.RegionName" class="progression-item__background-image" />
+        {{ item.RegionName }}
         <div class="completion_container">
             <div class="progression-item__symbols__completion">
                 <div>Daily</div>
-                    
-                    <input type="checkbox" v-model="item.RegionDailyCompletion" @change="saveProgression" />
-              
+                <input type="checkbox" v-model="item.RegionDailyCompletion" @change="saveProgression" />
             </div>
         </div>
     </div>
 
     <!-- DAILIES -->
     <div class="progression-item__activity" v-else-if="type === 'daily'">
-        {{ item.Name }}
+        <img :src="getImageSrc(item.key)" :alt="item.Name" class="progression-item__image" />
+        <div class="progression-item-name">
+            {{ item.Name }}
+        </div>
         <input type="checkbox" v-model="item.CompletionStatus" @change="saveProgression" />
     </div>
 
     <!-- WEEKLIES -->
     <div class="progression-item__activity" v-else-if="type === 'weekly'">
-        {{ item.Name }}
+        <img :src="getImageSrc(item.key)" :alt="item.Name" class="progression-item__image" />
+        <div class="progression-item-name">
+            {{ item.Name }}
+        </div>
         <input type="checkbox" v-model="item.CompletionStatus" @change="saveProgression" />
     </div>
-
 </template>
 
 <script setup>
@@ -56,22 +58,30 @@ const props = defineProps({
     },
     code: {
         type: String,
-        required: true
-    },
-    saveProgression: {
-        type: Function,
-        required: true
+        required: false
     }
 })
+
+const emit = defineEmits(['saveProgression'])
+
+function saveProgression() {
+    emit('saveProgression')
+}
+
+function getImageSrc(key) {
+    return key === 'grandisdungeon' 
+        ? `/src/assets/images/quests/${key}.png` 
+        : `/src/assets/images/quests/${key}.webp`
+}
+
+function getSymbolImageSrc(key) {
+    return `/src/assets/images/symbols/${key}.webp`
+}
 </script>
 
 <style scoped>
-/* .progression-item {
-    margin-bottom: 1em;
-} */
-
-
 .progression-item__symbols {
+    position: relative;
     display: flex;
     padding: 8px;
     flex-direction: column;
@@ -79,56 +89,72 @@ const props = defineProps({
     gap: 10px;
     justify-content: flex-start;
     max-width: 300px;
+    overflow: hidden;
+    border-radius: 4px;
 }
 
-.completion_container {
+
+.progression-item__activity {
     display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: flex-start;
-    gap: 10px;
+    align-items: center;
+    justify-content: space-between;
+    text-align: left;
+    line-height: 99%;
+    gap: 8px;
+    background-color: var(--elev-2);
+    padding: 16px 8px;
+    border-radius: 8px;
+    min-width: 200px;
+}
+
+.progression-item__image {
+    width: 24px;
+    height: 24px;
+    object-fit: cover;
+    border-radius: 4px;
+}
+
+.progression-item-name{
+    min-width: 100px;
+}
+
+.completion_container{
     width: 100%;
-}
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+    gap: 8px;
 
-
-
-.progression-item {
-    display: flex;
-    flex-direction: column;
-    gap: 1em;
-    justify-content: center;
 }
 
 .progression-item__symbols__completion {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    gap: 8px;
+ 
+    text-align: left;
 
-    width: 80%;
+   
+
+
     border-radius: 6px;
-    border: 1px solid rgba(228, 228, 228, 0.67);
-    background: linear-gradient(0deg, rgba(45, 45, 45, 0.10) 0%, rgba(45, 45, 45, 0.10) 100%), linear-gradient(124deg, rgba(255, 255, 255, 0.49) 30.91%, rgba(255, 255, 255, 0.55) 97.62%);
-
+    /* border: 1px solid rgba(228, 228, 228, 0.67); */
+    background: linear-gradient(0deg, rgba(218, 218, 218, 0.411) 0%, rgba(153, 153, 153, 0.247) 100%), linear-gradient(124deg, rgba(255, 255, 255, 0.49) 30.91%, rgba(255, 255, 255, 0.664) 97.62%);
+    border: #ffffff7e 1px solid;
     padding: 4px 8px;
+
+    border-radius: 8px;
+
 }
 
 
-
-
-/* ACTIVITY */
-
-.progression-item__activity{
-    display: flex;
-height: 46px;
-padding: 4px 8px;
-justify-content: center;
-align-items: center;
-gap: 16px;
-
-border-radius: 8px;
-border: 1px solid var(--lIGHTgRADIENT, #FFD9B4);
-background: var(--elev-2);
-box-shadow: 0px 2px 6px 1px rgba(0, 0, 0, 0.15);
+.progression-item__background-image {
+    position: absolute;
+    top: 0;
+    right: -15px;
+    width: 45px;
+    height:auto;
+    object-fit: contain;
+    opacity: 0.2;
+    z-index: 1;
 }
 </style>
