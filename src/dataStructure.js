@@ -35,7 +35,11 @@ export const emptyCharacter = {
     Dailies: {
       isActive: false,
       DailyActivity: [
-        { Name: "Erda's Request", key: "erdarequest", CompletionStatus: false, isActive: false, CompletionDate: '', claimType: "solo" },
+        { Name: "Erda's Request", key: "erdarequest", CompletionStatus: false, isActive: false, CompletionDate: '', claimType: "solo", maxPerAccount: 7, energyPerCompletion: 600},
+        {
+          Name: "Erda's Request (Energy)",key: "erdarequest_energy",CompletionStatus: false,isActive: false,CompletionDate: '', claimType: "multi",    // Can be done by multiple characters
+          energyPerCompletion: 600 // Added energy per completion
+        },
         { Name: 'Monster Park', key: "mp", CompletionStatus: false, isActive: false, CompletionDate: '', claimType: "solo" },
         { Name: 'Monster Park Extreme', key: "mpe", CompletionStatus: false, isActive: false, CompletionDate: '', claimType: "solo" },
         { Name: 'Ursus', key: "ursus", CompletionStatus: false, isActive: false, CompletionDate: '', claimType: "solo" },
@@ -297,5 +301,5 @@ export const emptyCharacter = {
       }
     ]
   },
- 
+
 }

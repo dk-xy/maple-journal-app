@@ -64,6 +64,7 @@ const props = defineProps({
 
 const emit = defineEmits(['saveProgression'])
 
+
 function saveProgression() {
     emit('saveProgression')
 }

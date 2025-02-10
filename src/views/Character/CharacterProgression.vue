@@ -44,7 +44,7 @@
       <h3>Activities</h3>
       <div class="complete-activities-container">
         <button class="complete-all-button toggle-complete" @click="toggleActivitiesDropdown">
-          <div>Complete</div> 
+          <div>Complete</div>
           <Icon :iconName="activitiesDropdownVisible ? 'arrow_drop_up' : 'arrow_drop_down'" />
         </button>
         <!-- <button class="complete-all-button" @click="toggleActivitiesDropdown">Complete Activities</button> -->
@@ -61,7 +61,7 @@
         <div class="activity-category-container">
           <h4>Dailies</h4>
           <ProgressionItem v-for="(daily, index) in activeDailies" :key="index" :item="daily" type="daily" code="daily"
-            :saveProgression="saveProgression" />
+            :saveProgression="saveProgression" @saveProgression="saveProgression" />
         </div>
       </div>
 
@@ -300,11 +300,12 @@ h3 {
 
 @media (max-width: 768px) {
 
-  .activities-container{
+  .activities-container {
     display: grid;
     grid-template-rows: repeat(2, auto);
     row-gap: 20px;
   }
+
   .all-symbols {
     grid-template-columns: 1fr;
   }
