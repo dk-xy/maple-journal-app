@@ -121,8 +121,8 @@ const weeklyStats = computed(() => {
 </script>
 
 <template>
-    <div class="dashboard-card">
-        <section class="daily-section">
+    <div class="dashboard-card activities">
+        <section class="dashboard-activites-section daily-section">
             <h2>Daily Activities</h2>
             <div class="stats-grid">
                 <div class="stat-block monster-park">
@@ -131,12 +131,14 @@ const weeklyStats = computed(() => {
                         <div class="stat-row">
                             <img src="/src/assets/images/quests/mp.webp" alt="MP" class="quest-icon" />
                             <span>Regular</span>
-                            <div class="stat-value">{{ dailyStats.monsterPark.mpCompleted }}/{{ dailyStats.monsterPark.activeCharacters }}</div>
+                            <div class="stat-value">{{ dailyStats.monsterPark.mpCompleted }}/{{
+                                dailyStats.monsterPark.activeCharacters }}</div>
                         </div>
                         <div class="stat-row">
                             <img src="/src/assets/images/quests/mpe.webp" alt="MPE" class="quest-icon" />
                             <span>Extreme</span>
-                            <div class="stat-value">{{ dailyStats.monsterPark.mpeCompleted }}/{{ dailyStats.monsterPark.activeCharacters }}</div>
+                            <div class="stat-value">{{ dailyStats.monsterPark.mpeCompleted }}/{{
+                                dailyStats.monsterPark.activeCharacters }}</div>
                         </div>
                     </div>
                 </div>
@@ -147,26 +149,29 @@ const weeklyStats = computed(() => {
                         <div class="stat-row">
                             <img src="/src/assets/images/quests/ursus.webp" alt="Ursus" class="quest-icon" />
                             <span>Ursus</span>
-                            <div class="stat-value">{{ dailyStats.soloContent.ursusCompleted }}/{{ dailyStats.soloContent.activeUrsusChars }}</div>
+                            <div class="stat-value">{{ dailyStats.soloContent.ursusCompleted }}/{{
+                                dailyStats.soloContent.activeUrsusChars }}</div>
                         </div>
                         <div class="stat-row">
                             <img src="/src/assets/images/quests/gollux.webp" alt="Gollux" class="quest-icon" />
                             <span>Gollux</span>
-                            <div class="stat-value">{{ dailyStats.multiContent.golluxCompleted }}/{{ dailyStats.multiContent.activeGolluxChars }}</div>
+                            <div class="stat-value">{{ dailyStats.multiContent.golluxCompleted }}/{{
+                                dailyStats.multiContent.activeGolluxChars }}</div>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section class="weekly-section">
+        <section class="dashboard-activites-section weekly-section">
             <h2>Weekly Activities</h2>
             <div class="stats-grid">
                 <div class="stat-block">
                     <h3>Mu Lung Dojo</h3>
                     <div class="stat-row">
                         <img src="/src/assets/images/quests/mulungdojo.webp" alt="Dojo" class="quest-icon" />
-                        <div class="stat-value">{{ weeklyStats.dojo.completed }}/{{ weeklyStats.dojo.activeChars }}</div>
+                        <div class="stat-value">{{ weeklyStats.dojo.completed }}/{{ weeklyStats.dojo.activeChars }}
+                        </div>
                     </div>
                 </div>
 
@@ -176,12 +181,14 @@ const weeklyStats = computed(() => {
                         <div class="stat-row">
                             <img src="/src/assets/images/quests/darkworldtree.webp" alt="DWT" class="quest-icon" />
                             <span>Dark World Tree</span>
-                            <div class="stat-value">{{ weeklyStats.absolab.dwtCompleted }}/{{ weeklyStats.absolab.activeChars }}</div>
+                            <div class="stat-value">{{ weeklyStats.absolab.dwtCompleted }}/{{
+                                weeklyStats.absolab.activeChars }}</div>
                         </div>
                         <div class="stat-row">
                             <img src="/src/assets/images/quests/haven.webp" alt="Haven" class="quest-icon" />
                             <span>Haven</span>
-                            <div class="stat-value">{{ weeklyStats.absolab.havenCompleted }}/{{ weeklyStats.absolab.activeChars }}</div>
+                            <div class="stat-value">{{ weeklyStats.absolab.havenCompleted }}/{{
+                                weeklyStats.absolab.activeChars }}</div>
                         </div>
                     </div>
                 </div>
@@ -192,12 +199,14 @@ const weeklyStats = computed(() => {
                         <div class="stat-row">
                             <img src="/src/assets/images/quests/culvert.png" alt="Culvert" class="quest-icon" />
                             <span>Culvert</span>
-                            <div class="stat-value">{{ weeklyStats.guild.culvertCompleted }}/{{ weeklyStats.guild.activeChars }}</div>
+                            <div class="stat-value">{{ weeklyStats.guild.culvertCompleted }}/{{
+                                weeklyStats.guild.activeChars }}</div>
                         </div>
                         <div class="stat-row">
                             <img src="/src/assets/images/quests/flagrace.png" alt="Flag Race" class="quest-icon" />
                             <span>Flag Race</span>
-                            <div class="stat-value">{{ weeklyStats.guild.flagraceCompleted }}/{{ weeklyStats.guild.activeChars }}</div>
+                            <div class="stat-value">{{ weeklyStats.guild.flagraceCompleted }}/{{
+                                weeklyStats.guild.activeChars }}</div>
                         </div>
                     </div>
                 </div>
@@ -207,13 +216,43 @@ const weeklyStats = computed(() => {
 </template>
 
 <style scoped>
-.dashboard-card {
-    background: linear-gradient(102deg, #F4C183 -6.39%, #F4A183 110.52%);
+.dashboard-card.activities {
+    /* background: linear-gradient(102deg, #F4C183 -6.39%, #F4A183 110.52%);
     border-radius: 6px;
     padding: 1.5em;
     margin-bottom: 1em;
-    color: white;
+    color: white; */
+    display: flex;
+    padding: 8px;
+    align-items: flex-start;
+    gap: 16px;
+    border-radius: 6px;
+    background: var(--elev-1-a);
 }
+
+.dashboard-activites-section{
+    border-radius: 8px;
+border: 1px solid rgba(255, 255, 255, 0.50);
+/* background: var(--elev-1); */
+background: #F5D9BE;
+}
+
+.dashboard-activites-section .stat-row{
+    border-radius: 8px;
+    background: var(--elev-2, #E9C7AE);
+}
+
+.weekly-section .stats-grid{
+display: grid;
+
+grid-template-columns: repeat(2, auto);
+}
+
+.weekly-section .stats-grid{
+    display: grid;
+    grid-template-rows: repeat(2, auto);
+}
+
 
 section {
     margin-bottom: 1.5em;

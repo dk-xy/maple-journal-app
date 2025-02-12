@@ -74,11 +74,12 @@ const bossStats = computed(() => {
 <template>
   <div class="dashboard-card bosses">
     <div class="card-header">
-      <h2>Boss Completion</h2>
+      <h2>Bosses</h2>
     </div>
 
     <div class="stats-container">
       <div class="completion-stats">
+        <h3>Completion</h3>
         <div class="stat-block">
           <h3>Daily Bosses</h3>
           <div class="stat-value">{{ bossStats.daily.completed }}/{{ bossStats.daily.total }}</div>
@@ -96,18 +97,26 @@ const bossStats = computed(() => {
       </div>
 
       <div class="crystal-limit">
-        <h3>Crystal Limit</h3>
-        <div class="world-limit">
-          World Total: {{ bossStats.crystalLimit.worldTotal }}/{{ bossStats.crystalLimit.worldLimit }}
-        </div>
-        <div class="character-limits">
-          <div v-for="(char, index) in bossStats.crystalLimit.perCharacter" :key="index" class="char-limit">
-            <span class="char-name">{{ char.name }}</span>
-            <div class="progress-bar">
-              <div class="progress" :style="{ width: `${(char.completed / 14) * 100}%` }"></div>
-            </div>
-            <span class="limit-value">{{ char.completed }}/{{ Math.min(char.total, 14) }}</span>
+        <div class="crystal-weekly-counter">
+          <h3>World Crystal Limit</h3>
+          <div class="world-limit">
+            {{ bossStats.crystalLimit.worldTotal }}/{{ bossStats.crystalLimit.worldLimit }}
           </div>
+        </div>
+
+
+        <div class="character-limits">
+          <h4>Characters Crystal Limit</h4>
+          <div class="all-characters-container">
+            <div v-for="(char, index) in bossStats.crystalLimit.perCharacter" :key="index" class="char-limit">
+              <span class="char-name">{{ char.name }}</span>
+              <div class="progress-bar">
+                <div class="progress" :style="{ width: `${(char.completed / 14) * 100}%` }"></div>
+              </div>
+              <span class="limit-value">{{ char.completed }}/{{ Math.min(char.total, 14) }}</span>
+            </div>
+          </div>
+
         </div>
       </div>
     </div>
@@ -116,34 +125,90 @@ const bossStats = computed(() => {
 
 <style scoped>
 .bosses {
-  background: linear-gradient(102deg, #A183F4 -6.39%, #837FF4 110.52%);
+  /* background: linear-gradient(102deg, #A183F4 -6.39%, #837FF4 110.52%); */
+  background: rgb(46, 46, 46);
+  background: rgb(46, 46, 46);
+  background: -moz-linear-gradient(38deg, rgba(46, 46, 46, 1) 0%, rgba(0, 0, 0, 1) 0%, rgba(37, 11, 11, 1) 52%, rgba(0, 0, 0, 1) 100%, rgba(34, 34, 34, 0.9303922252494747) 100%);
+  background: -webkit-linear-gradient(38deg, rgba(46, 46, 46, 1) 0%, rgba(0, 0, 0, 1) 0%, rgba(37, 11, 11, 1) 52%, rgba(0, 0, 0, 1) 100%, rgba(34, 34, 34, 0.9303922252494747) 100%);
+  background: linear-gradient(38deg, rgba(46, 46, 46, 1) 0%, rgba(0, 0, 0, 1) 0%, rgba(37, 11, 11, 1) 52%, rgba(0, 0, 0, 1) 100%, rgba(34, 34, 34, 0.9303922252494747) 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#2e2e2e", endColorstr="#222222", GradientType=1);
+
+  color: #fdfdfd;
+
+  border-radius: 4px;
+  padding: 4px 8px;
+
 }
 
-.stats-container {
+.bosses .stats-container {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 1.5em;
+
+
+
 }
 
-.completion-stats {
+.bosses .stat-block {
+  /* background-color: #2d2d2d; */
+  /* From https://css.glass */
+  background: rgba(0, 0, 0, 0.185);
+  border-radius: 16px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(59, 59, 59, 0.37);
+
+  /* padding: 2px 16px; */
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.bosses h3 {
+  margin: 8px 16px;
+}
+
+.bosses h4 {
+  margin: 2px 0px;
+  text-align: left;
+}
+
+.bosses .completion-stats {
   display: flex;
   flex-direction: column;
-  gap: 0.8em;
+  gap: 0.4em;
+  background: rgba(31, 31, 31, 0.24);
+  justify-content: center;
+  padding: 8px 16px;
+  border-radius: 6px;
 }
 
-.stat-block {
+.bosses .stat-value {
+  margin: 8px 16px;
+}
+
+/* .stat-block {
   display: flex;
   justify-content: space-between;
   align-items: center;
   background: rgba(255, 255, 255, 0.1);
   padding: 1em;
   border-radius: 6px;
-}
+} */
 
 .crystal-limit {
   background: rgba(255, 255, 255, 0.1);
   padding: 1em;
   border-radius: 6px;
+}
+
+.crystal-weekly-counter {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .world-limit {
