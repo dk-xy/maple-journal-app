@@ -64,15 +64,9 @@ const viMatrixStats = computed(() => {
         </div>
 
         <div class="stats-container">
-            <div class="stat-block">
-                <h3>Erda's Request</h3>
-                <div class="stat-value">{{ viMatrixStats.fragmentsCompleted }}/7</div>
-            </div>
 
-            <div class="stat-block">
-                <h3>Erda's Request (Energy)</h3>
-                <div class="stat-value">{{ viMatrixStats.energyCompleted }}/{{ viMatrixStats.activeEnergyCharacters }}</div>
-            </div>
+
+
 
             <div class="stat-block">
                 <h3>Grandis Dungeon</h3>
@@ -82,17 +76,34 @@ const viMatrixStats = computed(() => {
             </div>
 
             <div class="reward-container">
-                <div class="stat-row">
-                    <img src="/src/assets/images/quests/erdarequest.webp" alt="Fragments" class="reward-icon" />
-                    <div class="reward-title">Fragments</div>
-                    <div class="stat-value">{{ viMatrixStats.totalFragments }}</div>
+                <div class="stat-container">
+                    <div class="quest-block">
+                        <h3>Erda's Request</h3>
+                        <div class="stat-value">{{ viMatrixStats.fragmentsCompleted }}/7</div>
+                    </div>
+                    <div class="stat-row">
+                        <img src="/src/assets/images/quests/erdarequest.webp" alt="Fragments" class="reward-icon" />
+                        <div class="reward-title">Fragments</div>
+                        <div class="stat-value">{{ viMatrixStats.totalFragments }}</div>
+                    </div>
+                </div>
+                <div class="stat-container">
+                    <div class="quest-block">
+                        <h3>Erda's Request (Energy)</h3>
+                        <div class="stat-value">{{ viMatrixStats.energyCompleted }}/{{
+                            viMatrixStats.activeEnergyCharacters }}
+                        </div>
+                    </div>
+                    <div class="stat-row">
+                        <img src="/src/assets/images/quests/erdaenergy.webp" alt="Energy" class="reward-icon" />
+                        <div class="reward-title">Energy</div>
+                        <div class="stat-value">{{ viMatrixStats.totalEnergy }}</div>
+                    </div>
                 </div>
 
-                <div class="stat-row">
-                    <img src="/src/assets/images/quests/erdaenergy.webp" alt="Energy" class="reward-icon" />
-                    <div class="reward-title">Energy</div>
-                    <div class="stat-value">{{ viMatrixStats.totalEnergy }}</div>
-                </div>
+
+
+
             </div>
         </div>
     </div>
@@ -101,7 +112,14 @@ const viMatrixStats = computed(() => {
 <style scoped>
 .vi-matrix {
     display: grid;
-    grid-template-columns: 1fr 2fr;
+    grid-template-rows: 1fr;
+}
+
+.vi-matrix h2 {
+    margin: 0;
+
+    font-size: 1.5em;
+    font-weight: 500;
 }
 
 .vi-matrix .card-header {
@@ -110,7 +128,42 @@ const viMatrixStats = computed(() => {
     justify-content: flex-start;
     align-items: flex-start;
     text-align: left;
+    margin-bottom: 16px;
+
 }
+.reward-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;  /* Keep this */
+    gap: 1em;
+}
+
+/* Add these new styles */
+.stat-container {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6em;
+    width: 100%;  /* Ensure full width */
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.quest-block {
+    display: grid;
+    grid-template-columns: 1fr auto;  /* Changed to auto for the value */
+    gap: 1em;
+   
+    padding: 0.8em 1em;
+    border-radius: 6px;
+    align-items: center;
+    text-align: left;
+}
+
+.quest-block h3 {
+    margin: 0;
+    font-size: 1em;
+    font-weight: 500;
+    white-space: nowrap;  /* Prevent title from wrapping */
+}
+
 
 .dashboard-card {
     border-radius: 6px;
@@ -120,15 +173,10 @@ const viMatrixStats = computed(() => {
     color: white;
 }
 
-.stats-container {
-    display: flex;
-    flex-direction: column;
-    gap: 0.6em;
-}
 
 .stat-block {
     display: grid;
-    grid-template-columns: 3fr 1fr;
+    grid-template-columns: 1fr 1fr;
     text-align: left;
 }
 
