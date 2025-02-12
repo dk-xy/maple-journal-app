@@ -81,24 +81,24 @@ const bossStats = computed(() => {
       <div class="completion-stats">
         <h3>Completion</h3>
         <div class="stat-block">
-          <h3>Daily Bosses</h3>
+          <h4>Daily Bosses</h4>
           <div class="stat-value">{{ bossStats.daily.completed }}/{{ bossStats.daily.total }}</div>
         </div>
 
         <div class="stat-block">
-          <h3>Weekly Bosses</h3>
+          <h4>Weekly Bosses</h4>
           <div class="stat-value">{{ bossStats.weekly.completed }}/{{ bossStats.weekly.total }}</div>
         </div>
 
         <div class="stat-block">
-          <h3>Monthly Bosses</h3>
+          <h4>Monthly Bosses</h4>
           <div class="stat-value">{{ bossStats.monthly.completed }}/{{ bossStats.monthly.total }}</div>
         </div>
       </div>
 
       <div class="crystal-limit">
         <div class="crystal-weekly-counter">
-          <h3>World Crystal Limit</h3>
+          <h4>World Crystal Limit</h4>
           <div class="world-limit">
             {{ bossStats.crystalLimit.worldTotal }}/{{ bossStats.crystalLimit.worldLimit }}
           </div>
@@ -136,7 +136,10 @@ const bossStats = computed(() => {
   color: #fdfdfd;
 
   border-radius: 4px;
-  padding: 4px 8px;
+  padding: 16px 8px;
+  display: flex;
+  flex-direction: column; 
+  gap: 16px;
 
 }
 
@@ -166,12 +169,18 @@ const bossStats = computed(() => {
   justify-content: space-between;
 }
 
+.bosses h2{
+  margin: 8px 0px; 
+  text-align: left; 
+}
+
 .bosses h3 {
-  margin: 8px 16px;
+  margin: 8px 0px;
+  text-align: left;
 }
 
 .bosses h4 {
-  margin: 2px 0px;
+  margin: 2px 4px;
   text-align: left;
 }
 
@@ -179,7 +188,7 @@ const bossStats = computed(() => {
   display: flex;
   flex-direction: column;
   gap: 0.4em;
-  background: rgba(31, 31, 31, 0.24);
+  background: rgba(31, 31, 31, 0.44);
   justify-content: center;
   padding: 8px 16px;
   border-radius: 6px;
@@ -199,7 +208,7 @@ const bossStats = computed(() => {
 } */
 
 .crystal-limit {
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(31, 31, 31, 0.44);
   padding: 1em;
   border-radius: 6px;
 }
