@@ -4,8 +4,10 @@ import { getCharacters } from '../localStorageService'
 import VIMatrixCard from '../components/Dashboard/VIMatrixCard.vue'
 import DailyWeeklyCard from '../components/Dashboard/DailyWeeklyCard.vue'
 import BossesCard from '../components/Dashboard/BossesCard.vue'
+import { getData, saveData } from './../localStorageService'
 
-const characters = ref(getCharacters())
+const data = getData()
+const characters = data.Legion.Characters
 </script>
 
 <template>

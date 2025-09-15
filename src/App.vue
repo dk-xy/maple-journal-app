@@ -1,10 +1,24 @@
 <script setup>
 import { RouterLink, RouterView } from 'vue-router'
 import Icon from './components/Icon.vue'
+
+import { onMounted } from 'vue'
+import { getData, saveData } from './localStorageService'
+import { checkResets } from './utils/resetUtils'
+
+
+onMounted(() => {
+  const data = getData()
+  data.Legion.Characters.forEach(character => {
+    checkResets(character)
+  })
+  saveData(data)
+})
 </script>
 
 <template>
   <div class="app-container">
+  
     <nav class="main-header">
       <RouterLink to="/">
         <div class="menu-item-container">

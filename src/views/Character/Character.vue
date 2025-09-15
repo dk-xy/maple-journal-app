@@ -2,6 +2,7 @@
 import { ref, onMounted } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { getCharacters, deleteCharacter } from '../../localStorageService'
+import { getData } from '../../localStorageService'
 import Tabs from '../../components/Menus/Tabs.vue'
 import CharacterProgression from './CharacterProgression.vue'
 import CharacterBosses from './CharacterBosses.vue'
@@ -11,7 +12,7 @@ const router = useRouter()
 const character = ref(null)
 
 onMounted(() => {
-  const characters = getCharacters()
+  const characters = getData().Legion.Characters
   const characterId = parseInt(route.params.id) - 1
   character.value = characters[characterId]
 })

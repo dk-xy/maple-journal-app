@@ -3,6 +3,7 @@ import { ref, onMounted } from 'vue'
 import CharacterAddModal from '../components/Character/CharacterAddModal.vue'
 import LegionBlock from '../components/Legion/LegionBlock.vue'
 import { getCharacters } from '../localStorageService'
+import { getData } from '../localStorageService'
 import { RouterLink } from 'vue-router'
 import Icon from '../components/Icon.vue'
 
@@ -10,7 +11,8 @@ const showModal = ref(false)
 const characters = ref([])
 
 onMounted(() => {
-  characters.value = getCharacters()
+  // characters.value = getCharacters()
+  characters.value = getData().Legion.Characters
 })
 
 function handleCharacterAdded() {

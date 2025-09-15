@@ -228,6 +228,7 @@ const weeklyStats = computed(() => {
     gap: 16px;
     border-radius: 6px;
     background: var(--elev-1-a);
+    margin: 8px;
 }
 
 .dashboard-activites-section{
@@ -278,6 +279,8 @@ h2 {
     background: rgba(255, 255, 255, 0.1);
     padding: 1em;
     border-radius: 6px;
+    border: solid 1px rgba(255, 255, 255, 0.3);
+    margin: 8px 16px;
 }
 
 .stat-block h3 {

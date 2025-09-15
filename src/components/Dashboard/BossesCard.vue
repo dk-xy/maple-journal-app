@@ -125,13 +125,14 @@ const bossStats = computed(() => {
 
 <style scoped>
 .bosses {
+  background: var(--elev-1-a);
   /* background: linear-gradient(102deg, #A183F4 -6.39%, #837FF4 110.52%); */
-  background: rgb(46, 46, 46);
+  /* background: rgb(46, 46, 46);
   background: rgb(46, 46, 46);
   background: -moz-linear-gradient(38deg, rgba(46, 46, 46, 1) 0%, rgba(0, 0, 0, 1) 0%, rgba(37, 11, 11, 1) 52%, rgba(0, 0, 0, 1) 100%, rgba(34, 34, 34, 0.9303922252494747) 100%);
   background: -webkit-linear-gradient(38deg, rgba(46, 46, 46, 1) 0%, rgba(0, 0, 0, 1) 0%, rgba(37, 11, 11, 1) 52%, rgba(0, 0, 0, 1) 100%, rgba(34, 34, 34, 0.9303922252494747) 100%);
   background: linear-gradient(38deg, rgba(46, 46, 46, 1) 0%, rgba(0, 0, 0, 1) 0%, rgba(37, 11, 11, 1) 52%, rgba(0, 0, 0, 1) 100%, rgba(34, 34, 34, 0.9303922252494747) 100%);
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#2e2e2e", endColorstr="#222222", GradientType=1);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#2e2e2e", endColorstr="#222222", GradientType=1); */
 
   color: #fdfdfd;
 
@@ -188,7 +189,8 @@ const bossStats = computed(() => {
   display: flex;
   flex-direction: column;
   gap: 0.4em;
-  background: rgba(31, 31, 31, 0.44);
+  /* background: rgba(31, 31, 31, 0.44); */
+  background: rgba(255, 255, 255, 0.445) ;
   justify-content: center;
   padding: 8px 16px;
   border-radius: 6px;
