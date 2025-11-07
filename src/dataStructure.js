@@ -10,7 +10,7 @@ export const emptyCharacter = {
   Level: "Level",
 
   Progression: {
-     lastDailyReset: '', 
+    lastDailyReset: '', 
     lastWeeklyReset: '', 
     ArcaneRiver: {
       isActive: false,

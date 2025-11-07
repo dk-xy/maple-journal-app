@@ -47,29 +47,57 @@ const symbolStats = computed(() => {
 
 <template>
   <div class="dashboard-card symbols">
-    <h3>Symbols</h3>
+    <h2>Symbols</h2>
     <div class="stats">
       <div class="stat">
-        <span>Arcane River (Daily)</span>
-        <span>{{ symbolStats.arcaneRiverDaily.completed }} / {{ symbolStats.arcaneRiverDaily.total }}</span>
+        <div class="stat-info">
+          <div class="stat-title">Arcane River</div>
+          <div class="stat-contents">
+            <div class="stat-content">
+              <div class="stat-description">Dailies</div>
+              <div class="stat-value">{{ symbolStats.arcaneRiverDaily.completed }} / {{ symbolStats.arcaneRiverDaily.total }}</div>
+            </div>
+            <div class="stat-content">
+              <div class="stat-description">Weeklies</div>
+              <div class="stat-value">{{ symbolStats.arcaneRiverWeekly.completed }} / {{ symbolStats.arcaneRiverWeekly.total }}</div>
+            </div>
+          </div>
+
+
+
+        </div>
+
       </div>
 
-      <div class="stat">
-        <span>Arcane River (Weeklies)</span>
-        <span>{{ symbolStats.arcaneRiverWeekly.completed }} / {{ symbolStats.arcaneRiverWeekly.total }}</span>
-      </div>
+
 
       <div class="stat">
-        <span>Grandis</span>
-        <span>{{ symbolStats.grandis.completed }} / {{ symbolStats.grandis.total }}</span>
+        <div class="stat-info">
+          <div class="stat-title">Grandis</div>
+          <div class="stat-contents">
+            <div class="stat-content">
+              <div class="stat-description">Dailies</div>
+              <div class="stat-value">{{ symbolStats.grandis.completed }} / {{ symbolStats.grandis.total }}</div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 </template>
 
 <style scoped>
+h2 {
+  margin: 0;
+  text-align: left;
+  font-size: 1.48em;
+  font-weight: 700;
+}
+
 .dashboard-card.symbols {
-  background-color: #f9f9f9;
+
+  background: var(--shangrila-grad);
+
   border: 1px solid #eee;
   border-radius: 8px;
   padding: 16px;
@@ -79,6 +107,7 @@ const symbolStats = computed(() => {
 .stats {
   display: flex;
   flex-direction: column;
+  color: var(--dark-text);
 }
 
 .stat {
@@ -88,7 +117,48 @@ const symbolStats = computed(() => {
   border-bottom: 1px solid #eee;
 }
 
+.stat-title {
+  font-weight: 600;
+  margin-right: 16px;
+  text-align: left;
+  width: 30%;
+  padding: 16px 32px;
+}
+
 .stat:last-child {
   border-bottom: none;
+}
+
+.stat-info {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: flex-start;
+  width: 100%;
+}
+
+.stat-contents {
+  display: flex;
+  flex-direction: row;
+  margin-left: 16px;
+  justify-content: left;
+  width: 50%;
+}
+
+.stat-content {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-right: 16px;
+  padding: 8px 12px;
+  background: rgba(243, 243, 243, 0.404);
+  border: solid 1px #f1f1f1;
+  border-radius: 8px;
+  gap: 16px;
+}
+
+.stat-value
+{
+  font-weight: 700;
 }
 </style>

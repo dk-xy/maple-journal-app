@@ -21,3 +21,12 @@ const characters = data.Legion.Characters
     <BossesCard :characters="characters" />
   </div>
 </template>
+
+<style scoped>
+h2 {
+  margin: 0;
+
+  font-size: 1.1em;
+  font-weight: 700;
+}
+</style>

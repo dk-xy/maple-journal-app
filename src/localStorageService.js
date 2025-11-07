@@ -17,15 +17,15 @@ export function addCharacter(character) {
   data.Legion.Characters.push(character)
   saveData(data)
 }
-
 export function getCharacters() {
   const data = getData()
   data.Legion.Characters.forEach(character => {
-    checkResets(character)
+    checkResets(character) 
   })
   saveData(data)
   return data.Legion.Characters
 }
+
 export function deleteCharacter(index) {
   const data = getData()
   data.Legion.Characters.splice(index, 1)

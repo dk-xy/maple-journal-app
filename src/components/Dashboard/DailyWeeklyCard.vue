@@ -167,17 +167,16 @@ const weeklyStats = computed(() => {
             <h2>Weekly Activities</h2>
             <div class="stats-grid">
                 <div class="stat-block">
-                    <h3>Mu Lung Dojo</h3>
-                    <div class="stat-row">
-                        <img src="/src/assets/images/quests/mulungdojo.webp" alt="Dojo" class="quest-icon" />
-                        <div class="stat-value">{{ weeklyStats.dojo.completed }}/{{ weeklyStats.dojo.activeChars }}
-                        </div>
-                    </div>
-                </div>
-
-                <div class="stat-block">
-                    <h3>Absolab Materials</h3>
+                    <h3>Maple World</h3>
                     <div class="sub-stats">
+
+                        <div class="stat-row">
+                            <img src="/src/assets/images/quests/mulungdojo.webp" alt="Dojo" class="quest-icon" />
+                            <span>Dojo</span>
+                            <div class="stat-value">{{ weeklyStats.dojo.completed }}/{{ weeklyStats.dojo.activeChars }}
+                            </div>
+                        </div>
+
                         <div class="stat-row">
                             <img src="/src/assets/images/quests/darkworldtree.webp" alt="DWT" class="quest-icon" />
                             <span>Dark World Tree</span>
@@ -231,25 +230,25 @@ const weeklyStats = computed(() => {
     margin: 8px;
 }
 
-.dashboard-activites-section{
+.dashboard-activites-section {
     border-radius: 8px;
-border: 1px solid rgba(255, 255, 255, 0.50);
-/* background: var(--elev-1); */
-background: #F5D9BE;
+    border: 1px solid rgba(255, 255, 255, 0.50);
+    /* background: var(--elev-1); */
+    background: #F5D9BE;
 }
 
-.dashboard-activites-section .stat-row{
+.dashboard-activites-section .stat-row {
     border-radius: 8px;
     background: var(--elev-2, #E9C7AE);
 }
 
-.weekly-section .stats-grid{
-display: grid;
+.weekly-section .stats-grid {
+    display: grid;
 
-grid-template-columns: repeat(2, auto);
+    grid-template-columns: repeat(2, auto);
 }
 
-.weekly-section .stats-grid{
+.weekly-section .stats-grid {
     display: grid;
     grid-template-rows: repeat(2, auto);
 }
@@ -264,9 +263,12 @@ section:last-child {
 }
 
 h2 {
-    font-size: 1.5em;
-    margin: 0 0 1em 0;
-    font-weight: 500;
+    margin: 0;
+    padding: 8px 16px;
+    text-align: left;
+    font-size: 1.2em;
+    font-weight: 700;
+    color: var(--dark-text);
 }
 
 .stats-grid {
@@ -298,6 +300,7 @@ h2 {
 .stat-row {
     display: flex;
     align-items: center;
+    justify-content: space-between;
     gap: 0.8em;
     padding: 0.4em;
     background: rgba(255, 255, 255, 0.1);
@@ -313,5 +316,15 @@ h2 {
 .stat-value {
     margin-left: auto;
     font-weight: bold;
+    padding: 4px 8px;
+    margin: 2px 4px;
+    border: solid 1px var(--elev-1);
+    border-radius: 9px;
+    background: rgba(235, 230, 230, 0.418);
+}
+
+h3 {
+    text-align: left;
+    font-weight: 600 !important;
 }
 </style>

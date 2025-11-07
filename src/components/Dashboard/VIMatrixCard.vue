@@ -115,12 +115,6 @@ const viMatrixStats = computed(() => {
     grid-template-rows: 1fr;
 }
 
-.vi-matrix h2 {
-    margin: 0;
-
-    font-size: 1.5em;
-    font-weight: 500;
-}
 
 .vi-matrix .card-header {
     display: flex;
@@ -144,6 +138,8 @@ const viMatrixStats = computed(() => {
     gap: 0.6em;
     width: 100%;  /* Ensure full width */
     background: rgba(255, 255, 255, 0.1);
+    padding: 8px;
+    border-radius: 6px;
 }
 
 .quest-block {
@@ -178,6 +174,7 @@ const viMatrixStats = computed(() => {
     display: grid;
     grid-template-columns: 1fr 1fr;
     text-align: left;
+    margin: 16px 0px;
 }
 
 .stat-row {
@@ -200,6 +197,11 @@ const viMatrixStats = computed(() => {
     font-size: 1em;
     flex: 1;
     font-weight: 500;
+    /* align center vertically */
+    display: flex;
+    align-items: center;
+    text-align: left;
+
 }
 
 .stat-value {
@@ -218,12 +220,12 @@ const viMatrixStats = computed(() => {
     font-weight: bold;
     padding: 0.4em 0.8em;
     border-radius: 4px;
-    background: rgba(255, 59, 59, 0.3);
+    margin: 8px;
+    border: solid 1px rgba(206, 153, 241, 0.103);
+    background: linear-gradient(102deg, #b95bf767 -6.39%, #7b74df8f 110.52%);
     min-width: 120px;
     text-align: center;
 }
 
-.completion-status.completed {
-    background: rgba(72, 199, 116, 0.3);
-}
+
 </style>
