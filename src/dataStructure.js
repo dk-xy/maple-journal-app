@@ -8,10 +8,11 @@ export const emptyCharacter = {
   Name: "CharacterName",
   Class: "Class",
   Level: "Level",
+  Image: "",
 
   Progression: {
-    lastDailyReset: '', 
-    lastWeeklyReset: '', 
+    lastDailyReset: '',
+    lastWeeklyReset: '',
     ArcaneRiver: {
       isActive: false,
       Region: [
@@ -37,13 +38,12 @@ export const emptyCharacter = {
     Dailies: {
       isActive: false,
       DailyActivity: [
-        { Name: "Erda's Request", key: "erdarequest", CompletionStatus: false, isActive: false, CompletionDate: '', claimType: "solo", maxPerAccount: 7, energyPerCompletion: 600},
+        { Name: "Erda's Request", key: "erdarequest", CompletionStatus: false, isActive: false, CompletionDate: '', claimType: "solo", maxPerAccount: 7, energyPerCompletion: 600 },
         {
-          Name: "Erda's Request (Energy)",key: "erdarequest_energy",CompletionStatus: false,isActive: false,CompletionDate: '', claimType: "multi",    // Can be done by multiple characters
+          Name: "Erda's Request (Energy)", key: "erdarequest_energy", CompletionStatus: false, isActive: false, CompletionDate: '', claimType: "multi",    // Can be done by multiple characters
           energyPerCompletion: 600 // Added energy per completion
         },
         { Name: 'Monster Park', key: "mp", CompletionStatus: false, isActive: false, CompletionDate: '', claimType: "solo" },
-        { Name: 'Monster Park Extreme', key: "mpe", CompletionStatus: false, isActive: false, CompletionDate: '', claimType: "solo" },
         { Name: 'Ursus', key: "ursus", CompletionStatus: false, isActive: false, CompletionDate: '', claimType: "solo" },
         { Name: 'Gollux', key: "gollux", CompletionStatus: false, isActive: false, CompletionDate: '', claimType: "multi" },
         { Name: 'Maple Tour', key: "mapletour", CompletionStatus: false, isActive: false, CompletionDate: '', claimType: "solo" },
@@ -55,6 +55,7 @@ export const emptyCharacter = {
     Weeklies: {
       isActive: false,
       WeeklyActivity: [
+        { Name: 'Monster Park Extreme', key: "mpe", CompletionStatus: false, isActive: false, CompletionDate: '', ResetDay: 'Sunday', claimType: "solo", maxPerWeek: 2 },
         { Name: 'Dark World Tree', key: "darkworldtree", CompletionStatus: false, isActive: false, CompletionDate: '', ResetDay: 'Sunday', claimType: "multi" },
         { Name: 'Haven', key: "haven", CompletionStatus: false, isActive: false, CompletionDate: '', ResetDay: 'Sunday', claimType: "multi" },
         { Name: 'Mu Lung Dojo', key: "mulungdojo", CompletionStatus: false, isActive: false, CompletionDate: '', ResetDay: 'Sunday', claimType: "multi" },

@@ -12,7 +12,6 @@ const dailyStats = computed(() => {
     let stats = {
         monsterPark: {
             mpCompleted: 0,
-            mpeCompleted: 0,
             activeCharacters: 0
         },
         soloContent: {
@@ -30,13 +29,9 @@ const dailyStats = computed(() => {
         const mpQuest = character.Progression.Dailies.DailyActivity.find(
             activity => activity.key === 'mp'
         )
-        const mpeQuest = character.Progression.Dailies.DailyActivity.find(
-            activity => activity.key === 'mpe'
-        )
-        if (mpQuest?.isActive || mpeQuest?.isActive) {
+        if (mpQuest?.isActive) {
             stats.monsterPark.activeCharacters++
             if (mpQuest?.CompletionStatus) stats.monsterPark.mpCompleted++
-            if (mpeQuest?.CompletionStatus) stats.monsterPark.mpeCompleted++
         }
 
         // Ursus Stats
@@ -76,6 +71,10 @@ const weeklyStats = computed(() => {
             culvertCompleted: 0,
             flagraceCompleted: 0,
             activeChars: 0
+        },
+        monsterPark: {
+            mpeCompleted: 0,
+            activeCharacters: 0
         }
     }
 
@@ -114,6 +113,15 @@ const weeklyStats = computed(() => {
             if (culvertQuest?.CompletionStatus) stats.guild.culvertCompleted++
             if (flagraceQuest?.CompletionStatus) stats.guild.flagraceCompleted++
         }
+
+        // Monster Park Extreme
+        const mpeQuest = character.Progression.Weeklies.WeeklyActivity.find(
+            activity => activity.key === 'mpe'
+        )
+        if (mpeQuest?.isActive) {
+            stats.monsterPark.activeCharacters++
+            if (mpeQuest?.CompletionStatus) stats.monsterPark.mpeCompleted++
+        }
     })
 
     return stats
@@ -126,27 +134,15 @@ const weeklyStats = computed(() => {
             <h2>Daily Activities</h2>
             <div class="stats-grid">
                 <div class="stat-block monster-park">
-                    <h3>Monster Park</h3>
+                    <!-- <h3>Monster Park</h3> -->
                     <div class="sub-stats">
                         <div class="stat-row">
                             <img src="/src/assets/images/quests/mp.webp" alt="MP" class="quest-icon" />
-                            <span>Regular</span>
+                            <span>Monster Park</span>
                             <div class="stat-value">{{ dailyStats.monsterPark.mpCompleted }}/{{
                                 dailyStats.monsterPark.activeCharacters }}</div>
                         </div>
-                        <div class="stat-row">
-                            <img src="/src/assets/images/quests/mpe.webp" alt="MPE" class="quest-icon" />
-                            <span>Extreme</span>
-                            <div class="stat-value">{{ dailyStats.monsterPark.mpeCompleted }}/{{
-                                dailyStats.monsterPark.activeCharacters }}</div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="stat-block boss-content">
-                    <h3>Boss Content</h3>
-                    <div class="sub-stats">
-                        <div class="stat-row">
+                         <div class="stat-row">
                             <img src="/src/assets/images/quests/ursus.webp" alt="Ursus" class="quest-icon" />
                             <span>Ursus</span>
                             <div class="stat-value">{{ dailyStats.soloContent.ursusCompleted }}/{{
@@ -158,8 +154,10 @@ const weeklyStats = computed(() => {
                             <div class="stat-value">{{ dailyStats.multiContent.golluxCompleted }}/{{
                                 dailyStats.multiContent.activeGolluxChars }}</div>
                         </div>
+                      
                     </div>
                 </div>
+
             </div>
         </section>
 
@@ -188,6 +186,12 @@ const weeklyStats = computed(() => {
                             <span>Haven</span>
                             <div class="stat-value">{{ weeklyStats.absolab.havenCompleted }}/{{
                                 weeklyStats.absolab.activeChars }}</div>
+                        </div>
+                          <div class="stat-row">
+                            <img src="/src/assets/images/quests/mpe.webp" alt="MPE" class="quest-icon" />
+                            <span>MPE</span>
+                            <div class="stat-value">{{ weeklyStats.monsterPark.mpeCompleted }}/{{
+                                weeklyStats.monsterPark.activeCharacters }}</div>
                         </div>
                     </div>
                 </div>

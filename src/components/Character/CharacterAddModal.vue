@@ -36,7 +36,11 @@
         <div v-if="charData" class="character-result">
           <h3>{{ charData.characterName }}</h3>
           <p>Level {{ charData.level }} {{ charData.jobName }}</p>
-          <p>({{ charData.worldName }})</p> <img :src="charData.avatarImgUrl" alt="Character Avatar" />
+          <p>({{ charData.worldName }})</p>
+          <img :src="charData.avatarImgUrl || charData.characterImgURL" alt="Character Avatar" />
+          <div style="margin-top:12px;">
+            <button class="lookup-button" @click="addCharToLegion">Add to Legion</button>
+          </div>
         </div>
       </div>
     </div>
@@ -45,7 +49,8 @@
 
 <script setup>
 import { ref } from 'vue'
-
+import { addCharacter } from '../../localStorageService'   // <-- added
+import { emptyCharacter } from '../../dataStructure'       // <-- added
 // --- Modal Props & Emits ---
 const props = defineProps({
   show: Boolean,
@@ -61,6 +66,56 @@ const selectedServer = ref(null) // This will hold the { name, region, world_typ
 const loading = ref(false)
 const errorMsg = ref(null)
 const charData = ref(null)
+
+// --- Job mapping (jobID -> display string) ---
+const JOB_MAP = {
+  0: 'Beginner',
+  1: 'Warrior',
+  2: 'Magician',
+  3: 'Bowman',
+  4: 'Thief',
+  5: 'Pirate',
+  11: 'Dawn Warrior',
+  12: 'Blaze Wizard',
+  13: 'Wind Archer',
+  14: 'Night Walker',
+  15: 'Thunder Breaker',
+  202: 'Mihile',
+  30: 'Citizen',
+  31: 'Demon Slayer',
+  32: 'Battle Mage',
+  33: 'Wild Hunter',
+  35: 'Mechanic',
+  208: 'Xenon',
+  209: 'Demon Avenger',
+  215: 'Blaster',
+  20: 'Legend',
+  21: 'Aran',
+  22: 'Evan',
+  23: 'Mercedes',
+  24: 'Phantom',
+  203: 'Luminous',
+  212: 'Shade',
+  204: 'Kaiser',
+  205: 'Angelic Buster',
+  216: 'Cadena',
+  222: 'Kain',
+  217: 'Illium',
+  218: 'Ark',
+  221: 'Adele',
+  224: 'Khali',
+  206: 'Hayato',
+  207: 'Kanna',
+  223: 'Lara',
+  220: 'Hoyoung',
+  225: 'Lynn',
+  226: 'Mo Xuan'
+}
+
+function mapJob(jobId) {
+  return JOB_MAP[jobId] || 'Unknown'
+}
+
 
 // --- Server List with IDs ---
 const servers = ref([
@@ -128,13 +183,23 @@ const fetchCharacter = async () => {
       throw new Error(typeof errMsg === 'string' ? errMsg : JSON.stringify(errMsg))
     }
 
-    // Success — prefer parsed JSON but fall back to raw text
     const data = parsed || raw
     console.log('API Response:', data)
 
     // Update the UI with the character data (if parsed is an object)
     if (parsed && typeof parsed === 'object') {
-      charData.value = parsed
+      // Check if it has the 'ranks' property and if it's an array with data
+      if (parsed.ranks && Array.isArray(parsed.ranks) && parsed.ranks.length > 0) {
+        // *** FIX IS HERE ***: Assign the first element of the 'ranks' array.
+        charData.value = {
+          ...parsed.ranks[0], // Spread the character details
+          worldName: selectedServer.value.name, // Add worldName for display
+          jobName: mapJob(parsed.ranks[0].jobID) // Add jobName using your mapJob function
+        }
+      } else {
+        // Handle cases where API returns JSON but no ranks (e.g., character not found)
+        errorMsg.value = 'Character not found on this server.'
+      }
     } else {
       // If the response wasn't JSON, show raw text in error area
       errorMsg.value = 'Received non-JSON response; check console for details.'
@@ -157,6 +222,25 @@ function resetForm() {
   loading.value = false
   errorMsg.value = null
   charData.value = null
+}
+
+function addCharToLegion() {
+  if (!charData.value) return
+
+  // deep clone emptyCharacter and populate
+  const newChar = JSON.parse(JSON.stringify(emptyCharacter))
+  newChar.Name = characterName.value || charData.value.characterName || 'Character'
+  newChar.Class = mapJob(charData.value.jobID)
+  newChar.Level = charData.value.level || 1
+  // store avatar URL on a simple property used by LegionBlock
+  newChar.Image = charData.value.characterImgURL || charData.value.avatarImgUrl || ''
+  console.log('Adding character to Legion:', newChar)
+  // persist
+  addCharacter(newChar)
+
+  // close modal (Legion view refreshes on close)
+  resetForm()
+  emit('close')
 }
 
 /**

@@ -1,15 +1,22 @@
 <template>
   <div class="card">
     <div class="card-character-info">
-      <div class="character-properties">
-        <h3>{{ character.Name }}</h3>
-        <p> {{ character.Class }}</p>
+      <div v-if="character.Image">
+        <img :src="character.Image" alt="Character Image" class="character-image" />
       </div>
-      <div class="character-level">
-        <p>Lv. {{ character.Level }}</p>
+      <div class="character-info">
+        <div class="character-properties">
+          <h3>{{ character.Name }}</h3>
+          <p> {{ character.Class }}</p>
+        </div>
+        <div class="character-level">
+          <p>Lv. {{ character.Level }}</p>
+        </div>
+
       </div>
 
-   
+
+
     </div>
 
     <div class="progression-block__Container">
@@ -106,7 +113,7 @@ const totalBosses = computed(() => {
 
 }
 
-.card:hover{  
+.card:hover {
   background-color: var(--elev-a);
   transition: background-color 0.3s;
 }
@@ -125,19 +132,33 @@ const totalBosses = computed(() => {
 
 .progression-block__Container {
 
-  width: 100%;
+  width: 95%;
   display: grid;
   grid-template-columns: repeat(2, auto);
   gap: 8px 8px;
   flex-wrap: wrap;
+  
 }
 
-.character-level{
+.character-level {
   background-color: var(--elev-2);
   height: fit-content;
   padding: 2px 8px;
   border-radius: 4px;
   font-size: 0.8rem;
+}
+
+.character-info{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+  margin-left: 8px;
+    padding: 8px 16px;
+}
+
+.character-properties{
+
 }
 
 h3 {
