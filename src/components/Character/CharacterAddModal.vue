@@ -1,142 +1,167 @@
 <template>
   <div v-if="show" class="modal-overlay" @click.self="close">
     <div class="modal">
-      <h2>Add Character</h2>
-      <form @submit.prevent="handleAddCharacter">
-        <div class="form-fields">
-          <div class="form-field form-field-text">
-            <label for="name">Name</label>
-            <input id="name" v-model="characterName" required />
-          </div>
-          <div class="form-field form-field-select">
-            <label for="class">Class</label>
-            <select id="class" v-model="characterClass" required>
-              <optgroup label="Explorer">
-                <option>Dark Knight</option>
-                <option>Hero</option>
-                <option>Paladin</option>
-
-                <option>Fire/Poison Mage</option>
-                <option>Ice/Lightning Mage</option>
-                <option>Bishop</option>
-
-                <option>Bowmaster</option>
-                <option>Marksman</option>
-
-                <option>Shadower</option>
-                <option>Night Lord</option>
-                <option>Dual Blade</option>
-
-                <option>Buccaneer</option>
-                <option>Pirate</option>
-              </optgroup>
-
-              <optgroup label="Cygnus Knights">
-                <option>Dawn Warrior</option>
-                <option>Blaze Wizard</option>
-                <option>Wind Archer</option>
-                <option>Night Walker</option>
-                <option>Thunder Breaker</option>
-              </optgroup>
-
-
-              <optgroup label="Resistance">
-                <option>Battle Mage</option>
-                <option>Wild Hunter</option>
-                <option>Mechanic</option>
-                <option>Demon Slayer</option>
-                <option>Demon Avenger</option>
-                <option>Xenon</option>
-              </optgroup>
-
-              <optgroup label="Heroes">
-                <option>Aran</option>
-                <option>Evan</option>
-                <option>Mercedes</option>
-                <option>Phantom</option>
-                <option>Luminous</option>
-                <option>Shade</option>
-              </optgroup>
-
-
-
-              <optgroup label="Nova">
-                <option>Angelic Buster</option>
-                <option>Kaiser</option>
-                <option>Cadena</option>
-                <option>Kain</option>
-              </optgroup>
-
-              <optgroup label="Sengoku">
-                <option>Kanna</option>
-                <option>Hayato</option>
-              </optgroup>
-
-              <optgroup label="Flora">
-                <option>Adele</option>
-                <option>Ark</option>
-                <option>Illium</option>
-                <option>Khali</option>
-              </optgroup>
-
-              <optgroup label="Anima">
-                <option>Lara</option>
-                <option>Hoyoung</option>
-              </optgroup>
-              <!-- Add more families and classes as needed -->
-            </select>
-          </div>
-          <div class="form-field form-field-number">
-            <label for="level">Level</label>
-            <input id="level" type="number" v-model="characterLevel" min="1" max="350" required />
+      <h2>Character Lookup</h2>
+      <div class="character-lookup-content">
+        <form @submit.prevent="fetchCharacter">
+          <div class="form-group">
+            <label for="charName">Character Name:</label>
+            <input id="charName" v-model="characterName" type="text" required />
           </div>
 
-          <div class="form-button-container">
-            <button class="form-button-close" @click="close">Cancel</button>
-            <button class="form-button-add" type="submit">Add</button>
+          <div class="form-group">
+            <label>Select Server:</label>
+            <div class="server-selection-grid">
+              <div v-for="server in servers" :key="server.name" class="server-button" :class="{
+                active: selectedServer && selectedServer.name === server.name,
+              }" @click="selectServer(server)">
+                {{ server.name }}
+              </div>
+            </div>
           </div>
+
+          <button type="submit" :disabled="loading" class="lookup-button">
+            {{ loading ? 'Searching...' : 'Get Character' }}
+          </button>
+        </form>
+
+        <div v-if="loading" class="loading-spinner">
+          <p>Loading...</p>
         </div>
 
-      </form>
+        <div v-if="errorMsg" class="error-message">
+          <p>{{ errorMsg }}</p>
+        </div>
 
+        <div v-if="charData" class="character-result">
+          <h3>{{ charData.characterName }}</h3>
+          <p>Level {{ charData.level }} {{ charData.jobName }}</p>
+          <p>({{ charData.worldName }})</p> <img :src="charData.avatarImgUrl" alt="Character Avatar" />
+        </div>
+      </div>
     </div>
   </div>
 </template>
 
 <script setup>
 import { ref } from 'vue'
-import { addCharacter } from '../../localStorageService'
-import { emptyCharacter } from '../../dataStructure'
 
+// --- Modal Props & Emits ---
 const props = defineProps({
-  show: Boolean
+  show: Boolean,
 })
 
 const emit = defineEmits(['close'])
 
+// --- State ---
 const characterName = ref('')
-const characterClass = ref('')
-const characterLevel = ref(1)
+const selectedServer = ref(null) // This will hold the { name, region, world_type } object
 
+// Response state
+const loading = ref(false)
+const errorMsg = ref(null)
+const charData = ref(null)
 
-function handleAddCharacter() {
-  const newCharacter = { ...emptyCharacter }
-  newCharacter.Name = characterName.value
-  newCharacter.Class = characterClass.value
-  newCharacter.Level = characterLevel.value
+// --- Server List with IDs ---
+const servers = ref([
+  // EU Servers
+  { name: 'Solis', id: 46, region: 'eu' },
+  { name: 'Luna', id: 30, region: 'eu' },
+  // NA Servers
+  { name: 'Bera', id: 1, region: 'na' },
+  { name: 'Scania', id: 19, region: 'na' },
+  { name: 'Chronos', id: 45, region: 'na' },
+  { name: 'Hyperion', id: 70, region: 'na' },
+])
 
-  addCharacter(newCharacter)
-  resetForm()
-  emit('close')
-  alert('Character added!')
+// --- Methods ---
+
+/**
+ * Sets the currently active server.
+ * @param {object} server
+ */
+function selectServer(server) {
+  selectedServer.value = server
+  errorMsg.value = null // Clear error on new selection
 }
 
+/**
+ * Fetches character data from Nexon's API using world ID
+ */
+const fetchCharacter = async () => {
+  if (!selectedServer.value) {
+    errorMsg.value = 'Please select a server first'
+    return
+  }
+
+  loading.value = true
+  errorMsg.value = null
+  charData.value = null
+
+  try {
+    // Call our server-side API endpoint
+    const params = new URLSearchParams({
+      name: characterName.value,
+      world: selectedServer.value.name
+    });
+
+    const url = `/api/lookup?${params}`;
+    console.log('Fetching URL:', url);
+
+    const response = await fetch(url);
+    console.log('Response status:', response.status);
+
+    // Always read the body as text once to avoid double-consuming the stream.
+    const raw = await response.text();
+    console.log('Response raw text:', raw);
+
+    // Try to parse JSON; if it fails use the raw text for error messages
+    let parsed = null
+    try {
+      parsed = JSON.parse(raw)
+    } catch (e) {
+      // not JSON, keep parsed null
+    }
+
+    if (!response.ok) {
+      const errMsg = parsed?.error || parsed || raw || `HTTP ${response.status}`
+      throw new Error(typeof errMsg === 'string' ? errMsg : JSON.stringify(errMsg))
+    }
+
+    // Success — prefer parsed JSON but fall back to raw text
+    const data = parsed || raw
+    console.log('API Response:', data)
+
+    // Update the UI with the character data (if parsed is an object)
+    if (parsed && typeof parsed === 'object') {
+      charData.value = parsed
+    } else {
+      // If the response wasn't JSON, show raw text in error area
+      errorMsg.value = 'Received non-JSON response; check console for details.'
+    }
+
+  } catch (err) {
+    console.error('API Error:', err);
+    errorMsg.value = err.message;
+  } finally {
+    loading.value = false;
+  }
+}
+
+/**
+ * Resets all form fields and results.
+ */
 function resetForm() {
   characterName.value = ''
-  characterClass.value = ''
-  characterLevel.value = 1
+  selectedServer.value = null
+  loading.value = false
+  errorMsg.value = null
+  charData.value = null
 }
 
+/**
+ * Emits close event and resets the form.
+ */
 function close() {
   resetForm()
   emit('close')
@@ -144,6 +169,9 @@ function close() {
 </script>
 
 <style scoped>
+/* (Your existing modal styles should work perfectly here) */
+
+/* --- Modal Styles --- */
 .modal-overlay {
   position: fixed;
   top: 0;
@@ -158,16 +186,104 @@ function close() {
 }
 
 .modal {
-  background: var(--elev-0);
+  background: var(--elev-0, #fff);
+  /* Uses CSS var or fallback */
   padding: 2em;
   border-radius: 8px;
   max-width: 500px;
   width: 100%;
 }
 
-button {
-  margin-top: 1em;
+/* --- Content & Form Styles --- */
+.form-group {
+  margin-bottom: 15px;
 }
 
+.form-group label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: bold;
+}
 
+.form-group input[type='text'] {
+  width: 100%;
+  padding: 8px;
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+/* --- Server Button Styles --- */
+.server-selection-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 10px;
+}
+
+.server-button {
+  border: 1px solid #ddd;
+  padding: 12px;
+  border-radius: 4px;
+  text-align: center;
+  cursor: pointer;
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease;
+  font-size: 0.9em;
+}
+
+.server-button:hover {
+  background-color: #f4f4f4;
+}
+
+.server-button.active {
+  background-color: #007bff;
+  color: white;
+  border-color: #007bff;
+  font-weight: bold;
+}
+
+/* --- Action/Result Styles --- */
+.lookup-button {
+  width: 100%;
+  padding: 10px 15px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 1em;
+  margin-top: 10px;
+}
+
+.lookup-button:disabled {
+  background-color: #ccc;
+}
+
+.character-result {
+  margin-top: 20px;
+  text-align: center;
+  border-top: 1px solid #eee;
+  padding-top: 20px;
+}
+
+.character-result img {
+  display: block;
+  margin: 10px auto 0;
+}
+
+.character-result p {
+  margin: 4px 0;
+}
+
+.error-message {
+  color: red;
+  margin-top: 15px;
+  text-align: center;
+}
+
+.loading-spinner {
+  margin-top: 15px;
+  text-align: center;
+}
 </style>

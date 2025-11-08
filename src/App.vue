@@ -32,12 +32,12 @@ onMounted(() => {
           <div class="menu-item-container-title">Legion</div>
         </div>
       </RouterLink>
-      <RouterLink to="/checklist">
+      <!-- <RouterLink to="/checklist">
         <div class="menu-item-container">
           <Icon iconName="checklist" />
           <div class="menu-item-container-title">Checklist</div>
         </div>
-      </RouterLink>
+      </RouterLink> -->
       <RouterLink to="/settings">
         <div class="menu-item-container">
           <Icon iconName="settings" />
