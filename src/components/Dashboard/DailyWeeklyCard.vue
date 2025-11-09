@@ -136,6 +136,7 @@ const weeklyStats = computed(() => {
                 <div class="stat-block monster-park">
                     <!-- <h3>Monster Park</h3> -->
                     <div class="sub-stats">
+                        <h3>Maple World</h3>
                         <div class="stat-row">
                             <img src="/src/assets/images/quests/mp.webp" alt="MP" class="quest-icon" />
                             <span>Monster Park</span>
@@ -166,7 +167,7 @@ const weeklyStats = computed(() => {
             <div class="stats-grid">
                 <div class="stat-block">
                     <h3>Maple World</h3>
-                    <div class="sub-stats">
+                    <div class="sub-stats weekly">
 
                         <div class="stat-row">
                             <img src="/src/assets/images/quests/mulungdojo.webp" alt="Dojo" class="quest-icon" />
@@ -198,7 +199,7 @@ const weeklyStats = computed(() => {
 
                 <div class="stat-block">
                     <h3>Guild Activities</h3>
-                    <div class="sub-stats">
+                    <div class="sub-stats guild">
                         <div class="stat-row">
                             <img src="/src/assets/images/quests/culvert.png" alt="Culvert" class="quest-icon" />
                             <span>Culvert</span>
@@ -249,7 +250,7 @@ const weeklyStats = computed(() => {
 .weekly-section .stats-grid {
     display: grid;
 
-    grid-template-columns: repeat(2, auto);
+    grid-template-rows: repeat(2, auto);
 }
 
 .weekly-section .stats-grid {
@@ -277,7 +278,7 @@ h2 {
 
 .stats-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    grid-template-rows: repeat(auto-fit, minmax(250px, 1fr));
     gap: 1em;
 }
 
@@ -299,6 +300,24 @@ h2 {
     display: flex;
     flex-direction: column;
     gap: 0.6em;
+}
+
+.sub-stats.weekly{
+    /* display: flex;
+    flex-direction: row;
+    flex-wrap: wrap; */
+    /* grid 2 columns */
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.6em;
+
+    
+}
+
+.sub-stats.guild{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    
 }
 
 .stat-row {

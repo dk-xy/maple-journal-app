@@ -6,11 +6,11 @@
         <div class="completion_container">
             <div class="progression-item__symbols__completion">
                 <div>Daily</div>
-                <input type="checkbox" v-model="item.RegionDailyCompletion" @change="saveProgression" />
+                <input type="checkbox" v-model="item.RegionDailyCompletion" @change="saveProgression('RegionDailyCompletion')" />
             </div>
             <div class="progression-item__symbols__completion">
                 <div>Weekly</div>
-                <input type="checkbox" v-model="item.RegionWeeklyCompletion" @change="saveProgression" />
+                <input type="checkbox" v-model="item.RegionWeeklyCompletion" @change="saveProgression('RegionWeeklyCompletion')" />
             </div>
         </div>
     </div>
@@ -22,7 +22,7 @@
         <div class="completion_container">
             <div class="progression-item__symbols__completion">
                 <div>Daily</div>
-                <input type="checkbox" v-model="item.RegionDailyCompletion" @change="saveProgression" />
+                <input type="checkbox" v-model="item.RegionDailyCompletion" @change="saveProgression('RegionDailyCompletion')" />
             </div>
         </div>
     </div>
@@ -33,7 +33,7 @@
         <div class="progression-item-name">
             {{ item.Name }}
         </div>
-        <input type="checkbox" v-model="item.CompletionStatus" @change="saveProgression" />
+        <input type="checkbox" v-model="item.CompletionStatus" @change="saveProgression('CompletionStatus')" />
     </div>
 
     <!-- WEEKLIES -->
@@ -42,7 +42,7 @@
         <div class="progression-item-name">
             {{ item.Name }}
         </div>
-        <input type="checkbox" v-model="item.CompletionStatus" @change="saveProgression" />
+        <input type="checkbox" v-model="item.CompletionStatus" @change="saveProgression('CompletionStatus')" />
     </div>
 </template>
 
@@ -65,7 +65,28 @@ const props = defineProps({
 const emit = defineEmits(['saveProgression'])
 
 
-function saveProgression() {
+function saveProgression(completionKey) {
+    // Ensure the relevant completion flag was toggled before deciding date logic.
+    // For region items we need to consider both daily and weekly flags.
+    const now = new Date().toISOString()
+
+    if (props.type === 'region') {
+        // If any region completion flag is true, set a shared CompletionDate, otherwise clear it.
+        if (props.item.RegionDailyCompletion || props.item.RegionWeeklyCompletion) {
+            props.item.CompletionDate = now
+        } else {
+            props.item.CompletionDate = ''
+        }
+    } else {
+        // Activities (daily/weekly) use CompletionStatus
+        if (props.item.CompletionStatus) {
+            props.item.CompletionDate = now
+        } else {
+            props.item.CompletionDate = ''
+        }
+    }
+
+    // Emit the event to the parent component so it persists the change
     emit('saveProgression')
 }
 

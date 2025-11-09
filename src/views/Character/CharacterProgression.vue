@@ -154,6 +154,13 @@ function completeSymbols(type) {
         props.character.Progression.lastWeeklyReset = today
       }
     }
+
+    // set or clear a shared CompletionDate for the region
+    if (region.RegionDailyCompletion || region.RegionWeeklyCompletion) {
+      region.CompletionDate = today
+    } else {
+      region.CompletionDate = ''
+    }
   })
 
   activeGrandisRegions.value.forEach(region => {
@@ -163,6 +170,8 @@ function completeSymbols(type) {
         props.character.Progression.lastDailyReset = today
       }
     }
+
+    region.CompletionDate = region.RegionDailyCompletion ? today : ''
   })
 
   saveProgression()
@@ -184,6 +193,8 @@ function completeActivities(type) {
       if (daily.CompletionStatus) {
         props.character.Progression.lastDailyReset = today
       }
+      // set/clear CompletionDate for this activity
+      daily.CompletionDate = daily.CompletionStatus ? today : ''
     }
   })
 
@@ -193,6 +204,8 @@ function completeActivities(type) {
       if (weekly.CompletionStatus) {
         props.character.Progression.lastWeeklyReset = today
       }
+      // set/clear CompletionDate for this activity
+      weekly.CompletionDate = weekly.CompletionStatus ? today : ''
     }
   })
 
