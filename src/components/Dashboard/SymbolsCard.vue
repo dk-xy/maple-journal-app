@@ -50,16 +50,22 @@ const symbolStats = computed(() => {
     <h2>Symbols</h2>
     <div class="stats">
       <div class="stat">
-        <div class="stat-info">
+        <div class="stat-info arcane-river">
+          <div class="stat-image">
+            <!-- oblivion symbol -->
+            <img src="/src/assets/images/symbols/oblivion.webp" alt="oblivion symbol" class="reward-icon" />
+          </div>
           <div class="stat-title">Arcane River</div>
           <div class="stat-contents">
             <div class="stat-content">
               <div class="stat-description">Dailies</div>
-              <div class="stat-value">{{ symbolStats.arcaneRiverDaily.completed }} / {{ symbolStats.arcaneRiverDaily.total }}</div>
+              <div class="stat-value">{{ symbolStats.arcaneRiverDaily.completed }} / {{
+                symbolStats.arcaneRiverDaily.total }}</div>
             </div>
             <div class="stat-content">
               <div class="stat-description">Weeklies</div>
-              <div class="stat-value">{{ symbolStats.arcaneRiverWeekly.completed }} / {{ symbolStats.arcaneRiverWeekly.total }}</div>
+              <div class="stat-value">{{ symbolStats.arcaneRiverWeekly.completed }} / {{
+                symbolStats.arcaneRiverWeekly.total }}</div>
             </div>
           </div>
 
@@ -72,7 +78,12 @@ const symbolStats = computed(() => {
 
 
       <div class="stat">
-        <div class="stat-info">
+        <div class="stat-info grandis">
+          <div class="stat-image">
+            <img src="/src/assets/images/symbols/cernium.webp" alt="oblivion symbol" class="reward-icon" />
+
+          </div>
+
           <div class="stat-title">Grandis</div>
           <div class="stat-contents">
             <div class="stat-content">
@@ -89,6 +100,7 @@ const symbolStats = computed(() => {
 <style scoped>
 h2 {
   margin: 0;
+  margin-bottom: 16px;
   text-align: left;
   font-size: 1.48em;
   font-weight: 700;
@@ -96,12 +108,18 @@ h2 {
 
 .dashboard-card.symbols {
 
-  background: var(--shangrila-grad);
+  /* background: var(--shangrila-g
+  rad); */
+  /* linear gradient #466f7f  #4e7e8c*/
 
+  background: linear-gradient(102deg, #ddddddab -6.39%, #dddddfc4 110.52%);
+  /* background: linear-gradient(90deg,rgba(79, 136, 158, 0.788) 0%, rgba(78, 126, 140, 0.63) 100%); */
+  /* background-color: var(--elev-1-a); */
   border: 1px solid #eee;
   border-radius: 8px;
   padding: 16px;
   margin-bottom: 16px;
+  color: #3d3d3d;
 }
 
 .stats {
@@ -113,8 +131,31 @@ h2 {
 .stat {
   display: flex;
   justify-content: space-between;
-  padding: 8px 0;
-  border-bottom: 1px solid #eee;
+  align-items: center;
+  padding: 2px 0;
+
+  gap: 16px;
+
+}
+
+.stat-info.arcane-river {
+  background: var(--oblivion-grad);
+  /* background opacity */
+
+
+}
+
+.stat-info.grandis {
+  background: var(--cernium-grad);
+}
+
+.stat-image {
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2px;
 }
 
 .stat-title {
@@ -132,9 +173,12 @@ h2 {
 .stat-info {
   display: flex;
   flex-direction: row;
-  align-items: flex-start;
+  align-items: center;
   justify-content: flex-start;
   width: 100%;
+  background: rgba(144, 170, 180, 0.815);
+  border-radius: 4px;
+  border: solid 1px #eeeeee;
 }
 
 .stat-contents {
@@ -157,8 +201,7 @@ h2 {
   gap: 16px;
 }
 
-.stat-value
-{
+.stat-value {
   font-weight: 700;
 }
 </style>

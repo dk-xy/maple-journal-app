@@ -115,6 +115,10 @@ const viMatrixStats = computed(() => {
     grid-template-rows: 1fr;
 }
 
+.vi-matrix h2{
+    margin: 0;
+}
+
 
 .vi-matrix .card-header {
     display: flex;
@@ -122,7 +126,8 @@ const viMatrixStats = computed(() => {
     justify-content: flex-start;
     align-items: flex-start;
     text-align: left;
-    margin-bottom: 16px;
+    gap: 4px;
+    margin-bottom: 4px;
 
 }
 .reward-container {
@@ -166,7 +171,8 @@ const viMatrixStats = computed(() => {
     background: linear-gradient(102deg, #97B5F5 -6.39%, #ACA7F4 110.52%);
     padding: 1.5em;
     margin-bottom: 1em;
-    color: white;
+    /* color: var(--dark-text); */
+    color: #3d3d3d;
 }
 
 
@@ -221,11 +227,19 @@ const viMatrixStats = computed(() => {
     padding: 0.4em 0.8em;
     border-radius: 4px;
     margin: 8px;
-    border: solid 1px rgba(206, 153, 241, 0.103);
-    background: linear-gradient(102deg, #b95bf767 -6.39%, #7b74df8f 110.52%);
+    border: solid 1px rgba(231, 221, 238, 0.103);
+     background: rgba(235, 230, 230, 0.418);
+    /* background: linear-gradient(102deg, #b95bf767 -6.39%, #7b74df8f 110.52%); */
     min-width: 120px;
     text-align: center;
 }
+.completion-status.completed {
+
+    border: solid 1px rgba(206, 153, 241, 0.103);
+    background: linear-gradient(102deg, #b95bf767 -6.39%, #7b74df8f 110.52%);
+
+}
+
 
 
 </style>
