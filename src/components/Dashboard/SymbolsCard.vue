@@ -186,7 +186,7 @@ h2 {
   flex-direction: row;
   margin-left: 16px;
   justify-content: left;
-  width: 50%;
+ 
 }
 
 .stat-content {

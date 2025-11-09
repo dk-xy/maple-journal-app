@@ -14,7 +14,11 @@ const characters = data.Legion.Characters
 
 <template>
   <div class="dashboard-container">
-    <h1>Dashboard</h1>
+    <div class="title-section">
+      <img src="/src/assets/blacklist.png" alt="oblivion symbol" class="dashboard-icon" />
+      <h1>Dashboard</h1>
+    </div>
+
     <VIMatrixCard :characters="characters" />
     <SymbolsCard :characters="characters" />
     <DailyWeeklyCard :characters="characters" />
@@ -23,10 +27,24 @@ const characters = data.Legion.Characters
 </template>
 
 <style scoped>
-h2 {
-  margin: 0;
+.title-section {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+  margin-bottom: 16px;
+  width: 100%;
+  padding: 32px 24px;
+}
 
-  font-size: 1.1em;
-  font-weight: 700;
+.title-section h1 {
+  margin: 0;
+  font-size: 2.2em;
+  color: var(--dark-text);
+}
+
+.dashboard-icon {
+  width: 32x;
+  height: 32px;
 }
 </style>
