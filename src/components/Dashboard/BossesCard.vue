@@ -9,54 +9,51 @@ const props = defineProps({
 })
 
 const bossStats = computed(() => {
-  let stats = {
-    daily: {
-      completed: 0,
-      total: 0
-    },
-    weekly: {
-      completed: 0,
-      total: 0
-    },
-    monthly: {
-      completed: 0,
-      total: 0
-    },
-    crystalLimit: {
-      perCharacter: [],  // Array of {name, completed, total}
-      worldTotal: 0,
-      worldLimit: 180
-    }
+  const stats = {
+    daily: { completed: 0, total: 0 },
+    weekly: { completed: 0, total: 0 },
+    monthly: { completed: 0, total: 0 },
+    crystalLimit: { perCharacter: [], worldTotal: 0, worldLimit: 180 }
   }
 
-  props.characters.forEach(character => {
-    let charStats = {
-      name: character.Name,
-      completed: 0,
-      total: 0
-    }
+  const characters = Array.isArray(props.characters) ? props.characters : []
 
-    character.Bosses.BossList.forEach(boss => {
-      boss.Difficulty.forEach(diff => {
-        if (diff.isActive) {
-          switch (diff.DifficultyReset) {
-            case 'Daily':
-              stats.daily.total++
-              if (diff.CompletionStatus) stats.daily.completed++
-              break
-            case 'Weekly':
-              stats.weekly.total++
-              if (diff.CompletionStatus) {
-                stats.weekly.completed++
-                charStats.completed++
-              }
-              charStats.total++
-              break
-            case 'Monthly':
-              stats.monthly.total++
-              if (diff.CompletionStatus) stats.monthly.completed++
-              break
-          }
+  characters.forEach(character => {
+    const charStats = { name: character?.Name || 'Unknown', completed: 0, total: 0 }
+    const bossList = character?.Bosses?.BossList || []
+
+    bossList.forEach(boss => {
+      const difficulties = boss?.Difficulty || []
+      difficulties.forEach(diff => {
+        if (!diff) return
+
+        // Count this difficulty if it's active OR already completed (handles older data)
+        const counted = Boolean(diff.isActive) || Boolean(diff.CompletionStatus)
+        if (!counted) return
+
+        const reset = (diff.DifficultyReset || '').toString().toLowerCase()
+        const completed = Boolean(diff.CompletionStatus)
+
+        switch (reset) {
+          case 'daily':
+            stats.daily.total++
+            if (completed) stats.daily.completed++
+            break
+          case 'weekly':
+            stats.weekly.total++
+            if (completed) {
+              stats.weekly.completed++
+              charStats.completed++
+            }
+            charStats.total++
+            break
+          case 'monthly':
+            stats.monthly.total++
+            if (completed) stats.monthly.completed++
+            break
+          default:
+            // Unknown reset type — ignore or extend if needed
+            break
         }
       })
     })
@@ -134,7 +131,7 @@ const bossStats = computed(() => {
   background: linear-gradient(38deg, rgba(46, 46, 46, 1) 0%, rgba(0, 0, 0, 1) 0%, rgba(37, 11, 11, 1) 52%, rgba(0, 0, 0, 1) 100%, rgba(34, 34, 34, 0.9303922252494747) 100%);
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#2e2e2e", endColorstr="#222222", GradientType=1); */
 
-  color: #fdfdfd;
+  color: var(--dark-text);
 
   border-radius: 4px;
   padding: 16px 8px;
@@ -156,13 +153,14 @@ const bossStats = computed(() => {
 .bosses .stat-block {
   /* background-color: #2d2d2d; */
   /* From https://css.glass */
-  background: rgba(0, 0, 0, 0.185);
-  border-radius: 16px;
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  /* background: rgba(0, 0, 0, 0.185); */
+  padding: 2px 4px;
+  border-radius: 8px;
+  /* box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1); */
   backdrop-filter: blur(5px);
   -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(59, 59, 59, 0.37);
-
+  /* border: 1px solid rgba(255, 255, 255, 0.581); */
+  background-color: var(--elev-2);
   /* padding: 2px 16px; */
 
   display: flex;
@@ -190,7 +188,7 @@ const bossStats = computed(() => {
   flex-direction: column;
   gap: 0.4em;
   /* background: rgba(31, 31, 31, 0.44); */
-  background: rgba(255, 255, 255, 0.445) ;
+  background: #F5D9BE;
   justify-content: center;
   padding: 8px 16px;
   border-radius: 6px;
@@ -210,9 +208,10 @@ const bossStats = computed(() => {
 } */
 
 .crystal-limit {
-  background: rgba(31, 31, 31, 0.44);
+  /* background: rgba(31, 31, 31, 0.44); */
   padding: 1em;
   border-radius: 6px;
+  background-color: #F5D9BE;
 }
 
 .crystal-weekly-counter {

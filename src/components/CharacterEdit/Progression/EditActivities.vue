@@ -1,5 +1,8 @@
 <template>
     <div :class="class">
+        <div class="item-image">
+            <img :src="props.image" v-if="props.image" alt="">
+        </div>
         <label :for="id">{{ label }}</label>
         <input :id="id" :checked="modelValue" type="checkbox" @change="updateValue" />
     </div>
@@ -22,7 +25,12 @@ const props = defineProps({
     modelValue: {
         type: Boolean,
         required: true
+    },
+    image: {
+        type: String,
+        required: false
     }
+
 
 })
 
@@ -31,6 +39,8 @@ const emit = defineEmits(['update:modelValue'])
 function updateValue(event) {
     emit('update:modelValue', event.target.checked)
 }
+
+
 </script>
 
 <style scoped>
@@ -48,7 +58,7 @@ function updateValue(event) {
     box-shadow: 0 1px 6px rgba(0, 0, 0, 0.09);
 }
 
-.Symbol label{
+.Symbol label {
     min-width: 130px;
 }
 
@@ -57,7 +67,7 @@ function updateValue(event) {
     min-height: 48px;
     max-height: 86px;
     padding: 4px 8px;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
     gap: 16px;
 

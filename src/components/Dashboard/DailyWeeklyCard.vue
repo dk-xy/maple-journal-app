@@ -226,7 +226,7 @@ const weeklyStats = computed(() => {
     padding: 1.5em;
     margin-bottom: 1em;
     color: white; */
-    display: flex;
+    /* display: flex; */
     padding: 8px;
     align-items: flex-start;
     gap: 16px;
@@ -283,7 +283,8 @@ h2 {
 }
 
 .stat-block {
-    background: rgba(255, 255, 255, 0.1);
+    /* background: rgba(255, 255, 255, 0.1); */
+    background-color: #f0d3b8;
     padding: 1em;
     border-radius: 6px;
     border: solid 1px rgba(255, 255, 255, 0.3);
@@ -344,6 +345,7 @@ h2 {
     border: solid 1px var(--elev-1);
     border-radius: 9px;
     background: rgba(235, 230, 230, 0.418);
+    width: 10%;
 }
 
 h3 {
