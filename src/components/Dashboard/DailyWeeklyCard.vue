@@ -133,17 +133,17 @@ const weeklyStats = computed(() => {
         <section class="dashboard-activites-section daily-section">
             <h2>Daily Activities</h2>
             <div class="stats-grid">
-                <div class="stat-block monster-park">
+                <div class="stat-block dailies">
+                    <h3>Maple World</h3>
                     <!-- <h3>Monster Park</h3> -->
-                    <div class="sub-stats">
-                        <h3>Maple World</h3>
+                    <div class="sub-stats dailies">
                         <div class="stat-row">
                             <img src="/src/assets/images/quests/mp.webp" alt="MP" class="quest-icon" />
                             <span>Monster Park</span>
                             <div class="stat-value">{{ dailyStats.monsterPark.mpCompleted }}/{{
                                 dailyStats.monsterPark.activeCharacters }}</div>
                         </div>
-                         <div class="stat-row">
+                        <div class="stat-row">
                             <img src="/src/assets/images/quests/ursus.webp" alt="Ursus" class="quest-icon" />
                             <span>Ursus</span>
                             <div class="stat-value">{{ dailyStats.soloContent.ursusCompleted }}/{{
@@ -155,7 +155,7 @@ const weeklyStats = computed(() => {
                             <div class="stat-value">{{ dailyStats.multiContent.golluxCompleted }}/{{
                                 dailyStats.multiContent.activeGolluxChars }}</div>
                         </div>
-                      
+
                     </div>
                 </div>
 
@@ -168,19 +168,17 @@ const weeklyStats = computed(() => {
                 <div class="stat-block">
                     <h3>Maple World</h3>
                     <div class="sub-stats weekly">
-
+                        <div class="stat-row">
+                            <img src="/src/assets/images/quests/mpe.webp" alt="MPE" class="quest-icon" />
+                            <span>MPE</span>
+                            <div class="stat-value">{{ weeklyStats.monsterPark.mpeCompleted }}/{{
+                                weeklyStats.monsterPark.activeCharacters }}</div>
+                        </div>
                         <div class="stat-row">
                             <img src="/src/assets/images/quests/mulungdojo.webp" alt="Dojo" class="quest-icon" />
                             <span>Dojo</span>
                             <div class="stat-value">{{ weeklyStats.dojo.completed }}/{{ weeklyStats.dojo.activeChars }}
                             </div>
-                        </div>
-
-                        <div class="stat-row">
-                            <img src="/src/assets/images/quests/darkworldtree.webp" alt="DWT" class="quest-icon" />
-                            <span>Dark World Tree</span>
-                            <div class="stat-value">{{ weeklyStats.absolab.dwtCompleted }}/{{
-                                weeklyStats.absolab.activeChars }}</div>
                         </div>
                         <div class="stat-row">
                             <img src="/src/assets/images/quests/haven.webp" alt="Haven" class="quest-icon" />
@@ -188,12 +186,13 @@ const weeklyStats = computed(() => {
                             <div class="stat-value">{{ weeklyStats.absolab.havenCompleted }}/{{
                                 weeklyStats.absolab.activeChars }}</div>
                         </div>
-                          <div class="stat-row">
-                            <img src="/src/assets/images/quests/mpe.webp" alt="MPE" class="quest-icon" />
-                            <span>MPE</span>
-                            <div class="stat-value">{{ weeklyStats.monsterPark.mpeCompleted }}/{{
-                                weeklyStats.monsterPark.activeCharacters }}</div>
+                         <div class="stat-row">
+                            <img src="/src/assets/images/quests/darkworldtree.webp" alt="DWT" class="quest-icon" />
+                            <span>Dark World Tree</span>
+                            <div class="stat-value">{{ weeklyStats.absolab.dwtCompleted }}/{{
+                                weeklyStats.absolab.activeChars }}</div>
                         </div>
+
                     </div>
                 </div>
 
@@ -226,13 +225,15 @@ const weeklyStats = computed(() => {
     padding: 1.5em;
     margin-bottom: 1em;
     color: white; */
-    /* display: flex; */
+    display: flex;
+    flex-direction: column;
     padding: 8px;
     align-items: flex-start;
     gap: 16px;
     border-radius: 6px;
     background: var(--elev-1-a);
     margin: 8px;
+    width: 100%;
 }
 
 .dashboard-activites-section {
@@ -240,6 +241,7 @@ const weeklyStats = computed(() => {
     border: 1px solid rgba(255, 255, 255, 0.50);
     /* background: var(--elev-1); */
     background: #F5D9BE;
+        width: 100%;
 }
 
 .dashboard-activites-section .stat-row {
@@ -247,16 +249,8 @@ const weeklyStats = computed(() => {
     background: var(--elev-2, #E9C7AE);
 }
 
-.weekly-section .stats-grid {
-    display: grid;
 
-    grid-template-rows: repeat(2, auto);
-}
 
-.weekly-section .stats-grid {
-    display: grid;
-    grid-template-rows: repeat(2, auto);
-}
 
 
 section {
@@ -278,8 +272,9 @@ h2 {
 
 .stats-grid {
     display: grid;
-    grid-template-rows: repeat(auto-fit, minmax(250px, 1fr));
+    /* grid-template-rows: repeat(auto-fit, minmax(250px, 1fr)); */
     gap: 1em;
+    height: fit-content;
 }
 
 .stat-block {
@@ -289,6 +284,7 @@ h2 {
     border-radius: 6px;
     border: solid 1px rgba(255, 255, 255, 0.3);
     margin: 8px 16px;
+    height: fit-content;
 }
 
 .stat-block h3 {
@@ -297,13 +293,23 @@ h2 {
     font-weight: 500;
 }
 
+.stat-block.dailies .sub-stats {
+ display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    width: 100%;
+}
+
+.stat-block.dailies .sub-stats h3 {
+    width: 100%;
+}
+
 .sub-stats {
     display: flex;
     flex-direction: column;
     gap: 0.6em;
 }
 
-.sub-stats.weekly{
+.sub-stats.weekly {
     /* display: flex;
     flex-direction: row;
     flex-wrap: wrap; */
@@ -312,13 +318,13 @@ h2 {
     grid-template-columns: repeat(2, 1fr);
     gap: 0.6em;
 
-    
+
 }
 
-.sub-stats.guild{
+.sub-stats.guild {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    
+
 }
 
 .stat-row {

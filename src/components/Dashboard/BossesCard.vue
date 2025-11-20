@@ -138,6 +138,8 @@ const bossStats = computed(() => {
   display: flex;
   flex-direction: column; 
   gap: 16px;
+  background: #F5D9BE;
+  color: var(--dark-text);
 
 }
 
@@ -171,6 +173,8 @@ const bossStats = computed(() => {
 .bosses h2{
   margin: 8px 0px; 
   text-align: left; 
+  font-size: 1.2em;
+  font-weight: 700;
 }
 
 .bosses h3 {
@@ -188,10 +192,11 @@ const bossStats = computed(() => {
   flex-direction: column;
   gap: 0.4em;
   /* background: rgba(31, 31, 31, 0.44); */
-  background: #F5D9BE;
+  background: #f0d3b8;
   justify-content: center;
   padding: 8px 16px;
   border-radius: 6px;
+  border: solid 1px white;
 }
 
 .bosses .stat-value {

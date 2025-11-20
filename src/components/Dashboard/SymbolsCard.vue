@@ -160,7 +160,7 @@ h2 {
 
 .stat-title {
   font-weight: 600;
-  margin-right: 16px;
+
   text-align: left;
   width: 30%;
   padding: 16px 32px;
@@ -182,9 +182,9 @@ h2 {
 }
 
 .stat-contents {
-  display: flex;
-  flex-direction: row;
-  margin-left: 16px;
+display: grid;
+  grid-template-columns: 1fr 1fr;
+
   justify-content: left;
  
 }
@@ -203,5 +203,7 @@ h2 {
 
 .stat-value {
   font-weight: 700;
+  width: 100%;
+  min-width: 40px;
 }
 </style>
