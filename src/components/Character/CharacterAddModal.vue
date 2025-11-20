@@ -194,7 +194,7 @@ const fetchCharacter = async () => {
         charData.value = {
           ...parsed.ranks[0], // Spread the character details
           worldName: selectedServer.value.name, // Add worldName for display
-          jobName: mapJob(parsed.ranks[0].jobID) // Add jobName using your mapJob function
+          jobName: parsed.ranks[0].jobName // Add jobName using your mapJob function
         }
       } else {
         // Handle cases where API returns JSON but no ranks (e.g., character not found)
@@ -230,7 +230,8 @@ function addCharToLegion() {
   // deep clone emptyCharacter and populate
   const newChar = JSON.parse(JSON.stringify(emptyCharacter))
   newChar.Name = characterName.value || charData.value.characterName || 'Character'
-  newChar.Class = mapJob(charData.value.jobID)
+  // newChar.Class = mapJob(charData.value.jobID)
+  newChar.Class = charData.value.jobName
   newChar.Level = charData.value.level || 1
   // store avatar URL on a simple property used by LegionBlock
   newChar.Image = charData.value.characterImgURL || charData.value.avatarImgUrl || ''
