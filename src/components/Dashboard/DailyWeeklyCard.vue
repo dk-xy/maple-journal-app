@@ -231,7 +231,7 @@ const weeklyStats = computed(() => {
     align-items: flex-start;
     gap: 16px;
     border-radius: 6px;
-    background: var(--elev-1-a);
+    /* background: var(--elev-1-a); */
     margin: 8px;
     width: 100%;
 }
@@ -239,8 +239,8 @@ const weeklyStats = computed(() => {
 .dashboard-activites-section {
     border-radius: 8px;
     border: 1px solid rgba(255, 255, 255, 0.50);
-    /* background: var(--elev-1); */
-    background: #F5D9BE;
+    background: var(--elev-1-a);
+    /* background: #F5D9BE; */
         width: 100%;
 }
 

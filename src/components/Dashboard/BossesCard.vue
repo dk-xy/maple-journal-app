@@ -78,17 +78,17 @@ const bossStats = computed(() => {
       <div class="completion-stats">
         <h3>Completion</h3>
         <div class="stat-block">
-          <h4>Daily Bosses</h4>
+          <h4>Daily</h4>
           <div class="stat-value">{{ bossStats.daily.completed }}/{{ bossStats.daily.total }}</div>
         </div>
 
         <div class="stat-block">
-          <h4>Weekly Bosses</h4>
+          <h4>Weekly</h4>
           <div class="stat-value">{{ bossStats.weekly.completed }}/{{ bossStats.weekly.total }}</div>
         </div>
 
         <div class="stat-block">
-          <h4>Monthly Bosses</h4>
+          <h4>Monthly</h4>
           <div class="stat-value">{{ bossStats.monthly.completed }}/{{ bossStats.monthly.total }}</div>
         </div>
       </div>
@@ -138,7 +138,7 @@ const bossStats = computed(() => {
   display: flex;
   flex-direction: column; 
   gap: 16px;
-  background: #F5D9BE;
+  /* background: #F5D9BE; */
   color: var(--dark-text);
 
 }
@@ -242,24 +242,27 @@ const bossStats = computed(() => {
   grid-template-columns: 100px 1fr 60px;
   align-items: center;
   gap: 0.5em;
+  background: var(--elev-2);
+  padding: 4px 4px;
 }
 
 .progress-bar {
   height: 8px;
-  background: rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.425);
   border-radius: 4px;
   overflow: hidden;
 }
 
 .progress {
   height: 100%;
-  background: rgba(255, 255, 255, 0.8);
+  background: rgba(255, 255, 255, 0.856);
   transition: width 0.3s ease;
 }
 
 .limit-value {
   text-align: right;
   font-size: 0.9em;
+  padding: 4px;
 }
 
 .char-name {
@@ -267,5 +270,7 @@ const bossStats = computed(() => {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  text-align: left;
+  padding: 4px;
 }
 </style>
