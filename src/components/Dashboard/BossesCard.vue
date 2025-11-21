@@ -134,7 +134,7 @@ const bossStats = computed(() => {
   color: var(--dark-text);
 
   border-radius: 4px;
-  padding: 16px 8px;
+  /* padding: 16px 8px; */
   display: flex;
   flex-direction: column; 
   gap: 16px;
@@ -145,7 +145,7 @@ const bossStats = computed(() => {
 
 .bosses .stats-container {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
   gap: 1.5em;
 
 
@@ -171,20 +171,22 @@ const bossStats = computed(() => {
 }
 
 .bosses h2{
-  margin: 8px 0px; 
+  margin: 0px; 
   text-align: left; 
   font-size: 1.2em;
   font-weight: 700;
+  padding: 8px 16px;;
 }
 
 .bosses h3 {
-  margin: 8px 0px;
+  margin:  0px;
   text-align: left;
 }
 
 .bosses h4 {
   margin: 2px 4px;
   text-align: left;
+  font-weight: 700;
 }
 
 .bosses .completion-stats {
@@ -193,10 +195,11 @@ const bossStats = computed(() => {
   gap: 0.4em;
   /* background: rgba(31, 31, 31, 0.44); */
   background: #f0d3b8;
-  justify-content: center;
+  justify-content: top;
   padding: 8px 16px;
   border-radius: 6px;
-  border: solid 1px white;
+  
+  margin: 8px 16px;
 }
 
 .bosses .stat-value {
@@ -217,6 +220,8 @@ const bossStats = computed(() => {
   padding: 1em;
   border-radius: 6px;
   background-color: #F5D9BE;
+  margin: 8px 16px;
+
 }
 
 .crystal-weekly-counter {
@@ -237,6 +242,12 @@ const bossStats = computed(() => {
   gap: 0.8em;
 }
 
+.all-characters-container{
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
 .char-limit {
   display: grid;
   grid-template-columns: 100px 1fr 60px;
@@ -244,6 +255,7 @@ const bossStats = computed(() => {
   gap: 0.5em;
   background: var(--elev-2);
   padding: 4px 4px;
+  border-radius: 4px;
 }
 
 .progress-bar {
@@ -273,4 +285,7 @@ const bossStats = computed(() => {
   text-align: left;
   padding: 4px;
 }
+
+
+
 </style>

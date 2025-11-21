@@ -225,14 +225,14 @@ const weeklyStats = computed(() => {
     padding: 1.5em;
     margin-bottom: 1em;
     color: white; */
-    display: flex;
-    flex-direction: column;
+   display: grid;
+   grid-template-rows: auto;
     padding: 8px;
     align-items: flex-start;
     gap: 16px;
     border-radius: 6px;
     /* background: var(--elev-1-a); */
-    margin: 8px;
+    /* margin: 8px; */
     width: 100%;
 }
 

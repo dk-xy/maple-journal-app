@@ -19,10 +19,13 @@ const characters = data.Legion.Characters
       <h1>Dashboard</h1>
     </div>
 
-    <VIMatrixCard :characters="characters" />
-    <SymbolsCard :characters="characters" />
-    <DailyWeeklyCard :characters="characters" />
-    <BossesCard :characters="characters" />
+    <!-- changed: wrap cards in responsive grid -->
+    <div class="dashboard-grid">
+      <VIMatrixCard :characters="characters" />
+      <SymbolsCard :characters="characters" />
+      <DailyWeeklyCard :characters="characters" />
+      <BossesCard :characters="characters" />
+    </div>
   </div>
 </template>
 
@@ -47,4 +50,31 @@ const characters = data.Legion.Characters
   width: 32x;
   height: 32px;
 }
+
+/* new: responsive grid for dashboard cards */
+.dashboard-grid {
+  display: grid;
+  gap: 24px;
+  /* mobile: single column */
+  grid-template-columns: 1fr;
+}
+
+/* two columns on medium+ screens (wide) */
+@media (min-width: 768px) {
+  .dashboard-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* optional: limit card max-width and center grid */
+.dashboard-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.dashboard-grid > * {
+  width: 100%;
+  box-sizing: border-box;
+}
+
 </style>
