@@ -15,7 +15,10 @@
               <div v-for="server in servers" :key="server.name" class="server-button" :class="{
                 active: selectedServer && selectedServer.name === server.name,
               }" @click="selectServer(server)">
-                {{ server.name }}
+                <div class="server-content">
+                  <img v-if="serverIcon(server.name)" :src="serverIcon(server.name)" :alt="server.name + ' icon'" class="server-icon" />
+                  <span class="server-name">{{ server.name }}</span>
+                </div>
               </div>
             </div>
           </div>
@@ -125,9 +128,25 @@ const servers = ref([
   // NA Servers
   { name: 'Bera', id: 1, region: 'na' },
   { name: 'Scania', id: 19, region: 'na' },
-  { name: 'Chronos', id: 45, region: 'na' },
+  { name: 'Kronos', id: 45, region: 'na' },
   { name: 'Hyperion', id: 70, region: 'na' },
 ])
+
+/**
+ * Returns a URL string for the server icon located in `src/assets/icons/servers`.
+ * Filenames are expected to be all lowercase (e.g. `bera.png`).
+ * @param {string} name
+ */
+function serverIcon(name) {
+  if (!name) return null
+  try {
+    // relative to this file: src/components/Character -> ../../assets/icons/servers
+    return new URL(`../../assets/icons/servers/${name}.png`, import.meta.url).href
+  } catch (err) {
+    // If file not found or build-time resolution fails, gracefully return null
+    return null
+  }
+}
 
 // --- Methods ---
 
@@ -309,12 +328,14 @@ function close() {
   border: 1px solid #ddd;
   padding: 12px;
   border-radius: 4px;
-  text-align: center;
   cursor: pointer;
   transition:
     background-color 0.2s ease,
     border-color 0.2s ease;
   font-size: 0.9em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .server-button:hover {
@@ -326,6 +347,25 @@ function close() {
   color: white;
   border-color: #007bff;
   font-weight: bold;
+}
+
+.server-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.server-name {
+  flex: 1 1 auto;
+  text-align: left;
+}
+
+.server-icon {
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+  margin-left: 8px;
 }
 
 /* --- Action/Result Styles --- */
