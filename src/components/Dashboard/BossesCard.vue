@@ -77,7 +77,9 @@ const bossStats = computed(() => {
     <div class="stats-container">
       <div class="completion-stats">
         <h3>Completion</h3>
-        <div class="stat-block">
+
+        <div class="stat-block-container">
+<div class="stat-block">
           <h4>Daily</h4>
           <div class="stat-value">{{ bossStats.daily.completed }}/{{ bossStats.daily.total }}</div>
         </div>
@@ -92,6 +94,8 @@ const bossStats = computed(() => {
           <div class="stat-value">{{ bossStats.monthly.completed }}/{{ bossStats.monthly.total }}</div>
         </div>
       </div>
+        </div>
+        
 
       <div class="crystal-limit">
         <div class="crystal-weekly-counter">
@@ -145,11 +149,18 @@ const bossStats = computed(() => {
 
 .bosses .stats-container {
   display: grid;
-  grid-template-rows: 1fr 1fr;
+  grid-template-rows: 1fr 2fr;
   gap: 1.5em;
 
 
 
+}
+
+.bosses .stat-block-container {
+  display: flex;
+  flex-direction: row;
+  gap: 1em;
+  justify-content: space-around;
 }
 
 .bosses .stat-block {
@@ -166,8 +177,16 @@ const bossStats = computed(() => {
   /* padding: 2px 16px; */
 
   display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: space-between;
+  justify-content: left;
+  width: 100%;
+}
+
+.bosses .stat-block h4 {
+  margin: 0px;
+  text-align: left;
+  width: 33%;
 }
 
 .bosses h2{
@@ -262,7 +281,7 @@ const bossStats = computed(() => {
   height: 8px;
   background: rgba(255, 255, 255, 0.425);
   border-radius: 4px;
-  overflow: hidden;
+  overfnpmlow: hidden;
 }
 
 .progress {
