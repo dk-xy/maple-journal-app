@@ -281,13 +281,15 @@ const bossStats = computed(() => {
   height: 8px;
   background: rgba(255, 255, 255, 0.425);
   border-radius: 4px;
-  overfnpmlow: hidden;
+  overflow: hidden;
 }
 
 .progress {
   height: 100%;
-  background: rgba(255, 255, 255, 0.856);
+  background:var(--blue-accent);
   transition: width 0.3s ease;
+  border-radius: 16px;
+
 }
 
 .limit-value {

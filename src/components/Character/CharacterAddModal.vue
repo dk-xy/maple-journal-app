@@ -5,27 +5,48 @@
       <div class="character-lookup-content">
         <form @submit.prevent="fetchCharacter">
           <div class="form-group">
-            <label for="charName">Character Name:</label>
+            <h3>Character Name</h3>
             <input id="charName" v-model="characterName" type="text" required />
           </div>
 
           <div class="form-group">
-            <label>Select Server:</label>
+            <h3>Server</h3>
+            <h4>Heroic</h4>
+
             <div class="server-selection-grid">
-              <div v-for="server in servers" :key="server.name" class="server-button" :class="{
-                active: selectedServer && selectedServer.name === server.name,
-              }" @click="selectServer(server)">
+              <div v-for="server in servers.filter(s => ['Kronos', 'Hyperion', 'Solis'].includes(s.name))"
+                :key="server.name" class="server-button" :class="{
+                  active: selectedServer && selectedServer.name === server.name,
+                }" @click="selectServer(server)">
                 <div class="server-content">
-                  <img v-if="serverIcon(server.name)" :src="serverIcon(server.name)" :alt="server.name + ' icon'" class="server-icon" />
+                  <img v-if="serverIcon(server.name)" :src="serverIcon(server.name)" :alt="server.name + ' icon'"
+                    class="server-icon" />
                   <span class="server-name">{{ server.name }}</span>
                 </div>
               </div>
             </div>
-          </div>
+            <!-- separate grid for scania bera and luna -->
+            <h4>Interactive</h4>
+            <div class="server-selection-grid" style="margin-bottom:12px;">
+              <div v-for="server in servers.filter(s => ['Scania', 'Bera', 'Luna'].includes(s.name))" :key="server.name"
+                class="server-button" :class="{
+                  active: selectedServer && selectedServer.name === server.name,
+                }" @click="selectServer(server)">
+                <div class="server-content">
+                  <img v-if="serverIcon(server.name)" :src="serverIcon(server.name)" :alt="server.name + ' icon'"
+                    class="server-icon" />
+                  <span class="server-name">{{ server.name }}</span>
+                </div>
+              </div>
+            </div>
 
-          <button type="submit" :disabled="loading" class="lookup-button">
-            {{ loading ? 'Searching...' : 'Get Character' }}
-          </button>
+          </div>
+          <div class="form-button-container">
+            <button type="submit" :disabled="loading" class="lookup-button">
+              {{ loading ? 'Searching...' : 'Get Character' }}
+            </button>
+            <button class="lookup-button legion-button disabled" @click="addCharToLegion">Add to Legion</button>
+          </div>
         </form>
 
         <div v-if="loading" class="loading-spinner">
@@ -41,9 +62,9 @@
           <p>Level {{ charData.level }} {{ charData.jobName }}</p>
           <p>({{ charData.worldName }})</p>
           <img :src="charData.avatarImgUrl || charData.characterImgURL" alt="Character Avatar" />
-          <div style="margin-top:12px;">
+          <!-- <div style="margin-top:12px;">
             <button class="lookup-button" @click="addCharToLegion">Add to Legion</button>
-          </div>
+          </div> -->
         </div>
       </div>
     </div>
@@ -215,6 +236,12 @@ const fetchCharacter = async () => {
           worldName: selectedServer.value.name, // Add worldName for display
           jobName: parsed.ranks[0].jobName // Add jobName using your mapJob function
         }
+
+        // remove disabled from legion-button classList
+        const legionButton = document.querySelector('.legion-button');
+        if (legionButton) {
+          legionButton.classList.remove('disabled');
+        }
       } else {
         // Handle cases where API returns JSON but no ranks (e.g., character not found)
         errorMsg.value = 'Character not found on this server.'
@@ -257,6 +284,11 @@ function addCharToLegion() {
   console.log('Adding character to Legion:', newChar)
   // persist
   addCharacter(newChar)
+  // add disabled to classList of Legion button
+  const legionButton = document.querySelector('.legion-button');
+  if (legionButton) {
+    legionButton.classList.add('disabled');
+  }
 
   // close modal (Legion view refreshes on close)
   resetForm()
@@ -287,6 +319,7 @@ function close() {
   justify-content: center;
   align-items: center;
   z-index: 200;
+  text-align: left;
 }
 
 .modal {
@@ -325,7 +358,7 @@ function close() {
 }
 
 .server-button {
-  border: 1px solid #ddd;
+  border: 1px solid var(--elev-1);
   padding: 12px;
   border-radius: 4px;
   cursor: pointer;
@@ -336,16 +369,17 @@ function close() {
   display: flex;
   align-items: center;
   justify-content: center;
+  background: var(--elev-1-a);
 }
 
 .server-button:hover {
-  background-color: #f4f4f4;
+  background-color: var(--elev-2);
 }
 
 .server-button.active {
-  background-color: #007bff;
+  background-color: var(--blue-accent);
   color: white;
-  border-color: #007bff;
+
   font-weight: bold;
 }
 
@@ -354,11 +388,14 @@ function close() {
   align-items: center;
   justify-content: space-between;
   width: 100%;
+  gap: 16px;
 }
 
 .server-name {
   flex: 1 1 auto;
   text-align: left;
+  width: 20%;
+  /* Adjust width to account for icon */
 }
 
 .server-icon {
@@ -372,17 +409,29 @@ function close() {
 .lookup-button {
   width: 100%;
   padding: 10px 15px;
-  background-color: #007bff;
-  color: white;
+  background-color: var(--blue-accent);
+  color: #eee;
   border: none;
   border-radius: 4px;
   cursor: pointer;
   font-size: 1em;
   margin-top: 10px;
+  transition: background-color 0.2s ease;
 }
 
-.lookup-button:disabled {
-  background-color: #ccc;
+.lookup-button:hover {
+  background-color: var(--blue-accent-deep);
+}
+
+.lookup-button.disabled {
+  background-color: #ccc !important;
+}
+
+#charName {
+  background-color: var(--elev-2);
+  border: solid 1px var(--elev-1);
+  transition: border-color 0.2s ease;
+  color: var(--dark-text);
 }
 
 .character-result {

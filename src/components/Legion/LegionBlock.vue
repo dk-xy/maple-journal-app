@@ -145,7 +145,9 @@ const totalBosses = computed(() => {
   height: fit-content;
   padding: 2px 8px;
   border-radius: 4px;
-  font-size: 0.8rem;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--dark-text);
 }
 
 .character-info{
@@ -157,9 +159,7 @@ const totalBosses = computed(() => {
     padding: 8px 16px;
 }
 
-.character-properties{
 
-}
 
 h3 {
   margin: 0;
