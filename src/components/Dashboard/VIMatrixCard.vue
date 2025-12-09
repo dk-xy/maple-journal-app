@@ -8,19 +8,19 @@ const props = defineProps({
         required: true
     }
 })
-
 const viMatrixStats = computed(() => {
     let stats = {
         fragmentsCompleted: 0,
         totalEnergy: 0,
         totalFragments: 0,
         energyCompleted: 0,
-        grandisDungeonCompleted: false,
+        grandisDungeonCompleted: [],
         activeFragmentCharacters: 0,
         activeEnergyCharacters: 0
     }
 
     props.characters.forEach(character => {
+        // Fragment quest (daily)
         const fragmentQuest = character.Progression.Dailies.DailyActivity.find(
             activity => activity.key === 'erdarequest'
         )
@@ -33,6 +33,7 @@ const viMatrixStats = computed(() => {
             }
         }
 
+        // Energy quest (daily)
         const energyQuest = character.Progression.Dailies.DailyActivity.find(
             activity => activity.key === 'erdarequest_energy'
         )
@@ -44,11 +45,27 @@ const viMatrixStats = computed(() => {
             }
         }
 
+        // Weekly Erda quests (9 Sol & 90 Sol)
+        const erdaWeekly9Sol = character.Progression.Weeklies.WeeklyActivity.find(
+            activity => activity.key === 'erdarequest_9sol'
+        )
+        if (erdaWeekly9Sol?.CompletionStatus) {
+            stats.totalFragments += 9
+        }
+
+        const erdaWeekly90Sol = character.Progression.Weeklies.WeeklyActivity.find(
+            activity => activity.key === 'erdarequest_90sol'
+        )
+        if (erdaWeekly90Sol?.CompletionStatus) {
+            stats.totalFragments += 90
+        }
+
+        // Grandis dungeon (track by character name)
         const grandisDungeon = character.Progression.Weeklies.WeeklyActivity.find(
             activity => activity.key === 'grandisdungeon'
         )
         if (grandisDungeon?.isActive && grandisDungeon?.CompletionStatus) {
-            stats.grandisDungeonCompleted = true
+            stats.grandisDungeonCompleted.push(character.Name)  // Changed from character.name
         }
     })
 
@@ -70,16 +87,30 @@ const viMatrixStats = computed(() => {
 
             <div class="stat-block">
                 <h3>Grandis Dungeon</h3>
-                <div class="completion-status" :class="{ completed: viMatrixStats.grandisDungeonCompleted }">
-                    {{ viMatrixStats.grandisDungeonCompleted ? 'Completed' : 'Not Completed' }}
+                <!-- <div class="completion-status" :class="{ completed: viMatrixStats.grandisDungeonCompleted.length > 0 }">
+                    {{ viMatrixStats.grandisDungeonCompleted.length > 0
+                        ? `${viMatrixStats.grandisDungeonCompleted.length}x -
+                    ${viMatrixStats.grandisDungeonCompleted.join(', ')}`
+                        : 'Not Completed'
+                    }}
+                </div> -->
+                                <div class="completion-row">
+                    <div
+                        v-for="idx in 2"
+                        :key="idx"
+                        class="completion-status"
+                        :class="{ completed: viMatrixStats.grandisDungeonCompleted[idx - 1] }"
+                    >
+                        {{ viMatrixStats.grandisDungeonCompleted[idx - 1] || 'Not Completed' }}
+                    </div>
                 </div>
             </div>
 
             <div class="reward-container">
                 <div class="stat-container">
                     <div class="quest-block">
-                        <h3>Erda's Request</h3>
-                        <div class="stat-value">{{ viMatrixStats.fragmentsCompleted }}/7</div>
+                        <h3>Weekly Erda (9 Sol + 90 Sol)</h3>
+                        <div class="stat-value">✓</div>
                     </div>
                     <div class="stat-row">
                         <img src="/src/assets/images/quests/erdarequest.webp" alt="Fragments" class="reward-icon" />
@@ -115,7 +146,7 @@ const viMatrixStats = computed(() => {
     grid-template-rows: 1fr;
 }
 
-.vi-matrix h2{
+.vi-matrix h2 {
     margin: 0;
 }
 
@@ -130,9 +161,11 @@ const viMatrixStats = computed(() => {
     margin-bottom: 4px;
 
 }
+
 .reward-container {
     display: grid;
-    grid-template-columns: 1fr 1fr;  /* Keep this */
+    grid-template-columns: 1fr 1fr;
+    /* Keep this */
     gap: 1em;
 }
 
@@ -141,7 +174,8 @@ const viMatrixStats = computed(() => {
     display: flex;
     flex-direction: column;
     gap: 0.6em;
-    width: 100%;  /* Ensure full width */
+    width: 100%;
+    /* Ensure full width */
     background: rgba(255, 255, 255, 0.1);
     padding: 8px;
     border-radius: 6px;
@@ -149,9 +183,10 @@ const viMatrixStats = computed(() => {
 
 .quest-block {
     display: grid;
-    grid-template-columns: 1fr auto;  /* Changed to auto for the value */
+    grid-template-columns: 1fr auto;
+    /* Changed to auto for the value */
     gap: 1em;
-   
+
     padding: 0.8em 1em;
     border-radius: 6px;
     align-items: center;
@@ -162,7 +197,8 @@ const viMatrixStats = computed(() => {
     margin: 0;
     font-size: 1em;
     font-weight: 500;
-    white-space: nowrap;  /* Prevent title from wrapping */
+    white-space: nowrap;
+    /* Prevent title from wrapping */
 }
 
 
@@ -228,18 +264,16 @@ const viMatrixStats = computed(() => {
     border-radius: 4px;
     margin: 8px;
     border: solid 1px rgba(231, 221, 238, 0.103);
-     background: rgba(235, 230, 230, 0.418);
+    background: rgba(235, 230, 230, 0.418);
     /* background: linear-gradient(102deg, #b95bf767 -6.39%, #7b74df8f 110.52%); */
     min-width: 120px;
     text-align: center;
 }
+
 .completion-status.completed {
 
     border: solid 1px rgba(206, 153, 241, 0.103);
     background: linear-gradient(102deg, #b95bf767 -6.39%, #7b74df8f 110.52%);
 
 }
-
-
-
 </style>

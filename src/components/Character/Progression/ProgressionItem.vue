@@ -76,13 +76,16 @@ function saveProgression(completionKey) {
             props.item.CompletionDate = now
         } else {
             props.item.CompletionDate = ''
+          
         }
     } else {
         // Activities (daily/weekly) use CompletionStatus
         if (props.item.CompletionStatus) {
             props.item.CompletionDate = now
+             console.log("wesh2")
         } else {
             props.item.CompletionDate = ''
+              console.log("wesh")
         }
     }
 

@@ -69,7 +69,7 @@
         <div class="activity-category-container">
           <h4>Weeklies</h4>
           <ProgressionItem v-for="(weekly, index) in activeWeeklies" :key="index" :item="weekly" type="weekly"
-            code="weekly" :saveProgression="saveProgression" />
+            code="weekly" :saveProgression="saveProgression"  @saveProgression="saveProgression" />
         </div>
       </div>
     </div>
