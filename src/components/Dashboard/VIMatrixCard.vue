@@ -88,7 +88,7 @@ const viMatrixStats = computed(() => {
 
 
 
-            <div class="stat-block">
+            <div class="stat-block vi-title">
                 <h3>Grandis Dungeon</h3>
                 <!-- <div class="completion-status" :class="{ completed: viMatrixStats.grandisDungeonCompleted.length > 0 }">
                     {{ viMatrixStats.grandisDungeonCompleted.length > 0
@@ -98,42 +98,34 @@ const viMatrixStats = computed(() => {
                     }}
                 </div> -->
                 <div class="completion-row vi-matrix-completion">
-                    <div
-                        v-for="idx in 2"
-                        :key="viMatrixStats.grandisDungeonCompleted[idx - 1] || idx"
+                    <div v-for="idx in 2" :key="viMatrixStats.grandisDungeonCompleted[idx - 1] || idx"
                         class="completion-status"
-                        :class="{ completed: viMatrixStats.grandisDungeonCompleted[idx - 1] }"
-                    >
+                        :class="{ completed: viMatrixStats.grandisDungeonCompleted[idx - 1] }">
                         {{ viMatrixStats.grandisDungeonCompleted[idx - 1] || 'Not Completed' }}
                     </div>
                 </div>
             </div>
 
             <div class="reward-container">
-                <div class="stat-container">
-                    <div class="quest-block">
-                        <h3>Weekly Erda (9 Sol + 90 Sol)</h3>
-                        <div class="stat-value">✓</div>
+                <div class="stat-container erda-weekly">
+                    <div class="erda-heading">
+                        <h3>Erda's weekly</h3>
                     </div>
-                    <div class="stat-row">
-                        <img src="/src/assets/images/quests/erdarequest.webp" alt="Fragments" class="reward-icon" />
-                        <div class="reward-title">Fragments</div>
-                        <div class="stat-value">{{ viMatrixStats.totalFragments }}</div>
-                    </div>
-                </div>
-                <div class="stat-container">
-                    <div class="quest-block">
-                        <h3>Erda's Request (Energy)</h3>
-                        <div class="stat-value">{{ viMatrixStats.energyCompleted }}/{{
-                            viMatrixStats.activeEnergyCharacters }}
+                    <div class="erda-weekly-stats">
+                        <div class="stat-row">
+                            <img src="/src/assets/images/quests/erdarequest.webp" alt="Fragments" class="reward-icon" />
+                            <!-- <div class="reward-title">Fragments</div> -->
+                            <div class="stat-value">{{ viMatrixStats.totalFragments }}</div>
+                        </div>
+                        <div class="stat-row">
+                            <img src="/src/assets/images/quests/erdaenergy.webp" alt="Energy" class="reward-icon" />
+                            <!-- <div class="reward-title">Energy</div> -->
+                            <div class="stat-value">{{ viMatrixStats.totalEnergy }}</div>
                         </div>
                     </div>
-                    <div class="stat-row">
-                        <img src="/src/assets/images/quests/erdaenergy.webp" alt="Energy" class="reward-icon" />
-                        <div class="reward-title">Energy</div>
-                        <div class="stat-value">{{ viMatrixStats.totalEnergy }}</div>
-                    </div>
+
                 </div>
+
 
 
 
@@ -222,6 +214,12 @@ const viMatrixStats = computed(() => {
     margin: 16px 0px;
 }
 
+.vi-title {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr;
+}
+
 .stat-row {
     display: flex;
     align-items: center;
@@ -249,11 +247,24 @@ const viMatrixStats = computed(() => {
 
 }
 
+.erda-weekly .erda-heading {
+    padding: 0.8em 1em;
+    border-radius: 6px;
+    background: rgba(255, 255, 255, 0.04);
+    display: flex;
+    align-items: center;
+}
+
+.erda-weekly h3 {
+    margin: 0;
+    font-size: 1em;
+    font-weight: 500;
+}
+
 .stat-value {
     font-size: 1.2em;
     font-weight: bold;
-    min-width: 80px;
-    text-align: right;
+
 }
 
 .active-chars {
@@ -282,8 +293,20 @@ const viMatrixStats = computed(() => {
 
 .vi-matrix-completion {
     display: flex;
-    gap: 8px;
+    gap: 16px;
     justify-content: flex-start;
     flex-direction: row;
+    justify-content: center;
+    padding: 8px 2px;
+}
+
+
+.erda-weekly-stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    margin-top: 8px;
+   justify-items: stretch;
+   width: 100%;
 }
 </style>
