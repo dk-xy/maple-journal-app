@@ -65,7 +65,10 @@ const viMatrixStats = computed(() => {
             activity => activity.key === 'grandisdungeon'
         )
         if (grandisDungeon?.isActive && grandisDungeon?.CompletionStatus) {
-            stats.grandisDungeonCompleted.push(character.Name)  // Changed from character.name
+            // Keep only the first two characters that completed the dungeon
+            if (stats.grandisDungeonCompleted.length < 2) {
+                stats.grandisDungeonCompleted.push(character.Name)
+            }
         }
     })
 
@@ -94,10 +97,10 @@ const viMatrixStats = computed(() => {
                         : 'Not Completed'
                     }}
                 </div> -->
-                                <div class="completion-row">
+                <div class="completion-row vi-matrix-completion">
                     <div
                         v-for="idx in 2"
-                        :key="idx"
+                        :key="viMatrixStats.grandisDungeonCompleted[idx - 1] || idx"
                         class="completion-status"
                         :class="{ completed: viMatrixStats.grandisDungeonCompleted[idx - 1] }"
                     >
@@ -275,5 +278,12 @@ const viMatrixStats = computed(() => {
     border: solid 1px rgba(206, 153, 241, 0.103);
     background: linear-gradient(102deg, #b95bf767 -6.39%, #7b74df8f 110.52%);
 
+}
+
+.vi-matrix-completion {
+    display: flex;
+    gap: 8px;
+    justify-content: flex-start;
+    flex-direction: row;
 }
 </style>
