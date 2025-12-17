@@ -9,17 +9,48 @@ const props = defineProps({
     }
 })
 const viMatrixStats = computed(() => {
+    const MAX_ACCOUNT_EPIC_CLEARS = 2 // account-wide cap per week
+
     let stats = {
         fragmentsCompleted: 0,
         totalEnergy: 0,
         totalFragments: 0,
         energyCompleted: 0,
-        grandisDungeonCompleted: [],
+        // two account slots for epic grandis clears
+        grandisSlots: [
+            { dungeon: null, character: null, fragments: 0, erdaSol: 0 },
+            { dungeon: null, character: null, fragments: 0, erdaSol: 0 }
+        ],
         activeFragmentCharacters: 0,
         activeEnergyCharacters: 0
     }
 
+    let slotIndex = 0
+    const usedCharacters = new Set()
+
     props.characters.forEach(character => {
+        // Respect: 1 epic clear per character per week
+        if (slotIndex >= MAX_ACCOUNT_EPIC_CLEARS) return
+
+        const grandisCompletions = (character.Progression.Weeklies.WeeklyActivity || [])
+            .filter(a => a.key === 'grandisdungeon' && a.isActive && a.CompletionStatus)
+
+        // Only one epic clear per character counts
+        if (grandisCompletions.length > 0 && !usedCharacters.has(character.Name)) {
+            const activity = grandisCompletions[0]
+            const slot = stats.grandisSlots[slotIndex]
+            slot.dungeon = activity.Name
+            slot.character = character.Name
+            slot.fragments = activity.fragments || 0
+            slot.erdaSol = activity.erdaSol || 0
+
+            stats.totalFragments += slot.fragments
+            stats.totalEnergy += slot.erdaSol
+
+            usedCharacters.add(character.Name)
+            slotIndex++
+        }
+
         // Fragment quest (daily)
         const fragmentQuest = character.Progression.Dailies.DailyActivity.find(
             activity => activity.key === 'erdarequest'
@@ -59,17 +90,6 @@ const viMatrixStats = computed(() => {
         if (erdaWeekly90Sol?.CompletionStatus) {
             stats.totalFragments += 90
         }
-
-        // Grandis dungeon (track by character name)
-        const grandisDungeon = character.Progression.Weeklies.WeeklyActivity.find(
-            activity => activity.key === 'grandisdungeon'
-        )
-        if (grandisDungeon?.isActive && grandisDungeon?.CompletionStatus) {
-            // Keep only the first two characters that completed the dungeon
-            if (stats.grandisDungeonCompleted.length < 2) {
-                stats.grandisDungeonCompleted.push(character.Name)
-            }
-        }
     })
 
     return stats
@@ -89,22 +109,19 @@ const viMatrixStats = computed(() => {
 
 
             <div class="stat-block vi-title">
-                <h3>Grandis Dungeon</h3>
-                <!-- <div class="completion-status" :class="{ completed: viMatrixStats.grandisDungeonCompleted.length > 0 }">
-                    {{ viMatrixStats.grandisDungeonCompleted.length > 0
-                        ? `${viMatrixStats.grandisDungeonCompleted.length}x -
-                    ${viMatrixStats.grandisDungeonCompleted.join(', ')}`
-                        : 'Not Completed'
-                    }}
-                </div> -->
-                <div class="completion-row vi-matrix-completion">
-                    <div v-for="idx in 2" :key="viMatrixStats.grandisDungeonCompleted[idx - 1] || idx"
-                        class="completion-status"
-                        :class="{ completed: viMatrixStats.grandisDungeonCompleted[idx - 1] }">
-                        {{ viMatrixStats.grandisDungeonCompleted[idx - 1] || 'Not Completed' }}
+                <h3>Grandis Weekly</h3>
+
+                <div class="grandis-account-slots">
+                    <div class="completion-row vi-matrix-completion">
+                        <div v-for="(slot, idx) in viMatrixStats.grandisSlots" :key="idx" class="completion-status"
+                            :class="{ completed: slot.character }">
+                            <div class="slot-title">{{ slot.dungeon || 'Not Completed' }}</div>
+                            <div class="slot-sub">{{ slot.character || '' }}</div>
+                        </div>
                     </div>
                 </div>
-            </div>
+
+            </div> 
 
             <div class="reward-container">
                 <div class="stat-container erda-weekly">
@@ -118,10 +135,10 @@ const viMatrixStats = computed(() => {
                             <div class="stat-value">{{ viMatrixStats.totalFragments }}</div>
                         </div>
                         <div class="stat-row">
-                            <img src="/src/assets/images/quests/erdaenergy.webp" alt="Energy" class="reward-icon" />
+                            <img src="/src/assets/images/etc/Use_Sol_Erda.png" alt="Sol Erda" class="reward-icon" />
                             <!-- <div class="reward-title">Energy</div> -->
                             <div class="stat-value">{{ viMatrixStats.totalEnergy }}</div>
-                        </div>
+                        </div> 
                     </div>
 
                 </div>
@@ -274,14 +291,17 @@ const viMatrixStats = computed(() => {
 
 .completion-status {
     font-weight: bold;
-    padding: 0.4em 0.8em;
+    padding: 0.6em 0.8em;
     border-radius: 4px;
     margin: 8px;
     border: solid 1px rgba(231, 221, 238, 0.103);
     background: rgba(235, 230, 230, 0.418);
     /* background: linear-gradient(102deg, #b95bf767 -6.39%, #7b74df8f 110.52%); */
-    min-width: 120px;
+    min-width: 140px;
     text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
 }
 
 .completion-status.completed {
@@ -289,6 +309,16 @@ const viMatrixStats = computed(() => {
     border: solid 1px rgba(206, 153, 241, 0.103);
     background: linear-gradient(102deg, #b95bf767 -6.39%, #7b74df8f 110.52%);
 
+}
+
+.slot-title {
+    font-size: 0.95em;
+}
+
+.slot-sub {
+    font-size: 0.8em;
+    opacity: 0.85;
+    color: rgba(60,60,60,0.9);
 }
 
 .vi-matrix-completion {

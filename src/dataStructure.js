@@ -59,7 +59,8 @@ export const emptyCharacter = {
         { Name: 'Dark World Tree', key: "darkworldtree", CompletionStatus: false, isActive: false, CompletionDate: '', ResetDay: 'Sunday', claimType: "multi" },
         { Name: 'Haven', key: "haven", CompletionStatus: false, isActive: false, CompletionDate: '', ResetDay: 'Sunday', claimType: "multi" },
         { Name: 'Mu Lung Dojo', key: "mulungdojo", CompletionStatus: false, isActive: false, CompletionDate: '', ResetDay: 'Sunday', claimType: "multi" },
-        { Name: 'Grandis Dungeon', key: "grandisdungeon", CompletionStatus: false, isActive: false, CompletionDate: '', ResetDay: 'Thursday', claimType: "solo" },
+        { Name: 'High Mountain', key: 'grandisdungeon', CompletionStatus: false, isActive: false, CompletionDate: '', ResetDay: 'Thursday', claimType: 'solo', fragments: 40, erdaSol: 9 },
+        { Name: 'Angler Company', key: 'grandisdungeon', CompletionStatus: false, isActive: false, CompletionDate: '', ResetDay: 'Thursday', claimType: 'solo', fragments: 55, erdaSol: 9 },
 
       ]
     },
