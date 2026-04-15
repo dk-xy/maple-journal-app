@@ -1,40 +1,31 @@
 
 
 export function checkResets(character) {
-  const now = new Date()
   const lastDailyReset = character.Progression.lastDailyReset ? new Date(character.Progression.lastDailyReset) : null
   const lastWeeklyReset = character.Progression.lastWeeklyReset ? new Date(character.Progression.lastWeeklyReset) : null
-  const nextDailyReset = getNextResetTime('daily')
-  const nextWeeklyReset = getNextResetTime('weekly')
-  
-  // Check daily reset
-  if (!lastDailyReset || lastDailyReset < nextDailyReset) {
-    // Reset daily content
+  const currentDailyReset = getResetBoundaryTime('daily')
+  const currentWeeklyReset = getResetBoundaryTime('weekly')
+
+  // Reset if we have never reset or the last reset happened before the current reset boundary
+  if (!lastDailyReset || lastDailyReset < currentDailyReset) {
     resetDailyContent(character)
-    character.Progression.lastDailyReset = now.toISOString()
+    character.Progression.lastDailyReset = currentDailyReset.toISOString()
   }
 
-  // Check weekly reset
-  if (!lastWeeklyReset || lastWeeklyReset < nextWeeklyReset) {
-    // Reset weekly content
+  if (!lastWeeklyReset || lastWeeklyReset < currentWeeklyReset) {
     resetWeeklyContent(character)
-    character.Progression.lastWeeklyReset = now.toISOString()
+    character.Progression.lastWeeklyReset = currentWeeklyReset.toISOString()
   }
 }
-function getNextResetTime(type) {
-  const now = new Date()
-  const resetTime = new Date(now)
-  resetTime.setUTCHours(0, 0, 0, 0) // Set to midnight GMT
 
-  if (type === 'daily') {
-    // If current time is past midnight, set to next day
-    if (now.getUTCHours() >= 0) {
-      resetTime.setUTCDate(resetTime.getUTCDate() + 1)
-    }
-  } else if (type === 'weekly') {
-    // Get next Thursday
+function getResetBoundaryTime(type) {
+  const now = new Date()
+  const resetTime = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate(), 0, 0, 0, 0))
+
+  if (type === 'weekly') {
+    // Find the most recent Thursday at 00:00 UTC.
     while (resetTime.getUTCDay() !== 4) { // 4 = Thursday
-      resetTime.setUTCDate(resetTime.getUTCDate() + 1)
+      resetTime.setUTCDate(resetTime.getUTCDate() - 1)
     }
   }
 
@@ -42,18 +33,16 @@ function getNextResetTime(type) {
 }
 
 function resetDailyContent(character) {
-  const nextDailyReset = getNextResetTime('daily')
   const lastDailyReset = character.Progression.lastDailyReset ? new Date(character.Progression.lastDailyReset) : null
 
   // Reset daily activities
   character.Progression.Dailies.DailyActivity.forEach(activity => {
-    if (!activity.CompletionStatus) return // Skip if not completed
+    if (!activity.CompletionStatus) return
 
     const completionDate = new Date(activity.CompletionDate)
-    // Reset if completion was before last reset or is invalid
-    if (!activity.CompletionDate || 
+    if (!activity.CompletionDate ||
         isNaN(completionDate.getTime()) ||
-        !lastDailyReset || // Reset if no last reset stored
+        !lastDailyReset ||
         completionDate < lastDailyReset) {
       activity.CompletionStatus = false
       activity.CompletionDate = ''
@@ -105,7 +94,6 @@ function resetDailyContent(character) {
 }
 
 function resetWeeklyContent(character) {
-  const nextWeeklyReset = getNextResetTime('weekly')
   const lastWeeklyReset = character.Progression.lastWeeklyReset ? new Date(character.Progression.lastWeeklyReset) : null
 
   // Reset weekly activities

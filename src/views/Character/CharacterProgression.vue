@@ -144,15 +144,9 @@ function completeSymbols(type) {
   activeArcaneRiverRegions.value.forEach(region => {
     if (type === 'all' || type === 'Daily') {
       region.RegionDailyCompletion = !allCompleted
-      if (region.RegionDailyCompletion) {
-        props.character.Progression.lastDailyReset = today
-      }
     }
     if (type === 'all' || type === 'Weekly') {
       region.RegionWeeklyCompletion = !allCompleted
-      if (region.RegionWeeklyCompletion) {
-        props.character.Progression.lastWeeklyReset = today
-      }
     }
 
     // set or clear a shared CompletionDate for the region
@@ -166,9 +160,6 @@ function completeSymbols(type) {
   activeGrandisRegions.value.forEach(region => {
     if (type === 'all' || type === 'Daily') {
       region.RegionDailyCompletion = !allCompleted
-      if (region.RegionDailyCompletion) {
-        props.character.Progression.lastDailyReset = today
-      }
     }
 
     region.CompletionDate = region.RegionDailyCompletion ? today : ''
@@ -190,10 +181,6 @@ function completeActivities(type) {
   activeDailies.value.forEach(daily => {
     if (type === 'all' || type === 'Daily') {
       daily.CompletionStatus = !allCompleted
-      if (daily.CompletionStatus) {
-        props.character.Progression.lastDailyReset = today
-      }
-      // set/clear CompletionDate for this activity
       daily.CompletionDate = daily.CompletionStatus ? today : ''
     }
   })
@@ -201,10 +188,6 @@ function completeActivities(type) {
   activeWeeklies.value.forEach(weekly => {
     if (type === 'all' || type === 'Weekly') {
       weekly.CompletionStatus = !allCompleted
-      if (weekly.CompletionStatus) {
-        props.character.Progression.lastWeeklyReset = today
-      }
-      // set/clear CompletionDate for this activity
       weekly.CompletionDate = weekly.CompletionStatus ? today : ''
     }
   })

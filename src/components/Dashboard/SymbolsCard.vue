@@ -182,10 +182,10 @@ h2 {
 }
 
 .stat-contents {
-display: grid;
-  grid-template-columns: 1fr 1fr;
+display: flex;
 
-  justify-content: left;
+  justify-content: flex-start;
+  width: 100%;
  
 }
 
@@ -204,6 +204,6 @@ display: grid;
 .stat-value {
   font-weight: 700;
   width: 100%;
-  min-width: 40px;
+  min-width: 65px;
 }
 </style>
