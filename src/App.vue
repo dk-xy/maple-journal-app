@@ -6,13 +6,14 @@ import { onMounted } from 'vue'
 import { getData, saveData } from './localStorageService'
 import { checkResets } from './utils/resetUtils'
 
-
 onMounted(() => {
   const data = getData()
-  data.Legion.Characters.forEach(character => {
-    checkResets(character)
-  })
-  saveData(data)
+  if (Array.isArray(data?.Legion?.Characters)) {
+    data.Legion.Characters.forEach(character => {
+      checkResets(character)
+    })
+    saveData(data)
+  }
 })
 </script>
 

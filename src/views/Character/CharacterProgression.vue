@@ -144,12 +144,13 @@ function completeSymbols(type) {
   activeArcaneRiverRegions.value.forEach(region => {
     if (type === 'all' || type === 'Daily') {
       region.RegionDailyCompletion = !allCompleted
+      region.DailyCompletionDate = region.RegionDailyCompletion ? today : ''
     }
     if (type === 'all' || type === 'Weekly') {
       region.RegionWeeklyCompletion = !allCompleted
+      region.WeeklyCompletionDate = region.RegionWeeklyCompletion ? today : ''
     }
 
-    // set or clear a shared CompletionDate for the region
     if (region.RegionDailyCompletion || region.RegionWeeklyCompletion) {
       region.CompletionDate = today
     } else {
@@ -160,6 +161,7 @@ function completeSymbols(type) {
   activeGrandisRegions.value.forEach(region => {
     if (type === 'all' || type === 'Daily') {
       region.RegionDailyCompletion = !allCompleted
+      region.DailyCompletionDate = region.RegionDailyCompletion ? today : ''
     }
 
     region.CompletionDate = region.RegionDailyCompletion ? today : ''
@@ -198,6 +200,13 @@ function completeActivities(type) {
 
 </script>
 <style scoped>
+.page-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
 .page-title h2 {
   margin: 0;
 }

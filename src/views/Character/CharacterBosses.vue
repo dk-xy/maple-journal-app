@@ -63,9 +63,9 @@ function completeAll(type) {
 
   props.character.Bosses.BossList.forEach(boss => {
     boss.Difficulty.forEach(difficulty => {
-      if (difficulty.DifficultyReset === type && difficulty.isActive) {
+      if ((type === 'all' || difficulty.DifficultyReset === type) && difficulty.isActive) {
         difficulty.CompletionStatus = !allCompleted
-        difficulty.CompletionDate = !allCompleted ? new Date().toISOString().split('T')[0] : ''
+        difficulty.CompletionDate = !allCompleted ? new Date().toISOString() : ''
       }
     })
   })

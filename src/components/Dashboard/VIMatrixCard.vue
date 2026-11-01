@@ -165,9 +165,9 @@ const viMatrixStats = computed(() => {
 
 .vi-matrix .card-header {
     display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: flex-start;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
     text-align: left;
     gap: 4px;
     margin-bottom: 4px;
@@ -175,21 +175,20 @@ const viMatrixStats = computed(() => {
 }
 
 .reward-container {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
+
     /* Keep this */
     gap: 1em;
 }
 
 /* Add these new styles */
 .stat-container {
-    display: flex;
-    flex-direction: column;
+   display: grid;
+    grid-template-columns: 1fr 1fr;
     gap: 0.6em;
     width: 100%;
     /* Ensure full width */
     background: rgba(255, 255, 255, 0.1);
-    padding: 8px;
+    padding: 2px;
     border-radius: 6px;
 }
 
@@ -221,6 +220,7 @@ const viMatrixStats = computed(() => {
     margin-bottom: 1em;
     /* color: var(--dark-text); */
     color: #3d3d3d;
+    width: 100%;
 }
 
 
@@ -233,8 +233,9 @@ const viMatrixStats = computed(() => {
 
 .vi-title {
     width: 100%;
-    display: grid;
-    grid-template-columns: 1fr;
+    display: flex;
+    flex-direction: column;
+  
 }
 
 .stat-row {
@@ -246,11 +247,7 @@ const viMatrixStats = computed(() => {
     border-radius: 6px;
 }
 
-.reward-container {
-    display: flex;
-    flex-direction: row;
-    gap: 1em;
-}
+
 
 .stat-block h3 {
     margin: 0;
@@ -268,8 +265,7 @@ const viMatrixStats = computed(() => {
     padding: 0.8em 1em;
     border-radius: 6px;
     background: rgba(255, 255, 255, 0.04);
-    display: flex;
-    align-items: center;
+
 }
 
 .erda-weekly h3 {
@@ -291,16 +287,16 @@ const viMatrixStats = computed(() => {
 
 .completion-status {
     font-weight: bold;
-    padding: 0.6em 0.8em;
+    padding: 0.3em 0.4em;
     border-radius: 4px;
-    margin: 8px;
+    margin: 4px;
     border: solid 1px rgba(231, 221, 238, 0.103);
     background: rgba(235, 230, 230, 0.418);
     /* background: linear-gradient(102deg, #b95bf767 -6.39%, #7b74df8f 110.52%); */
-    min-width: 140px;
+  
     text-align: center;
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-rows: 1fr 1fr;
     gap: 4px;
 }
 
@@ -313,21 +309,24 @@ const viMatrixStats = computed(() => {
 
 .slot-title {
     font-size: 0.95em;
+    font-weight: 600;
+    width: 100%;
 }
 
 .slot-sub {
     font-size: 0.8em;
     opacity: 0.85;
+    font-weight: 500;
     color: rgba(60,60,60,0.9);
 }
 
 .vi-matrix-completion {
-    display: flex;
+    display: grid;
     gap: 16px;
     justify-content: flex-start;
-    flex-direction: row;
+    grid-template-columns: 1fr 1fr;
     justify-content: center;
-    padding: 8px 2px;
+    padding: 4px 2px;
 }
 
 
@@ -335,7 +334,7 @@ const viMatrixStats = computed(() => {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 8px;
-    margin-top: 8px;
+   
    justify-items: stretch;
    width: 100%;
 }

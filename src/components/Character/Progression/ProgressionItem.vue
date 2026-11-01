@@ -64,32 +64,33 @@ const props = defineProps({
 
 const emit = defineEmits(['saveProgression'])
 
-
 function saveProgression(completionKey) {
-    // Ensure the relevant completion flag was toggled before deciding date logic.
-    // For region items we need to consider both daily and weekly flags.
     const now = new Date().toISOString()
 
     if (props.type === 'region') {
-        // If any region completion flag is true, set a shared CompletionDate, otherwise clear it.
+        if (completionKey === 'RegionDailyCompletion') {
+            props.item.DailyCompletionDate = props.item.RegionDailyCompletion ? now : ''
+        } else if (completionKey === 'RegionWeeklyCompletion') {
+            props.item.WeeklyCompletionDate = props.item.RegionWeeklyCompletion ? now : ''
+        } else {
+            if (props.item.RegionDailyCompletion) props.item.DailyCompletionDate = now
+            if (props.item.RegionWeeklyCompletion) props.item.WeeklyCompletionDate = now
+        }
+        // Shared CompletionDate for backwards compatibility
         if (props.item.RegionDailyCompletion || props.item.RegionWeeklyCompletion) {
             props.item.CompletionDate = now
         } else {
             props.item.CompletionDate = ''
-          
         }
     } else {
         // Activities (daily/weekly) use CompletionStatus
         if (props.item.CompletionStatus) {
             props.item.CompletionDate = now
-             console.log("wesh2")
         } else {
             props.item.CompletionDate = ''
-              console.log("wesh")
         }
     }
 
-    // Emit the event to the parent component so it persists the change
     emit('saveProgression')
 }
 

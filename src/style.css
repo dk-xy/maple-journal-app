@@ -99,17 +99,17 @@ color: var(--dark-text);
   border-radius: 16px; /* Add border radius */
 }
 
-.Extreme {
-  background-color: var(--extreme-diff); /* Black background */
-  color: transparent; /* Make text transparent to show gradient */
-  background: var(--extreme-diff-accent); /* Apply gradient */
-  -webkit-background-clip: text; /* Clip background to text */
-  background-clip: text; /* Clip background to text */
-  -webkit-text-fill-color: transparent; /* Make text transparent to show gradient */
-  text-fill-color: transparent; /* Make text transparent to show gradient */
-  border: 2px solid #cf3027; /* Set border color */
-  border-radius: 16px; /* Add border radius */
-}
+/* .Extreme {
+  background-color: var(--extreme-diff); 
+  color: transparent; 
+  background: var(--extreme-diff-accent); 
+  -webkit-background-clip: text; 
+  background-clip: text; 
+  -webkit-text-fill-color: transparent; 
+  text-fill-color: transparent; 
+  border: 2px solid #cf3027; 
+  border-radius: 16px; 
+} */
 
 /* MASTER BACKGROUND FOR SYMBOLS!!!!! */
 

@@ -13,7 +13,6 @@
 
 <script setup>
 import DifficultyCompletion from './DifficultyCompletion.vue'
-import { saveData } from '../../../localStorageService'
 
 const props = defineProps({
   boss: {
@@ -28,21 +27,11 @@ const props = defineProps({
 
 function handleCompletionChange(difficulty) {
   if (difficulty.CompletionStatus) {
-    difficulty.CompletionDate = new Date().toISOString().split('T')[0] // Set to current date (YYYY-MM-DD)
+    difficulty.CompletionDate = new Date().toISOString()
   } else {
     difficulty.CompletionDate = ''
   }
   props.saveBosses()
-  updateLocalStorage()
-}
-
-function updateLocalStorage() {
-  const characters = JSON.parse(localStorage.getItem('mapleStoryData')).Legion.Characters
-  const characterIndex = characters.findIndex(c => c.Name === props.boss.Name)
-  if (characterIndex !== -1) {
-    characters[characterIndex] = props.boss
-    saveData({ Legion: { Characters: characters } })
-  }
 }
 </script>
 

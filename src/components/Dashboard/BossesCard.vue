@@ -126,6 +126,7 @@ const bossStats = computed(() => {
 
 <style scoped>
 .bosses {
+  width: 100%;
   background: var(--elev-1-a);
   /* background: linear-gradient(102deg, #A183F4 -6.39%, #837FF4 110.52%); */
   /* background: rgb(46, 46, 46);
@@ -262,8 +263,8 @@ const bossStats = computed(() => {
 }
 
 .all-characters-container{
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
   gap: 8px;
 }
 
