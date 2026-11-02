@@ -5,6 +5,7 @@ const WORLD_IDS = {
   Luna: 30,
   Bera: 1,
   Scania: 19,
+  Kronos: 45,
   Chronos: 45,
   Hyperion: 70,
 };

@@ -85,7 +85,6 @@ const weeklyStats = computed(() => {
             <h2>Weekly Activities</h2>
             <div class="stats-grid">
                 <div class="stat-block">
-                    <h3>Maple World</h3>
                     <div class="sub-stats weekly">
                         <div class="stat-row">
                             <img src="/src/assets/images/quests/mpe.webp" alt="MPE" class="quest-icon" />
@@ -146,7 +145,7 @@ const weeklyStats = computed(() => {
     color: white; */
    display: grid;
    grid-template-rows: auto;
-    padding: 8px;
+    
     align-items: flex-start;
     gap: 16px;
     border-radius: 6px;

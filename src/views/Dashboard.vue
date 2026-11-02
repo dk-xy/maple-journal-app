@@ -43,7 +43,7 @@ const nextDailyReset = computed(() => {
 const dailyCountdown = computed(() => {
   const diff = Math.max(0, nextDailyReset.value.getTime() - now.value.getTime())
   const totalSeconds = Math.floor(diff / 1000)
-  const hours = Math.floor(totalSeconds / 3600)
+  const hours = Math.floor(totalSeconds / 3602)
   const minutes = Math.floor((totalSeconds % 3600) / 60)
   const seconds = totalSeconds % 60
   const pad = n => String(n).padStart(2, '0')
@@ -109,15 +109,14 @@ const weeklyCountdown = computed(() => {
     </div>
 
     <!-- changed: wrap cards in responsive grid -->
-    <div class="dashboard-prog">
 
-
-
-
-    </div>
-    <div class="dashboard-grid">
+    <div class="prog-grid">
       <VIMatrixCard :characters="characters" />
       <SymbolsCard :characters="characters" />
+    </div>
+    <div class="dashboard-grid">
+
+
       <DailyCard :characters="characters" />
       <WeeklyCard :characters="characters" />
 
@@ -217,7 +216,7 @@ const weeklyCountdown = computed(() => {
 }
 
 .dashboard-head-prog {
-  width: 100%;
+  /* width: 100%;  */
   display: flex;
   flex-direction: column;
   gap: 24px;
@@ -231,10 +230,12 @@ const weeklyCountdown = computed(() => {
 
 /* new: responsive grid for dashboard cards */
 .dashboard-grid {
+  width: 100%;
   display: grid;
-  gap: 24px;
+  gap: 8px;
   /* mobile: single column */
   grid-template-columns: 1fr;
+  margin-bottom: 16px;
 }
 
 /* two columns on medium+ screens (wide) */
@@ -252,7 +253,17 @@ const weeklyCountdown = computed(() => {
 }
 
 .dashboard-grid>* {
-  width: 100%;
+  /* width: 100%; */
   box-sizing: border-box;
+}
+
+
+
+.prog-grid {
+  width: 100%;
+  display: grid;
+  gap: 24px;
+  /* mobile: single column */
+  grid-template-columns: 1fr 2fr; 
 }
 </style>

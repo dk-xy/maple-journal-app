@@ -67,13 +67,13 @@ const weeklyStats = computed(() => {
    
    justify-items: center;
    justify-content: center;
-    padding: 7px 4px !important;
+    padding: 8px 8px !important;
     align-items: center;
     gap: 8px;
     border-radius: 6px;
     /* background: var(--elev-1-a); */
     /* margin: 8px; */
-    width: 100%;
+    width: fit-content;
 
         background-color: var(--elev-1);
   

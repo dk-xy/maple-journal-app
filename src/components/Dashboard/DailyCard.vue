@@ -63,7 +63,6 @@ const dailyStats = computed(() => {
             <h2>Daily Activities</h2>
             <div class="stats-grid">
                 <div class="stat-block dailies">
-                    <h3>Maple World</h3>
                     <!-- <h3>Monster Park</h3> -->
                     <div class="sub-stats dailies">
                         <div class="stat-row">
@@ -102,7 +101,7 @@ const dailyStats = computed(() => {
     color: white; */
    display: grid;
    grid-template-rows: auto;
-    padding: 8px;
+  
     align-items: flex-start;
     gap: 16px;
     border-radius: 6px;

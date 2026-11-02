@@ -165,9 +165,9 @@ const viMatrixStats = computed(() => {
 
 .vi-matrix .card-header {
     display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
+    flex-direction: column;
+    justify-content: left;
+    align-items: left;
     text-align: left;
     gap: 4px;
     margin-bottom: 4px;
@@ -220,7 +220,7 @@ const viMatrixStats = computed(() => {
     margin-bottom: 1em;
     /* color: var(--dark-text); */
     color: #3d3d3d;
-    width: 100%;
+    /* width: 100%; */
 }
 
 
