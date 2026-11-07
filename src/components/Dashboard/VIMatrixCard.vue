@@ -1,6 +1,7 @@
 <script setup>
 import { computed } from 'vue'
 import Icon from '../Icon.vue'
+import { getQuestImage, getEtcImage } from '../../utils/assetLoader'
 
 const props = defineProps({
     characters: {
@@ -130,12 +131,12 @@ const viMatrixStats = computed(() => {
                     </div>
                     <div class="erda-weekly-stats">
                         <div class="stat-row">
-                            <img src="/src/assets/images/quests/erdarequest.webp" alt="Fragments" class="reward-icon" />
+                            <img :src="getQuestImage('erdarequest')" alt="Fragments" class="reward-icon" loading="lazy" decoding="async" />
                             <!-- <div class="reward-title">Fragments</div> -->
                             <div class="stat-value">{{ viMatrixStats.totalFragments }}</div>
                         </div>
                         <div class="stat-row">
-                            <img src="/src/assets/images/etc/Use_Sol_Erda.png" alt="Sol Erda" class="reward-icon" />
+                            <img :src="getEtcImage('Use_Sol_Erda')" alt="Sol Erda" class="reward-icon" loading="lazy" decoding="async" />
                             <!-- <div class="reward-title">Energy</div> -->
                             <div class="stat-value">{{ viMatrixStats.totalEnergy }}</div>
                         </div> 

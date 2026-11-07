@@ -3,8 +3,9 @@ import { RouterLink, RouterView } from 'vue-router'
 import Icon from './components/Icon.vue'
 
 import { onMounted } from 'vue'
-import { getData, saveData } from './localStorageService'
+import { getData, saveData, cacheCharacterImages } from './localStorageService'
 import { checkResets } from './utils/resetUtils'
+import { preloadAllAssets } from './utils/assetLoader'
 
 onMounted(() => {
   const data = getData()
@@ -14,6 +15,10 @@ onMounted(() => {
     })
     saveData(data)
   }
+  // Preload local assets into browser cache for instant loading
+  preloadAllAssets()
+  // Ensure all character images are cached as base64 in localStorage
+  cacheCharacterImages()
 })
 </script>
 

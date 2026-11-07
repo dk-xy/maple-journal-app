@@ -1,8 +1,8 @@
 <template>
   <div class="card">
     <div class="card-character-info">
-      <div v-if="character.Image">
-        <img :src="character.Image" alt="Character Image" class="character-image" />
+      <div v-if="character.Image" class="character-image-container">
+        <img :src="character.Image" alt="Character Image" class="character-image" loading="lazy" decoding="async" />
       </div>
       <div class="character-info">
         <div class="character-properties">
@@ -12,11 +12,7 @@
         <div class="character-level">
           <p>Lv. {{ character.Level }}</p>
         </div>
-
       </div>
-
-
-
     </div>
 
     <div class="progression-block__Container">
@@ -97,12 +93,10 @@ const totalBosses = computed(() => {
 
 .card {
   background-color: var(--elev-1);
-  /* border: 1px solid #ddd; */
   border-radius: 8px;
   padding: 1em;
   margin: 1em 0;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  border-radius: 8px;
   background: var(--elev-1);
   box-shadow: 0px 2px 8px 1px rgba(0, 0, 0, 0.05);
   color: var(--dark-text) !important;
@@ -110,7 +104,6 @@ const totalBosses = computed(() => {
   grid-template-rows: repeat(auto, 1fr);
   gap: 0.4em;
   min-width: 340px;
-
 }
 
 .card:hover {
@@ -121,23 +114,58 @@ const totalBosses = computed(() => {
 .card-character-info {
   display: flex;
   flex-direction: row;
+  align-items: center;
   justify-content: space-between;
-
   text-align: left;
   width: 100%;
   margin: auto;
   margin-bottom: 8px;
-  /* padding: 4px 16px; */
+}
+
+.character-image-container {
+  width: 80px;
+  height: 80px;
+  min-width: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  overflow: hidden;
+  /* background: rgba(0, 0, 0, 0.04); */
+}
+
+.character-image {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+
+.character-image-container {
+  width: 84px;
+  height: 84px;
+  min-width: 84px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  overflow: hidden;
+  /* background: rgba(0, 0, 0, 0.04); */
+}
+
+.character-image {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
 }
 
 .progression-block__Container {
-
   width: 95%;
   display: grid;
   grid-template-columns: repeat(2, auto);
   gap: 8px 8px;
   flex-wrap: wrap;
-  
 }
 
 .character-level {
@@ -156,18 +184,14 @@ const totalBosses = computed(() => {
   justify-content: space-between;
   width: 100%;
   margin-left: 8px;
-    padding: 8px 16px;
+  padding: 8px 16px;
 }
-
-
 
 h3 {
   margin: 0;
-  /* margin: 0 0 0.5em 0; */
 }
 
 p {
-  /* margin: 0.5em 0; */
   margin: 0;
 }
 </style>

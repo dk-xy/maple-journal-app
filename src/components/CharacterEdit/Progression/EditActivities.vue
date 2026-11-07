@@ -1,7 +1,7 @@
 <template>
     <div :class="class">
         <div class="item-image">
-            <img :src="props.image" v-if="props.image" alt="">
+            <img :src="props.image" v-if="props.image" alt="" loading="lazy" decoding="async">
         </div>
         <label :for="id">{{ label }}</label>
         <input :id="id" :checked="modelValue" type="checkbox" @change="updateValue" />

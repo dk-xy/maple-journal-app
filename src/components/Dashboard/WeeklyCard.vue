@@ -1,5 +1,6 @@
 <script setup>
 import { computed } from 'vue'
+import { getQuestImage } from '../../utils/assetLoader'
 
 const props = defineProps({
     characters: {
@@ -87,25 +88,25 @@ const weeklyStats = computed(() => {
                 <div class="stat-block">
                     <div class="sub-stats weekly">
                         <div class="stat-row">
-                            <img src="/src/assets/images/quests/mpe.webp" alt="MPE" class="quest-icon" />
+                            <img :src="getQuestImage('mpe')" alt="MPE" class="quest-icon" loading="lazy" decoding="async" />
                             <span>MPE</span>
                             <div class="stat-value">{{ weeklyStats.monsterPark.mpeCompleted }}/{{
                                 weeklyStats.monsterPark.activeCharacters }}</div>
                         </div>
                         <div class="stat-row">
-                            <img src="/src/assets/images/quests/mulungdojo.webp" alt="Dojo" class="quest-icon" />
+                            <img :src="getQuestImage('mulungdojo')" alt="Dojo" class="quest-icon" loading="lazy" decoding="async" />
                             <span>Dojo</span>
                             <div class="stat-value">{{ weeklyStats.dojo.completed }}/{{ weeklyStats.dojo.activeChars }}
                             </div>
                         </div>
                         <div class="stat-row">
-                            <img src="/src/assets/images/quests/haven.webp" alt="Haven" class="quest-icon" />
+                            <img :src="getQuestImage('haven')" alt="Haven" class="quest-icon" loading="lazy" decoding="async" />
                             <span>Haven</span>
                             <div class="stat-value">{{ weeklyStats.absolab.havenCompleted }}/{{
                                 weeklyStats.absolab.activeChars }}</div>
                         </div>
                          <div class="stat-row">
-                            <img src="/src/assets/images/quests/darkworldtree.webp" alt="DWT" class="quest-icon" />
+                            <img :src="getQuestImage('darkworldtree')" alt="DWT" class="quest-icon" loading="lazy" decoding="async" />
                             <span>Dark World Tree</span>
                             <div class="stat-value">{{ weeklyStats.absolab.dwtCompleted }}/{{
                                 weeklyStats.absolab.activeChars }}</div>
@@ -118,13 +119,13 @@ const weeklyStats = computed(() => {
                     <h3>Guild Activities</h3>
                     <div class="sub-stats guild">
                         <div class="stat-row">
-                            <img src="/src/assets/images/quests/culvert.png" alt="Culvert" class="quest-icon" />
+                            <img :src="getQuestImage('culvert')" alt="Culvert" class="quest-icon" />
                             <span>Culvert</span>
                             <div class="stat-value">{{ weeklyStats.guild.culvertCompleted }}/{{
                                 weeklyStats.guild.activeChars }}</div>
                         </div>
                         <div class="stat-row">
-                            <img src="/src/assets/images/quests/flagrace.png" alt="Flag Race" class="quest-icon" />
+                            <img :src="getQuestImage('flagrace')" alt="Flag Race" class="quest-icon" />
                             <span>Flag Race</span>
                             <div class="stat-value">{{ weeklyStats.guild.flagraceCompleted }}/{{
                                 weeklyStats.guild.activeChars }}</div>

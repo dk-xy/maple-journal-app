@@ -7,13 +7,14 @@
       </div>
     </div>
     <div class="boss-edit-image-container">
-      <img :src="`/src/assets/images/resizedBosses/${boss.key}.webp`" :alt="boss.Name" class="boss-image" />
+      <img :src="getBossImage(boss.key)" :alt="boss.Name" class="boss-image" loading="lazy" decoding="async" />
     </div>
   </div>
 </template>
 
 <script setup>
 import DifficultySelector from './DifficultySelector.vue'
+import { getBossImage } from '../../../utils/assetLoader'
 
 const props = defineProps({
   boss: {

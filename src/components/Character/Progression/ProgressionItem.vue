@@ -1,7 +1,7 @@
 <template>
     <!-- ARCANE RIVER -->
     <div :class="'progression-item__symbols ' + item.RegionName" v-if="type === 'region' && code === 'arcaneRiver'">
-        <img :src="getSymbolImageSrc(item.key)" :alt="item.RegionName" class="progression-item__background-image" />
+        <img :src="getSymbolImageSrc(item.key)" :alt="item.RegionName" class="progression-item__background-image" loading="lazy" decoding="async" />
         {{ item.RegionName }}
         <div class="completion_container">
             <div class="progression-item__symbols__completion">
@@ -17,7 +17,7 @@
 
     <!-- GRANDIS -->
     <div :class="'progression-item__symbols ' + item.RegionName" v-else-if="type === 'region' && code === 'grandis'">
-        <img :src="getSymbolImageSrc(item.key)" :alt="item.RegionName" class="progression-item__background-image" />
+        <img :src="getSymbolImageSrc(item.key)" :alt="item.RegionName" class="progression-item__background-image" loading="lazy" decoding="async" />
         {{ item.RegionName }}
         <div class="completion_container">
             <div class="progression-item__symbols__completion">
@@ -29,7 +29,7 @@
 
     <!-- DAILIES -->
     <div class="progression-item__activity" v-else-if="type === 'daily'">
-        <img :src="getImageSrc(item.key)" :alt="item.Name" class="progression-item__image" />
+        <img :src="getImageSrc(item.key)" :alt="item.Name" class="progression-item__image" loading="lazy" decoding="async" />
         <div class="progression-item-name">
             {{ item.Name }}
         </div>
@@ -38,7 +38,7 @@
 
     <!-- WEEKLIES -->
     <div class="progression-item__activity" v-else-if="type === 'weekly'">
-        <img :src="getImageSrc(item.key)" :alt="item.Name" class="progression-item__image" />
+        <img :src="getImageSrc(item.key)" :alt="item.Name" class="progression-item__image" loading="lazy" decoding="async" />
         <div class="progression-item-name">
             {{ item.Name }}
         </div>
@@ -47,6 +47,8 @@
 </template>
 
 <script setup>
+import { getSymbolImage, getQuestImage } from '../../../utils/assetLoader'
+
 const props = defineProps({
     item: {
         type: Object,
@@ -95,13 +97,11 @@ function saveProgression(completionKey) {
 }
 
 function getImageSrc(key) {
-    return key === 'grandisdungeon' 
-        ? `/src/assets/images/quests/${key}.png` 
-        : `/src/assets/images/quests/${key}.webp`
+    return getQuestImage(key)
 }
 
 function getSymbolImageSrc(key) {
-    return `/src/assets/images/symbols/${key}.webp`
+    return getSymbolImage(key)
 }
 </script>
 

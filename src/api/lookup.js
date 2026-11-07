@@ -48,7 +48,7 @@ export default async function handler(req, res) {
       },
     });
 
-    const text = await apiResponse.text(); // safer than directly json()
+    const text = await apiResponse.text();
     console.log('⬅️ Raw Nexon Response:', text);
 
     if (!apiResponse.ok) {
@@ -69,17 +69,46 @@ export default async function handler(req, res) {
       });
     }
 
-    const character = data?.rankingList?.[0];
+    const character = data?.ranks?.[0] || data?.rankingList?.[0];
     if (!character) {
       return res.status(404).json({ error: `Character '${name}' not found on ${world}` });
     }
 
+    const avatarUrl = character.characterImgURL || character.avatar_url || character.character_image || '';
+    let avatarBase64 = '';
+
+    if (avatarUrl) {
+      try {
+        const imgResp = await fetch(avatarUrl, {
+          headers: {
+            Referer: 'https://www.nexon.com/',
+            'User-Agent':
+              'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36',
+          },
+        });
+        if (imgResp.ok) {
+          const buffer = await imgResp.arrayBuffer();
+          const base64 = Buffer.from(buffer).toString('base64');
+          const contentType = imgResp.headers.get('content-type') || 'image/png';
+          avatarBase64 = `data:${contentType};base64,${base64}`;
+        }
+      } catch (e) {
+        console.error('Failed to convert image to base64 in lookup handler:', e);
+      }
+    }
+
     const normalizedData = {
-      characterName: character.character_name,
-      avatarImgUrl: character.avatar_url || character.character_image || '',
-      level: character.level || character.lv || 0,
-      jobName: character.job_name || character.job || 'Unknown',
-      worldName: world,
+      ranks: [
+        {
+          characterName: character.character_name || character.characterName,
+          avatarImgUrl: avatarUrl,
+          characterImgURL: avatarUrl,
+          avatarBase64: avatarBase64,
+          level: character.level || character.lv || 0,
+          jobName: character.job_name || character.jobName || character.job || 'Unknown',
+          worldName: world,
+        }
+      ]
     };
 
     res.status(200).json(normalizedData);

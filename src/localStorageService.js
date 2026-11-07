@@ -1,5 +1,6 @@
 import { initialData } from './dataStructure'
 import { checkResets } from './utils/resetUtils'
+import { urlToBase64 } from './utils/imageUtils'
 
 const LOCAL_STORAGE_KEY = 'mapleStoryData'
 
@@ -138,12 +139,15 @@ export function addCharacter(character) {
   data.Legion.Characters.push(character)
   saveData(data)
 }
+
 export function getCharacters() {
   const data = getData()
   data.Legion.Characters.forEach(character => {
     checkResets(character) 
   })
   saveData(data)
+  // Background-cache any external character images as base64 in localStorage
+  cacheCharacterImages()
   return data.Legion.Characters
 }
 
@@ -151,4 +155,33 @@ export function deleteCharacter(index) {
   const data = getData()
   data.Legion.Characters.splice(index, 1)
   saveData(data)
+}
+
+/**
+ * Automatically converts any remote character image URLs to base64 Data URLs
+ * and updates localStorage so they load instantly on subsequent visits.
+ */
+export async function cacheCharacterImages() {
+  const data = getData()
+  const characters = data?.Legion?.Characters
+  if (!Array.isArray(characters) || characters.length === 0) return
+
+  let updated = false
+  for (const char of characters) {
+    if (char.Image && typeof char.Image === 'string' && char.Image.startsWith('http')) {
+      try {
+        const base64 = await urlToBase64(char.Image)
+        if (base64 && base64.startsWith('data:')) {
+          char.Image = base64
+          updated = true
+        }
+      } catch (err) {
+        console.warn('Could not cache character image:', err)
+      }
+    }
+  }
+
+  if (updated) {
+    saveData(data)
+  }
 }

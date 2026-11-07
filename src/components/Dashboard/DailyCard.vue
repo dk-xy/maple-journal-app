@@ -1,5 +1,6 @@
 <script setup>
 import { computed } from 'vue'
+import { getQuestImage } from '../../utils/assetLoader'
 
 const props = defineProps({
     characters: {
@@ -66,19 +67,19 @@ const dailyStats = computed(() => {
                     <!-- <h3>Monster Park</h3> -->
                     <div class="sub-stats dailies">
                         <div class="stat-row">
-                            <img src="/src/assets/images/quests/mp.webp" alt="MP" class="quest-icon" />
+                            <img :src="getQuestImage('mp')" alt="MP" class="quest-icon" loading="lazy" decoding="async" />
                             <span>Monster Park</span>
                             <div class="stat-value">{{ dailyStats.monsterPark.mpCompleted }}/{{
                                 dailyStats.monsterPark.activeCharacters }}</div>
                         </div>
                         <div class="stat-row">
-                            <img src="/src/assets/images/quests/ursus.webp" alt="Ursus" class="quest-icon" />
+                            <img :src="getQuestImage('ursus')" alt="Ursus" class="quest-icon" loading="lazy" decoding="async" />
                             <span>Ursus</span>
                             <div class="stat-value">{{ dailyStats.soloContent.ursusCompleted }}/{{
                                 dailyStats.soloContent.activeUrsusChars }}</div>
                         </div>
                         <div class="stat-row">
-                            <img src="/src/assets/images/quests/gollux.webp" alt="Gollux" class="quest-icon" />
+                            <img :src="getQuestImage('gollux')" alt="Gollux" class="quest-icon" loading="lazy" decoding="async" />
                             <span>Gollux</span>
                             <div class="stat-value">{{ dailyStats.multiContent.golluxCompleted }}/{{
                                 dailyStats.multiContent.activeGolluxChars }}</div>

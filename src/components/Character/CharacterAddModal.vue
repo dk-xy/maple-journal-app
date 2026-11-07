@@ -20,7 +20,7 @@
                 }" @click="selectServer(server)">
                 <div class="server-content">
                   <img v-if="serverIcon(server.name)" :src="serverIcon(server.name)" :alt="server.name + ' icon'"
-                    class="server-icon" />
+                    class="server-icon" loading="lazy" decoding="async" />
                   <span class="server-name">{{ server.name }}</span>
                 </div>
               </div>
@@ -34,7 +34,7 @@
                 }" @click="selectServer(server)">
                 <div class="server-content">
                   <img v-if="serverIcon(server.name)" :src="serverIcon(server.name)" :alt="server.name + ' icon'"
-                    class="server-icon" />
+                    class="server-icon" loading="lazy" decoding="async" />
                   <span class="server-name">{{ server.name }}</span>
                 </div>
               </div>
@@ -61,7 +61,7 @@
           <h3>{{ charData.characterName }}</h3>
           <p>Level {{ charData.level }} {{ charData.jobName }}</p>
           <p>({{ charData.worldName }})</p>
-          <img :src="charData.avatarImgUrl || charData.characterImgURL" alt="Character Avatar" />
+          <img :src="charData.avatarBase64 || charData.avatarImgUrl || charData.characterImgURL" alt="Character Avatar" loading="lazy" decoding="async" />
           <!-- <div style="margin-top:12px;">
             <button class="lookup-button" @click="addCharToLegion">Add to Legion</button>
           </div> -->
@@ -73,8 +73,11 @@
 
 <script setup>
 import { ref } from 'vue'
-import { addCharacter } from '../../localStorageService'   // <-- added
-import { emptyCharacter } from '../../dataStructure'       // <-- added
+import { addCharacter } from '../../localStorageService'
+import { emptyCharacter } from '../../dataStructure'
+import { getServerIcon } from '../../utils/assetLoader'
+import { urlToBase64 } from '../../utils/imageUtils'
+
 // --- Modal Props & Emits ---
 const props = defineProps({
   show: Boolean,
@@ -140,7 +143,6 @@ function mapJob(jobId) {
   return JOB_MAP[jobId] || 'Unknown'
 }
 
-
 // --- Server List with IDs ---
 const servers = ref([
   // EU Servers
@@ -153,36 +155,17 @@ const servers = ref([
   { name: 'Hyperion', id: 70, region: 'na' },
 ])
 
-/**
- * Returns a URL string for the server icon located in `src/assets/icons/servers`.
- * Filenames are expected to be all lowercase (e.g. `bera.png`).
- * @param {string} name
- */
 function serverIcon(name) {
-  if (!name) return null
-  try {
-    // relative to this file: src/components/Character -> ../../assets/icons/servers
-    return new URL(`../../assets/icons/servers/${name}.png`, import.meta.url).href
-  } catch (err) {
-    // If file not found or build-time resolution fails, gracefully return null
-    return null
-  }
+  return getServerIcon(name)
 }
 
 // --- Methods ---
 
-/**
- * Sets the currently active server.
- * @param {object} server
- */
 function selectServer(server) {
   selectedServer.value = server
   errorMsg.value = null // Clear error on new selection
 }
 
-/**
- * Fetches character data from Nexon's API using world ID
- */
 const fetchCharacter = async () => {
   if (!selectedServer.value) {
     errorMsg.value = 'Please select a server first'
@@ -194,7 +177,6 @@ const fetchCharacter = async () => {
   charData.value = null
 
   try {
-    // Call our server-side API endpoint
     const params = new URLSearchParams({
       name: characterName.value,
       world: selectedServer.value.name
@@ -206,16 +188,14 @@ const fetchCharacter = async () => {
     const response = await fetch(url);
     console.log('Response status:', response.status);
 
-    // Always read the body as text once to avoid double-consuming the stream.
     const raw = await response.text();
     console.log('Response raw text:', raw);
 
-    // Try to parse JSON; if it fails use the raw text for error messages
     let parsed = null
     try {
       parsed = JSON.parse(raw)
     } catch (e) {
-      // not JSON, keep parsed null
+      // not JSON
     }
 
     if (!response.ok) {
@@ -226,28 +206,24 @@ const fetchCharacter = async () => {
     const data = parsed || raw
     console.log('API Response:', data)
 
-    // Update the UI with the character data (if parsed is an object)
     if (parsed && typeof parsed === 'object') {
-      // Check if it has the 'ranks' property and if it's an array with data
-      if (parsed.ranks && Array.isArray(parsed.ranks) && parsed.ranks.length > 0) {
-        // *** FIX IS HERE ***: Assign the first element of the 'ranks' array.
+      const rankList = parsed.ranks || parsed.rankingList
+      if (Array.isArray(rankList) && rankList.length > 0) {
         charData.value = {
-          ...parsed.ranks[0], // Spread the character details
-          worldName: selectedServer.value.name, // Add worldName for display
-          jobName: parsed.ranks[0].jobName // Add jobName using your mapJob function
+          ...rankList[0],
+          worldName: selectedServer.value.name,
+          jobName: rankList[0].jobName || rankList[0].job_name || 'Unknown',
+          avatarBase64: rankList[0].avatarBase64 || ''
         }
 
-        // remove disabled from legion-button classList
         const legionButton = document.querySelector('.legion-button');
         if (legionButton) {
           legionButton.classList.remove('disabled');
         }
       } else {
-        // Handle cases where API returns JSON but no ranks (e.g., character not found)
         errorMsg.value = 'Character not found on this server.'
       }
     } else {
-      // If the response wasn't JSON, show raw text in error area
       errorMsg.value = 'Received non-JSON response; check console for details.'
     }
 
@@ -259,9 +235,6 @@ const fetchCharacter = async () => {
   }
 }
 
-/**
- * Resets all form fields and results.
- */
 function resetForm() {
   characterName.value = ''
   selectedServer.value = null
@@ -270,34 +243,37 @@ function resetForm() {
   charData.value = null
 }
 
-function addCharToLegion() {
+async function addCharToLegion() {
   if (!charData.value) return
 
-  // deep clone emptyCharacter and populate
   const newChar = JSON.parse(JSON.stringify(emptyCharacter))
   newChar.Name = characterName.value || charData.value.characterName || 'Character'
-  // newChar.Class = mapJob(charData.value.jobID)
   newChar.Class = charData.value.jobName
   newChar.Level = charData.value.level || 1
-  // store avatar URL on a simple property used by LegionBlock
-  newChar.Image = charData.value.characterImgURL || charData.value.avatarImgUrl || ''
-  console.log('Adding character to Legion:', newChar)
-  // persist
+
+  // Convert avatar to base64 so it is stored directly in localStorage with no network loading on revisit
+  let rawImage = charData.value.avatarBase64 || charData.value.characterImgURL || charData.value.avatarImgUrl || ''
+  if (rawImage && typeof rawImage === 'string' && !rawImage.startsWith('data:')) {
+    try {
+      rawImage = await urlToBase64(rawImage)
+    } catch (e) {
+      console.warn('Could not convert avatar to base64, saving URL:', e)
+    }
+  }
+  newChar.Image = rawImage
+
+  console.log('Adding character to Legion with cached Image:', newChar)
   addCharacter(newChar)
-  // add disabled to classList of Legion button
+
   const legionButton = document.querySelector('.legion-button');
   if (legionButton) {
     legionButton.classList.add('disabled');
   }
 
-  // close modal (Legion view refreshes on close)
   resetForm()
   emit('close')
 }
 
-/**
- * Emits close event and resets the form.
- */
 function close() {
   resetForm()
   emit('close')
@@ -305,8 +281,6 @@ function close() {
 </script>
 
 <style scoped>
-/* (Your existing modal styles should work perfectly here) */
-
 /* --- Modal Styles --- */
 .modal-overlay {
   position: fixed;
@@ -324,7 +298,6 @@ function close() {
 
 .modal {
   background: var(--elev-0, #fff);
-  /* Uses CSS var or fallback */
   padding: 2em;
   border-radius: 8px;
   max-width: 500px;
@@ -379,7 +352,6 @@ function close() {
 .server-button.active {
   background-color: var(--blue-accent);
   color: white;
-
   font-weight: bold;
 }
 
@@ -395,7 +367,6 @@ function close() {
   flex: 1 1 auto;
   text-align: left;
   width: 20%;
-  /* Adjust width to account for icon */
 }
 
 .server-icon {
@@ -444,6 +415,8 @@ function close() {
 .character-result img {
   display: block;
   margin: 10px auto 0;
+  max-width: 120px;
+  height: auto;
 }
 
 .character-result p {

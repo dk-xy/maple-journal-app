@@ -1,5 +1,6 @@
 <script setup>
 import { computed } from 'vue'
+import { getSymbolImage } from '../../utils/assetLoader'
 
 const props = defineProps({
   characters: {
@@ -137,9 +138,8 @@ const grandisBreakdown = computed(() => {
         <!-- 2 or 3 column breakdown -->
         <div class="region-breakdown-grid">
           <div v-for="region in arcaneRiverBreakdown" :key="region.key" class="region-item">
-            <img :src="`/src/assets/images/symbols/${region.key}.webp`" :alt="region.name" class="region-icon" />
+            <img :src="getSymbolImage(region.key)" :alt="region.name" class="region-icon" loading="lazy" decoding="async" />
             <div class="region-details">
-               <!-- <span class="region-name" :title="region.name">{{ region.name }}</span> -->
               <div class="region-badges">
                 <span
                   class="badge daily"
@@ -176,11 +176,10 @@ const grandisBreakdown = computed(() => {
         </div>
 
         <!-- 2 or 3 column breakdown -->
-        <div class="region-breakdown-grid">
+        <div class="region-breakdown-grid grandis">
           <div v-for="region in grandisBreakdown" :key="region.key" class="region-item">
-            <img :src="`/src/assets/images/symbols/${region.key}.webp`" :alt="region.name" class="region-icon" />
+            <img :src="getSymbolImage(region.key)" :alt="region.name" class="region-icon" loading="lazy" decoding="async" />
             <div class="region-details">
-              <!-- <span class="region-name" :title="region.name">{{ region.name }}</span> -->
               <div class="region-badges">
                 <span
                   class="badge daily"
@@ -208,8 +207,8 @@ h2 {
 }
 
 .dashboard-card.symbols {
-    background: linear-gradient(102deg, #ddddddab -6.39%, #dddddfc4 110.52%);
-    border: 1px solid #eee;
+  background: linear-gradient(102deg, #ddddddab -6.39%, #dddddfc4 110.52%);
+  border: 1px solid #eee;
   border-radius: 8px;
   padding: 16px;
   margin-bottom: 16px;
@@ -227,9 +226,6 @@ h2 {
   display: flex;
   flex-direction: column;
   gap: 8px;
-  background: #f5f5f575;
-  border-radius: 6px;
-  border : solid 1px #e0e0e0;
 }
 
 .stat-info.arcane-river {
@@ -269,7 +265,6 @@ h2 {
 
 .stat-contents {
   display: flex;
-  flex-direction: row;
   justify-content: flex-start;
   width: 100%;
 }
@@ -297,8 +292,10 @@ h2 {
   display: grid;
   grid-template-columns: repeat(6, 1fr);
   gap: 8px;
-  padding: 2px;
-  margin-bottom: 4px
+}
+
+.region-breakdown-grid.grandis {
+  grid-template-columns: repeat(6, 1fr);
 }
 
 @media (max-width: 540px) {
@@ -312,8 +309,8 @@ h2 {
   align-items: center;
   gap: 8px;
   padding: 6px 8px;
-  /* background: rgba(255, 255, 255, 0.55);
-  border: 1px solid rgba(255, 255, 255, 0.8); */
+  background: rgba(255, 255, 255, 0.55);
+  border: 1px solid rgba(255, 255, 255, 0.8);
   border-radius: 6px;
   min-width: 0;
   box-sizing: border-box;

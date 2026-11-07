@@ -15,7 +15,7 @@
             :id="'arcane-active-' + index" 
             :label="region.RegionName" 
             :class="'Symbol ArcaneRiver ' + region.RegionName"
-            :image="`/src/assets/images/symbols/${region.key}.webp`"
+            :image="getSymbolImage(region.key)"
             v-model="region.isActive" />
         </div>
       </div>
@@ -32,7 +32,7 @@
             :id="'grandis-active-' + index" 
             :label="region.RegionName" 
             :class="'Symbol Grandis ' + region.RegionName"
-            :image="`/src/assets/images/symbols/${region.key}.webp`"
+            :image="getSymbolImage(region.key)"
             v-model="region.isActive" />
         </div>
       </div>
@@ -51,7 +51,7 @@
             :id="'daily-active-' + index" 
             :class="'Activity ' + daily.Name" 
             :label="daily.Name"
-            :image="`/src/assets/images/quests/${daily.key}.webp`"
+            :image="getQuestImage(daily.key)"
             v-model="daily.isActive" />
         </div>
       </div>
@@ -68,7 +68,7 @@
             :id="'weekly-active-' + index" 
             :class="'Activity ' + weekly.Name" 
             :label="weekly.Name"
-            :image="`/src/assets/images/quests/${weekly.key}.webp`"
+            :image="getQuestImage(weekly.key)"
             v-model="weekly.isActive" />
         </div>
       </div>
@@ -78,6 +78,7 @@
 <script setup>
 import { ref, watch, computed } from 'vue'
 import EditActivities from '../../components/CharacterEdit/Progression/EditActivities.vue'
+import { getSymbolImage, getQuestImage } from '../../utils/assetLoader'
 const props = defineProps({
   character: {
     type: Object,
