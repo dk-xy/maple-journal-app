@@ -280,13 +280,16 @@ h3 {
 
 .all-symbols {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr;
   gap: 20px;
-  margin-bottom: 64px;
-
+  margin-bottom: 48px;
 }
 
-
+.activities-container {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+}
 
 .symbol-progression_container h4 {
   grid-column-start: span 3;
@@ -294,47 +297,18 @@ h3 {
   margin: 0;
 }
 
-
-
-
-
-
-/* RESPONSIVENES!! */
-
-@media (min-width:768px) and (max-width: 1024px) {
-  .symbol-progression_container h3 {
-    grid-column-start: span 2;
-  }
-
-  .symbol-progression_container {
-    grid-template-columns: repeat(2, auto);
-  }
-}
-
-@media (min-width: 868px) {
-  .activities-container {
-    display: grid;
-    grid-template-columns: repeat(2, auto);
-    gap: 20px;
-    row-gap: 20px;
-  }
-
-
-
-}
-
-@media (max-width: 768px) {
-
-  .activities-container {
-    display: grid;
-    grid-template-rows: repeat(2, auto);
-    row-gap: 20px;
-  }
-
+/* RESPONSIVENESS */
+@media (min-width: 1080px) {
   .all-symbols {
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr 1fr;
   }
 
+  .activities-container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 1024px) {
   .symbol-progression_container {
     grid-template-columns: repeat(2, auto);
   }

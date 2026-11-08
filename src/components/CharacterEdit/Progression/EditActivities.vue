@@ -1,10 +1,18 @@
 <template>
-    <div :class="class">
+    <div 
+        class="toggleable-activity"
+        :class="{ 'is-active': modelValue, 'is-inactive': !modelValue }"
+        @click="toggleValue"
+        role="button"
+        :aria-pressed="modelValue"
+        tabindex="0"
+        @keydown.space.prevent="toggleValue"
+        @keydown.enter.prevent="toggleValue"
+    >
         <div class="item-image">
             <img :src="props.image" v-if="props.image" alt="" loading="lazy" decoding="async">
         </div>
-        <label :for="id">{{ label }}</label>
-        <input :id="id" :checked="modelValue" type="checkbox" @change="updateValue" />
+        <span class="activity-label">{{ label }}</span>
     </div>
 </template>
 
@@ -18,10 +26,6 @@ const props = defineProps({
         type: String,
         required: true
     },
-    class: {
-        type: String,
-        required: false
-    },
     modelValue: {
         type: Boolean,
         required: true
@@ -30,47 +34,89 @@ const props = defineProps({
         type: String,
         required: false
     }
-
-
 })
 
 const emit = defineEmits(['update:modelValue'])
 
-function updateValue(event) {
-    emit('update:modelValue', event.target.checked)
+function toggleValue() {
+    emit('update:modelValue', !props.modelValue)
 }
-
-
 </script>
 
 <style scoped>
-/* Add any custom styles here */
+.toggleable-activity {
+    cursor: pointer;
+    user-select: none;
+    transition: all 0.15s ease-in-out;
+}
+
+/* Inactive / Deselected: greyed out like None in boss difficulties */
+.toggleable-activity.is-inactive {
+    opacity: 0.5;
+    filter: grayscale(70%);
+    background: rgba(255, 255, 255, 0.12) !important;
+    border: 1px dashed rgba(255, 255, 255, 0.45) !important;
+    box-shadow: none !important;
+}
+
+.toggleable-activity.is-inactive:hover {
+    opacity: 0.75;
+    filter: grayscale(30%);
+    border-color: rgba(255, 255, 255, 0.7) !important;
+}
+
+/* Active / Selected: fully colored with active border */
+.toggleable-activity.is-active {
+    opacity: 1;
+    filter: grayscale(0%);
+    border: 1.5px solid #ffffff !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15) !important;
+}
+
+.toggleable-activity.is-active:hover {
+    transform: translateY(-1px);
+}
+
+.item-image {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.item-image img {
+    width: 24px;
+    height: 24px;
+    object-fit: contain;
+}
+
+.activity-label {
+    flex: 1;
+    text-align: left;
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: var(--dark-text);
+}
 
 .Symbol {
     display: flex;
-    padding: 8px;
-    justify-content: center;
+    padding: 8px 12px;
+    justify-content: flex-start;
     align-items: center;
-    gap: 8px;
-    border-radius: 4px;
-    border: solid 0.5px #ffffffaf;
-    /* very light box shadow */
-    box-shadow: 0 1px 6px rgba(0, 0, 0, 0.09);
-}
-
-.Symbol label {
-    min-width: 130px;
+    gap: 10px;
+    border-radius: 8px;
+    min-height: 44px;
+    box-sizing: border-box;
 }
 
 .Activity {
     display: flex;
     min-height: 48px;
-    max-height: 86px;
-    padding: 4px 8px;
-    justify-content: space-between;
+    padding: 8px 12px;
+    justify-content: flex-start;
     align-items: center;
-    gap: 16px;
-
+    gap: 12px;
+    border-radius: 8px;
     background-color: var(--elev-1);
+    box-sizing: border-box;
 }
 </style>

@@ -87,14 +87,13 @@ function saveBosses() {
 
 .character-bosses {
   display: grid;
-  grid-template-columns: repeat(2, auto);
+  grid-template-columns: 1fr;
   gap: 1rem;
 }
 
-/* responsiveness */
-@media (max-width: 868px) {
+@media (min-width: 1080px) {
   .character-bosses {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, 1fr);
   }
 }
 

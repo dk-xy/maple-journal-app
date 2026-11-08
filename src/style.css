@@ -87,7 +87,8 @@ color: var(--dark-text);
   border: solid 2px #fff;
   color: #fff;
 }
-.Chaos {
+.difficulty-capsule.Chaos,
+.Chaos:not(.Activity) {
   background-color: var(--chaos-diff); /* Black background */
   color: transparent; /* Make text transparent to show gradient */
   background: var(--chaos-diff-accent); /* Apply gradient */
@@ -99,7 +100,8 @@ color: var(--dark-text);
   border-radius: 16px; /* Add border radius */
 }
 
-/* .Extreme {
+.difficulty-capsule.Extreme,
+.Extreme:not(.Activity) {
   background-color: var(--extreme-diff); 
   color: transparent; 
   background: var(--extreme-diff-accent); 
@@ -109,7 +111,7 @@ color: var(--dark-text);
   text-fill-color: transparent; 
   border: 2px solid #cf3027; 
   border-radius: 16px; 
-} */
+}
 
 /* MASTER BACKGROUND FOR SYMBOLS!!!!! */
 

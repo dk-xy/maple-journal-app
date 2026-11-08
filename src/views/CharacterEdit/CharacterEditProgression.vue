@@ -49,7 +49,7 @@
         <div class="activity-container">
           <EditActivities v-for="(daily, index) in character.Progression.Dailies.DailyActivity" :key="index"
             :id="'daily-active-' + index" 
-            :class="'Activity ' + daily.Name" 
+            :class="['Activity', daily.key]" 
             :label="daily.Name"
             :image="getQuestImage(daily.key)"
             v-model="daily.isActive" />
@@ -66,7 +66,7 @@
         <div class="activity-container">
           <EditActivities v-for="(weekly, index) in character.Progression.Weeklies.WeeklyActivity" :key="index"
             :id="'weekly-active-' + index" 
-            :class="'Activity ' + weekly.Name" 
+            :class="['Activity', weekly.key]" 
             :label="weekly.Name"
             :image="getQuestImage(weekly.key)"
             v-model="weekly.isActive" />
@@ -169,81 +169,103 @@ watch(
 </script>
 
 <style scoped>
-
 .character-edit-progression {
   display: flex;
   flex-direction: column;
   gap: 32px;
 }
 
-
-.section-header{
+.section-header {
   display: flex;
-  gap: 16px;
+  justify-content: space-between;
+  align-items: center;
   margin-bottom: 16px;
 }
 
-.section-header h3{
-  margin:0
+.section-header h3 {
+  margin: 0;
 }
+
+.select-all-button {
+  background-color: var(--elev-2);
+  color: var(--dark-text);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  padding: 0.35em 0.8em;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 0.85rem;
+  transition: all 0.15s ease;
+}
+
+.select-all-button:hover {
+  background-color: var(--elev-1);
+}
+
+/* Region symbols: 1 column by default, 2 columns on wide screens */
 .allSymbols-container {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 16px;
+  grid-template-columns: 1fr;
+  gap: 20px;
 }
 
-/* Add any custom styles here */
+.region-container {
+  background: var(--elev-1-a, rgba(245, 217, 190, 0.5));
+  padding: 16px;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
 
+/* Fluid auto-fit grid so symbols wrap naturally */
 .symbol-container {
   display: grid;
-  grid-template-columns: repeat(3, auto);
-  gap: 8px 16px;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 10px 14px;
 }
 
-.activity-container {
-  display: grid;
-  grid-template-columns: repeat(2, auto);
-  gap: 8px 16px;
-}
-
+/* Activities: 1 column by default, 2 columns on wide screens */
 .activities-container {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 16px;
+  grid-template-columns: 1fr;
+  gap: 20px;
 }
 
-/* max width 1000px */
-@media (max-width: 968px) {
-  .symbol-container {
-    grid-template-columns: repeat(2, auto);
-  }
+.activity-block {
+  background: var(--elev-1-a, rgba(245, 217, 190, 0.5));
+  padding: 16px;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
 }
 
-@media (min-width: 968px) {
-  .activities-container {
+/* Fluid auto-fit grid so activity items wrap naturally */
+.activity-container {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 16px;
-}
+  grid-template-columns: repeat(auto-fill, minmax(110px, 1fr 1fr));
+  gap: 10px 14px;
 }
 
-@media (max-width: 768px) {
+/* Wide desktop: 2 column side-by-side layout when there is plenty of room */
+@media (min-width: 1100px) {
   .allSymbols-container {
-    grid-template-columns: 1fr;
-  }
-
-  .symbol-container {
-    grid-template-columns: repeat(2, auto);
+    grid-template-columns: repeat(2, 1fr);
   }
 
   .activities-container {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .activity-container {
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
   }
 }
 
-/* @media (max-width: 480px) {
+@media (max-width: 480px) {
   .symbol-container {
     grid-template-columns: 1fr;
   }
-} */
+
+  .activity-container {
+    grid-template-columns: 1fr;
+  }
+}
 </style>

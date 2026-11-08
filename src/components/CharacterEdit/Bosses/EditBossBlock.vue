@@ -3,7 +3,7 @@
     <div class="boss-edit-info">
       <h3>{{ boss.Name }}</h3>
       <div class="edit-difficulties-block">
-        <DifficultySelector :difficulties="boss.Difficulty" :handleChange="handleDifficultyChange" />
+        <DifficultySelector :difficulties="boss.Difficulty" :bossKey="boss.key" :handleChange="handleDifficultyChange" />
       </div>
     </div>
     <div class="boss-edit-image-container">
@@ -27,8 +27,7 @@ const props = defineProps({
   }
 })
 
-function handleDifficultyChange(difficulty) {
-  difficulty.isActive = !difficulty.isActive
+function handleDifficultyChange() {
   props.saveBosses()
 }
 </script>
@@ -42,9 +41,13 @@ function handleDifficultyChange(difficulty) {
   margin: 0;
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  overflow: hidden;
+  overflow: visible;
   width: 100%;
   box-sizing: border-box;
+}
+
+.boss-edit-block:focus-within {
+  z-index: 40;
 }
 
 /* Reserve space for the image by adding right margin */
@@ -59,8 +62,8 @@ function handleDifficultyChange(difficulty) {
 }
 
 .edit-difficulties-block {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  display: flex;
+  flex-direction: column;
   gap: 8px;
 }
 
@@ -76,7 +79,7 @@ function handleDifficultyChange(difficulty) {
   right: 0;
   width: 150px;
   height: 100%;
-  border-radius: 8px 0 0 8px;
+  border-radius: 0 8px 8px 0;
   overflow: hidden;
   z-index: 1;
 }
@@ -100,5 +103,28 @@ function handleDifficultyChange(difficulty) {
   background: linear-gradient(145deg, #f5d9be 23.61%, rgba(197, 160, 125, 0) 98%);
   z-index: 2;
   pointer-events: none;
+}
+
+@media (max-width: 520px) {
+  .boss-edit-image-container {
+    width: 100px;
+  }
+  .boss-edit-info {
+    margin-right: 85px;
+    padding: 0.4em;
+  }
+  .boss-edit-block h3 {
+    font-size: 0.95rem;
+  }
+}
+
+@media (max-width: 380px) {
+  .boss-edit-image-container {
+    width: 60px;
+    opacity: 0.35;
+  }
+  .boss-edit-info {
+    margin-right: 50px;
+  }
 }
 </style>
